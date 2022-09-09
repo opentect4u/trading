@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class TdReceive extends Model
 {
     use HasFactory;
+    protected $table="td_receive";
+    protected $fillable = [
+        'society_id',
+        'received_date',
+        'received_type',
+        'supplier_id',
+        'amount',
+        'bank',
+        'cheque_no',
+        'cheque_date',
+        'created_by',
+        'updated_by',
+    ];
+
 }

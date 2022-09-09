@@ -98,3 +98,24 @@ Route::post('purchaseadd',[App\Http\Controllers\PurchaseController::class,'Creat
 Route::get('purchaseedit/{id}',[App\Http\Controllers\PurchaseController::class,'Edit'])->name('purchaseEdit');
 Route::post('purchaseedit',[App\Http\Controllers\PurchaseController::class,'Update'])->name('purchaseUpdate');
 Route::post('productRateAjax',[App\Http\Controllers\PurchaseController::class,'RateAjax'])->name('productRateAjax');
+
+
+Route::get('payment',[App\Http\Controllers\PaymentController::class,'Index'])->name('paymentManage');
+Route::get('paymentadd',[App\Http\Controllers\PaymentController::class,'Show'])->name('paymentAdd');
+Route::post('paymentadd',[App\Http\Controllers\PaymentController::class,'Create'])->name('paymentCreate');
+Route::get('paymentedit/{id}',[App\Http\Controllers\PaymentController::class,'Edit'])->name('paymentEdit');
+Route::post('paymentedit',[App\Http\Controllers\PaymentController::class,'Update'])->name('paymentUpdate');
+// Route::post('productRateAjax',[App\Http\Controllers\PaymentController::class,'RateAjax'])->name('productRateAjax');
+
+Route::get('sale',[App\Http\Controllers\SaleController::class,'Index'])->name('saleManage');
+Route::get('saleadd',[App\Http\Controllers\SaleController::class,'Show'])->name('saleAdd');
+Route::post('saleadd',[App\Http\Controllers\SaleController::class,'Create'])->name('saleCreate');
+Route::get('saleedit/{id}',[App\Http\Controllers\SaleController::class,'Edit'])->name('saleEdit');
+Route::post('saleedit',[App\Http\Controllers\SaleController::class,'Update'])->name('saleUpdate');
+Route::post('productStockAjax',[App\Http\Controllers\SaleController::class,'SaleStockProductAjax'])->name('productStockAjax');
+
+Route::get('receive',[App\Http\Controllers\ReceivedController::class,'Index'])->name('receiveManage');
+Route::get('receiveadd',[App\Http\Controllers\ReceivedController::class,'Show'])->name('receiveAdd');
+Route::post('receiveadd',[App\Http\Controllers\ReceivedController::class,'Create'])->name('receiveCreate');
+Route::get('receiveedit/{id}',[App\Http\Controllers\ReceivedController::class,'Edit'])->name('receiveEdit');
+Route::post('receiveedit',[App\Http\Controllers\ReceivedController::class,'Update'])->name('receiveUpdate');

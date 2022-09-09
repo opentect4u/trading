@@ -64,9 +64,13 @@
                                     </td>
 
                                     <td>
+                                        @if($data->member_type=='M')
                                         <a href="{{route('memberClose',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
                                             title="Close Member"><i class="fa fa-times-circle-o" aria-hidden="true"
                                                 style="font-size:18px;color:red;"></i></a>
+                                        @else
+                                        -
+                                        @endif
                                     </td>
 
                                     <td>
@@ -110,7 +114,7 @@ toastr.success('Member Close Successfully.');
 </script>
 @endif
 <script>
-function butDelete(society_id,customer_id) {
+function butDelete(society_id, customer_id) {
     // alert(id)
     $.confirm({
         title: '',

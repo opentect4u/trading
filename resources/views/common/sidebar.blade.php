@@ -33,6 +33,21 @@
             </div>
         </li>
 
+        <li>
+            <div class="link"><a href="{{route('paymentManage')}}"><i class="fa fa-code"></i>Payment </a>
+            </div>
+        </li>
+
+        <li>
+            <div class="link"><a href="{{route('saleManage')}}"><i class="fa fa-code"></i>Sale </a>
+            </div>
+        </li>
+
+        <li>
+            <div class="link"><a href="{{route('receiveManage')}}"><i class="fa fa-code"></i>Receive </a>
+            </div>
+        </li>
+
        
 <!-- 
         <li>
