@@ -48,6 +48,32 @@
             </div>
         </li>
 
+        <li>
+            <div class="link"><a href="{{route('memberReport')}}"><i class="fa fa-code"></i>Members Report </a>
+            </div>
+        </li>
+
+        <li>
+            <div class="link"><a href="{{route('stockReport')}}"><i class="fa fa-code"></i>Stock Report </a>
+            </div>
+        </li>
+        <li>
+            <div class="link"><a href="{{route('purchaseReport')}}"><i class="fa fa-code"></i>Purchase Report </a>
+            </div>
+        </li>
+        <li>
+            <div class="link"><a href="{{route('saleReport')}}"><i class="fa fa-code"></i>Sale Report </a>
+            </div>
+        </li>
+
+        <li>
+            <div class="link"><a href="{{route('paymentReport')}}"><i class="fa fa-code"></i>Payment Report </a>
+            </div>
+        </li>
+        <li>
+            <div class="link"><a href="{{route('receiveReport')}}"><i class="fa fa-code"></i>Receive Report </a>
+            </div>
+        </li>
        
 <!-- 
         <li>

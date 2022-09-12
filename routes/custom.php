@@ -119,3 +119,13 @@ Route::get('receiveadd',[App\Http\Controllers\ReceivedController::class,'Show'])
 Route::post('receiveadd',[App\Http\Controllers\ReceivedController::class,'Create'])->name('receiveCreate');
 Route::get('receiveedit/{id}',[App\Http\Controllers\ReceivedController::class,'Edit'])->name('receiveEdit');
 Route::post('receiveedit',[App\Http\Controllers\ReceivedController::class,'Update'])->name('receiveUpdate');
+
+
+// =============================== Report ==============================
+
+Route::get('memberreport',[App\Http\Controllers\Report\MemberController::class,'Index'])->name('memberReport');
+Route::get('stockreport',[App\Http\Controllers\Report\StockController::class,'Index'])->name('stockReport');
+Route::get('purchasereport',[App\Http\Controllers\Report\PurchaseController::class,'Index'])->name('purchaseReport');
+Route::get('salereport',[App\Http\Controllers\Report\SaleController::class,'Index'])->name('saleReport');
+Route::get('paymentreport',[App\Http\Controllers\Report\PaymentController::class,'Index'])->name('paymentReport');
+Route::get('receivereport',[App\Http\Controllers\Report\ReceiveController::class,'Index'])->name('receiveReport');

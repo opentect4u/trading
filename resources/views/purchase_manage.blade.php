@@ -111,5 +111,14 @@
 toastr.success('Product purchase successfully.');
 </script>
 @endif
-
+<script>
+$(function() {
+    $("#from_date").datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+    $("#to_date").datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+});
+</script>
 @endsection

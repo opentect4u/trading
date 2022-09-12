@@ -10,7 +10,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="{{route('paymentManage')}}">
+                        <form action="{{route('memberReport')}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">From Date</label>
@@ -39,8 +39,8 @@
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
-                    <a type="button" href="{{route('paymentAdd')}}" class="btn btn-primary">Create</a>
-                    <h2>Payment</h2>
+                    <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
+                    <h2> Members</h2>
                 </div>
 
                 <div class="row">
@@ -52,6 +52,9 @@
                                     <th>Date</th>
                                     <th>Type</th>
                                     <th>Supplier Name</th>
+                                    <th>Product Name</th>
+                                    <th>Rate</th>
+                                    <th>Quantity</th>
                                     <th>Amount</th>
                                     <!-- <th>Action</th> -->
                                 </tr>
@@ -61,15 +64,18 @@
                                 @foreach($datas as $data)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{date('d-m-Y',strtotime($data->payment_date))}}</td>
+                                    <td>{{$data->sale_date}}</td>
                                     <td>
-                                        @if($data->payment_type =='C')
-                                        Cash
+                                        @if($data->sale_type =='C')
+                                        Credit
                                         @else
-                                        Bank
+                                        Cash
                                         @endif
                                     </td>
                                     <td>{{$data->sup_name}}</td>
+                                    <td>{{$data->pdt_name}}</td>
+                                    <td>{{$data->rate}}</td>
+                                    <td>{{$data->quantity}}</td>
                                     <td>{{$data->amount}}</td>
                                     <!-- <td><a href="{{route('purchaseEdit',['id'=>\Crypt::encryptString($data->id)])}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"
                                                 style="font-size:18px;"></i></a></td> -->
@@ -82,6 +88,9 @@
                                     <th>Date</th>
                                     <th>Type</th>
                                     <th>Supplier Name</th>
+                                    <th>Product Name</th>
+                                    <th>Rate</th>
+                                    <th>Quantity</th>
                                     <th>Amount</th>
                                     <!-- <th>Action</th> -->
                                 </tr>
@@ -99,17 +108,8 @@
 
 @if(Session::has('addSuccess'))
 <script>
-toastr.success('Product purchase successfully.');
+toastr.success('Product sale successfully.');
 </script>
 @endif
-<script>
-$(function() {
-    $("#from_date").datepicker({
-        dateFormat: 'dd-mm-yy',
-    });
-    $("#to_date").datepicker({
-        dateFormat: 'dd-mm-yy',
-    });
-});
-</script>
+
 @endsection

@@ -10,24 +10,23 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="{{route('paymentManage')}}">
+                        <form action="{{route('stockReport')}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">From Date</label>
-                                    <input type="text" class="form-control" name="from_date" id="from_date"
-                                        required value="<?php if($from_date!=''){echo $from_date;}else{ echo date('d-m-Y');} ?>">
+                                    <input type="text" class="form-control" name="from_date" id="from_date" required
+                                        value="<?php if($from_date!=''){echo $from_date;}else{ echo date('d-m-Y');} ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">To Date</label>
-                                    <input type="text" class="form-control" name="to_date" id="to_date"
-                                        required value="<?php if($to_date!=''){echo $to_date;}else{ echo date('d-m-Y');} ?>">
+                                    <input type="text" class="form-control" name="to_date" id="to_date" required
+                                        value="<?php if($to_date!=''){echo $to_date;}else{ echo date('d-m-Y');} ?>">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
-                                    <input type="submit" class="btn btn-info" id="submit"
-                                        value="Search">
+                                    <input type="submit" class="btn btn-info" id="submit" value="Search">
                                 </div>
                             </div>
                         </form>
@@ -39,21 +38,22 @@
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
-                    <a type="button" href="{{route('paymentAdd')}}" class="btn btn-primary">Create</a>
-                    <h2>Payment</h2>
+                    <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
+                    <h2> Stock Report</h2>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sl No</th>
-                                    <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Supplier Name</th>
-                                    <th>Amount</th>
-                                    <!-- <th>Action</th> -->
+                                    <th>Product Category</th>
+                                    <th>Product Name</th>
+                                    <th>Opening Stock</th>
+                                    <th>Purchase Stock</th>
+                                    <th>Sale Stock</th>
+                                    <th> Stock in Hand</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,29 +61,25 @@
                                 @foreach($datas as $data)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{date('d-m-Y',strtotime($data->payment_date))}}</td>
-                                    <td>
-                                        @if($data->payment_type =='C')
-                                        Cash
-                                        @else
-                                        Bank
-                                        @endif
-                                    </td>
-                                    <td>{{$data->sup_name}}</td>
-                                    <td>{{$data->amount}}</td>
-                                    <!-- <td><a href="{{route('purchaseEdit',['id'=>\Crypt::encryptString($data->id)])}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"
-                                                style="font-size:18px;"></i></a></td> -->
+                                    <td>{{$data->cat_name}}</td>
+                                    <td>{{$data->pdt_name}}</td>
+                                    <td>{{$data->opening_stock}}</td>
+                                    <td>{{$data->total_purchase}}</td>
+                                    <td>{{$data->total_sale}}</td>
+                                    <td>{{$data->stock_in_hand}}</td>
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>Sl No</th>
-                                    <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Supplier Name</th>
-                                    <th>Amount</th>
-                                    <!-- <th>Action</th> -->
+                                    <th>Product Category</th>
+                                    <th>Product Name</th>
+                                    <th>Opening Stock</th>
+                                    <th>Purchase Stock</th>
+                                    <th>Sale Stock</th>
+                                    <th> Stock in Hand</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -99,9 +95,10 @@
 
 @if(Session::has('addSuccess'))
 <script>
-toastr.success('Product purchase successfully.');
+toastr.success('Product sale successfully.');
 </script>
 @endif
+
 <script>
 $(function() {
     $("#from_date").datepicker({
