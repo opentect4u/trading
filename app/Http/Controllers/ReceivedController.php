@@ -60,6 +60,7 @@ class ReceivedController extends Controller
             'bank'=>$request->bank,
             'cheque_no'=>$request->cheque_no,
             'cheque_no'=>$request->cheque_no,
+            'remark'=>$request->remark,
             'created_by'=>auth()->user()->id,
         ));
         return redirect()->route('receiveManage')->with('addSuccess','addSuccess');

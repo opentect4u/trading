@@ -13,6 +13,8 @@ class MdProductRate extends Model
         'society_id',
         'effective_date',
         'product_master_id',
+        'company_rate',
+        'buy_rate',
         'rate',
         'created_by',
         'updated_by',

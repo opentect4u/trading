@@ -74,6 +74,11 @@
             <div class="link"><a href="{{route('receiveReport')}}"><i class="fa fa-code"></i>Receive Report </a>
             </div>
         </li>
+
+        <li>
+            <div class="link"><a href="{{route('supplierReport')}}"><i class="fa fa-code"></i>Supplier Purchase Sale Report </a>
+            </div>
+        </li>
        
 <!-- 
         <li>

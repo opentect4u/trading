@@ -12,6 +12,14 @@ class MdSupplier extends Model
     protected $fillable = [
         'society_id',
         'sup_name',
+        'sup_address',
+        'contact_no',
+        'sup_email  ',
+        'aadhar_no',
+        'pan_no',
+        'bank_name',
+        'acc_no',
+        'ifsc',
         'created_by',
         'updated_by',
     ];

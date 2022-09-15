@@ -17,6 +17,7 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Name</th>
+                                    <th>Contact No</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$data->sup_name}}</td>
+                                    <td>{{$data->contact_no}}</td>
                                     <td><a href="{{route('supplierEdit',['id'=>\Crypt::encryptString($data->id)])}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"
                                                 style="font-size:18px;"></i></a></td>
                                 </tr>
@@ -35,6 +37,7 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Name</th>
+                                    <th>Contact No</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

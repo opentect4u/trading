@@ -18,6 +18,7 @@ class TdPayment extends Model
         'bank',
         'cheque_no',
         'cheque_date',
+        'remark',
         'created_by',
         'updated_by',
     ];

@@ -56,6 +56,13 @@ class MemberController extends Controller
             'mem_email'=>$request->mem_email,
             'member_type'=>$request->member_type,
             'deposit_amount'=>$request->deposit_amount,
+
+            'aadhar_no'=>$request->aadhar_no,
+            'pan_no'=>$request->pan_no,
+            'bank_name'=>$request->bank_name,
+            'acc_no'=>$request->acc_no,
+            'ifsc'=>$request->ifsc,
+
             'remark'=>$request->remark,
             'open_close_flag'=>$open_close_flag,
             'delete_flag'=>'N',

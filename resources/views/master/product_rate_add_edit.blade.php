@@ -23,10 +23,10 @@
                                         value="{{isset($data)?date('d-m-Y',strtotime($data->effective_date)):date('d-m-Y')}}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Category</label>
+                                    <label for="">Product Name</label>
                                     <select class="form-control" id="product_master_id" name="product_master_id"
                                         required>
-                                        <option value=""> -- Select Category -- </option>
+                                        <option value=""> -- Select Product Name -- </option>
                                         @foreach($products as $product)
                                         <option value="{{$product->id}}"
                                             <?php if(isset($data) && $data->product_master_id==$product->id){echo "selected";}?>>
@@ -35,7 +35,17 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Name</label>
+                                    <label for="">Company Rate</label>
+                                    <input type="text" class="form-control" name="company_rate" id="company_rate" required
+                                        value="{{isset($data)?$data->company_rate:''}}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">Buy Rate</label>
+                                    <input type="text" class="form-control" name="buy_rate" id="buy_rate" required
+                                        value="{{isset($data)?$data->buy_rate:''}}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">Sale Rate</label>
                                     <input type="text" class="form-control" name="rate" id="rate" required
                                         value="{{isset($data)?$data->rate:''}}">
                                 </div>

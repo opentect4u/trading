@@ -13,7 +13,8 @@
                     <div class="col-sm-12">
                         <form method="POST" action="{{isset($data)?route('memberUpdate'):route('memberAdd')}}">
                             @csrf
-                            <input type="text" name="id" id="id" hidden value="{{isset($data)?\Crypt::encryptString($data->id):''}}">
+                            <input type="text" name="id" id="id" hidden
+                                value="{{isset($data)?\Crypt::encryptString($data->id):''}}">
                             <div class="form-group row">
                                 @if(isset($data))
                                 <div class="col-sm-6">
@@ -29,13 +30,14 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Address</label>
-                                    <textarea class="form-control" name="mem_address" id="mem_address" cols="30" rows="2"
-                                        required>{{isset($data)?$data->mem_address:''}}</textarea>
+                                    <textarea class="form-control" name="mem_address" id="mem_address" cols="30"
+                                        rows="2" required>{{isset($data)?$data->mem_address:''}}</textarea>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Contact No</label>
                                     <input type="text" class="form-control" name="contact_no" id="contact_no" required
-                                        value="{{isset($data)?$data->contact_no:''}}">
+                                        value="{{isset($data)?$data->contact_no:''}}"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Email</label>
@@ -60,6 +62,38 @@
                                     <input type="text" class="form-control" name="deposit_amount" id="deposit_amount"
                                         value="{{isset($data)?$data->deposit_amount:''}}">
                                 </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Aadhar No.</label>
+                                    <input type="text" class="form-control" name="aadhar_no" id="aadhar_no"
+                                        value="{{isset($data)?$data->aadhar_no:''}}"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">PAN No.</label>
+                                    <input type="text" class="form-control" name="pan_no" id="pan_no"
+                                        value="{{isset($data)?$data->pan_no:''}}">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Bank Name</label>
+                                    <input type="text" class="form-control" name="bank_name" id="bank_name"
+                                        value="{{isset($data)?$data->bank_name:''}}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">ACC No.</label>
+                                    <input type="text" class="form-control" name="acc_no" id="acc_no"
+                                        value="{{isset($data)?$data->acc_no:''}}"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">IFSC</label>
+                                    <input type="text" class="form-control" name="ifsc" id="ifsc"
+                                        value="{{isset($data)?$data->ifsc:''}}">
+                                </div>
+
+
 
                                 <div class="col-sm-6">
                                     <label for="">Remark</label>

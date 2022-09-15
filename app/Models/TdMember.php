@@ -23,6 +23,12 @@ class TdMember extends Model
         'mem_email  ',
         'member_type',
         'deposit_amount',
+        'aadhar_no',
+        'pan_no',
+        'bank_name',
+        'acc_no',
+        'ifsc',
+
         'remark',
         'open_close_flag',
         'date_of_closing',

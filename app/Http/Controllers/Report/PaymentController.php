@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 use Helper;
-use App\Models\{TdPurchase,TdSale,MdProductMaster};
+use App\Models\{TdPurchase,TdSale,MdProductMaster,MdSupplier};
 
 class PaymentController extends Controller
 {
@@ -20,8 +20,18 @@ class PaymentController extends Controller
     {
         $from_date=$request->from_date;
         $to_date=$request->to_date;
+        $supplier_id=$request->supplier_id;
         $datas=[];
-        if ($from_date!='' && $to_date!='') {
+        if ($from_date!='' && $to_date!='' && $supplier_id!='') {
+            $datas=DB::table('td_payment')
+                ->leftJoin('md_supplier','md_supplier.id','=','td_payment.supplier_id')
+                ->select('td_payment.*','md_supplier.sup_name as sup_name')
+                ->where('td_payment.society_id',auth()->user()->society_id)
+                ->where('td_payment.supplier_id',$supplier_id)
+                ->whereDate('td_payment.payment_date','>=',date('Y-m-d',strtotime($from_date)))
+                ->whereDate('td_payment.payment_date','<=',date('Y-m-d',strtotime($to_date)))
+                ->get();
+        }else if ($from_date!='' && $to_date!='') {
             $datas=DB::table('td_payment')
                 ->leftJoin('md_supplier','md_supplier.id','=','td_payment.supplier_id')
                 ->select('td_payment.*','md_supplier.sup_name as sup_name')
@@ -30,7 +40,10 @@ class PaymentController extends Controller
                 ->whereDate('td_payment.payment_date','<=',date('Y-m-d',strtotime($to_date)))
                 ->get();
         }
-        return view('report.payment',['datas'=>$datas,'from_date'=>$from_date,'to_date'=>$to_date]);
+        $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        return view('report.payment',['datas'=>$datas,'from_date'=>$from_date,'to_date'=>$to_date,
+            'supplier_id'=>$supplier_id,'suppliers'=>$suppliers
+        ]);
     }
 
 }

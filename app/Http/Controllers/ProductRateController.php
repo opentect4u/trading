@@ -38,6 +38,8 @@ class ProductRateController extends Controller
             'society_id'=>auth()->user()->society_id,
             'effective_date'=> date('Y-m-d',strtotime($request->effective_date)),
             'product_master_id'=>$request->product_master_id,
+            'company_rate'=>$request->company_rate,
+            'buy_rate'=>$request->buy_rate,
             'rate'=>$request->rate,
             'created_by'=>auth()->user()->id,
         ));

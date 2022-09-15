@@ -129,3 +129,6 @@ Route::get('purchasereport',[App\Http\Controllers\Report\PurchaseController::cla
 Route::get('salereport',[App\Http\Controllers\Report\SaleController::class,'Index'])->name('saleReport');
 Route::get('paymentreport',[App\Http\Controllers\Report\PaymentController::class,'Index'])->name('paymentReport');
 Route::get('receivereport',[App\Http\Controllers\Report\ReceiveController::class,'Index'])->name('receiveReport');
+
+
+Route::get('supplierreport',[App\Http\Controllers\Report\SupplierController::class,'Index'])->name('supplierReport');

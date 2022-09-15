@@ -38,11 +38,13 @@
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
+                    <a type="button" href="javascript:void(0);" class="btn btn-primary"
+                        onclick="printContent('sectionDiv');">Print</a>
                     <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
                     <h2> Stock Report</h2>
                 </div>
 
-                <div class="row">
+                <div class="row" id="sectionDiv">
                     <div class="col-sm-12">
                         <table id="" class="table table-striped table-bordered" style="width:100%">
                             <thead>
@@ -67,7 +69,7 @@
                                     <td>{{$data->total_purchase}}</td>
                                     <td>{{$data->total_sale}}</td>
                                     <td>{{$data->stock_in_hand}}</td>
-                                    
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -108,5 +110,17 @@ $(function() {
         dateFormat: 'dd-mm-yy',
     });
 });
+</script>
+<script>
+function printContent(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
 </script>
 @endsection

@@ -18,6 +18,7 @@ class TdPurchase extends Model
         'rate',
         'quantity',
         'amount',
+        'remark',
         'created_by',
         'updated_by',
     ];

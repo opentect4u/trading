@@ -17,21 +17,21 @@
                                 value="{{isset($data)?\Crypt::encryptString($data->id):''}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Purchase Date</label>
-                                    <input type="text" class="form-control" name="sale_date" id="sale_date"
-                                        required value="{{isset($data)?$data->sale_date:date('d-m-Y')}}">
+                                    <label for="">Sale Date</label>
+                                    <input type="text" class="form-control" name="sale_date" id="sale_date" required
+                                        value="{{isset($data)?$data->sale_date:date('d-m-Y')}}" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Purchase Type</label>
-                                    <select name="sale_type" id="sale_type" class="form-control">
-                                        <option value=""> -- Select Purchase Type -- </option>
+                                    <label for="">Sale Type</label>
+                                    <select name="sale_type" id="sale_type" class="form-control" required>
+                                        <option value=""> -- Select Sale Type -- </option>
                                         <option value="C">Credit</option>
                                         <option value="S">Cash</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Supplier Name</label>
-                                    <select name="supplier_id" id="supplier_id" class="form-control">
+                                    <select name="supplier_id" id="supplier_id" class="form-control" required>
                                         <option value=""> -- Select Supplier Name -- </option>
                                         @foreach($suppliers as $supplier)
                                         <option value="{{$supplier->id}}">{{$supplier->sup_name}}</option>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Product Name</label>
-                                    <select name="product_master_id" id="product_master_id" class="form-control">
+                                    <select name="product_master_id" id="product_master_id" class="form-control" required>
                                         <option value=""> -- Select Product Name -- </option>
                                         @foreach($products as $product)
                                         <option value="{{$product->id}}">{{$product->pdt_name}}</option>
@@ -63,12 +63,19 @@
                                     <input type="text" class="form-control" name="amount" id="amount" required
                                         value="{{isset($data)?$data->amount:''}}">
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="">Remark</label>
+                                    <textarea name="remark" id="remark" class="form-control" cols="30"
+                                        rows="3">{{isset($data)?$data->remark:''}}</textarea>
+
+
+                                </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
                                     <input type="submit" class="btn btn-info" id="submit" name="submit"
-                                        value="{{isset($data)?'Update':'Create'}}">
+                                        value="{{isset($data)?'Update':'Sale'}}">
                                 </div>
                             </div>
                         </form>
@@ -127,7 +134,7 @@ $(document).ready(function() {
                 // alert(data)
                 var obj = JSON.parse(data);
                 var stock = obj.stock;
-                
+
                 $("#total_stock").val('');
                 $("#total_stock").val(stock);
                 $("#totalStockTag").empty();
@@ -148,14 +155,14 @@ $(document).ready(function() {
             $("#quantity").val(val1);
         } else {
             // alert('hii')
-            var total_stock=$('#total_stock').val();
+            var total_stock = $('#total_stock').val();
             if (total_stock < value) {
-                alert('You sale maximum '+total_stock);
+                alert('You sale maximum ' + total_stock);
                 $("#quantity").val(0);
                 // return false;
             }
             var value1 = $("#quantity").val();
-            var amount= Number(rate) * Number(value1) ;
+            var amount = Number(rate) * Number(value1);
             $("#amount").val('');
             $("#amount").val(amount);
 

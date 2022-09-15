@@ -18,7 +18,9 @@
                                     <th>Sl No</th>
                                     <th>Effective Date</th>
                                     <th>Product Name</th>
-                                    <th>Rate</th>
+                                    <th>Company Rate</th>
+                                    <th>Buy Rate</th>
+                                    <th>Sale Rate</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -29,6 +31,8 @@
                                     <td>{{$i++}}</td>
                                     <td>{{$data->effective_date}}</td>
                                     <td>{{$data->pdt_name}}</td>
+                                    <td>{{$data->company_rate}}</td>
+                                    <td>{{$data->buy_rate}}</td>
                                     <td>{{$data->rate}}</td>
                                     <td><a href="{{route('productrateEdit',['id'=>\Crypt::encryptString($data->id)])}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"
                                                 style="font-size:18px;"></i></a></td>
@@ -40,7 +44,9 @@
                                     <th>Sl No</th>
                                     <th>Effective Date</th>
                                     <th>Product Name</th>
-                                    <th>Rate</th>
+                                    <th>Company Rate</th>
+                                    <th>Buy Rate</th>
+                                    <th>Sale Rate</th>                                    
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

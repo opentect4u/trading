@@ -59,12 +59,19 @@
                                     <input type="text" class="form-control" name="cheque_date" id="cheque_date"
                                         value="{{isset($data)?$data->cheque_date:''}}">
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="">Remark</label>
+                                    <textarea name="remark" id="remark" class="form-control" cols="30"
+                                        rows="3">{{isset($data)?$data->remark:''}}</textarea>
+
+
+                                </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
                                     <input type="submit" class="btn btn-info" id="submit" name="submit"
-                                        value="{{isset($data)?'Update':'Create'}}">
+                                        value="{{isset($data)?'Update':'Payment'}}">
                                 </div>
                             </div>
                         </form>
@@ -118,8 +125,8 @@ $(document).ready(function() {
             $("#quantity").val(val1);
         } else {
             // alert('hii')
-            
-            var amount= Number(rate) * Number(value) ;
+
+            var amount = Number(rate) * Number(value);
             $("#amount").val('');
             $("#amount").val(amount);
 

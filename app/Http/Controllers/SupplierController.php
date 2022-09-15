@@ -30,6 +30,14 @@ class SupplierController extends Controller
         MdSupplier::create(array(
             'society_id'=>auth()->user()->society_id,
             'sup_name'=>$request->sup_name,
+            'sup_address'=>$request->sup_address,
+            'contact_no'=>$request->contact_no,
+            'sup_email'=>$request->sup_email,
+            'aadhar_no'=>$request->aadhar_no,
+            'pan_no'=>$request->pan_no,
+            'bank_name'=>$request->bank_name,
+            'acc_no'=>$request->acc_no,
+            'ifsc'=>$request->ifsc,
             'created_by'=>auth()->user()->id,
         ));
         return redirect()->route('supplierManage')->with('addSuccess','addSuccess');
@@ -49,6 +57,14 @@ class SupplierController extends Controller
         $id=Crypt::decryptString($request->id);
         $data=MdSupplier::find($id);
         $data->sup_name=$request->sup_name;
+        $data->sup_address=$request->sup_address;
+        $data->contact_no=$request->contact_no;
+        $data->sup_email=$request->sup_email;
+        $data->aadhar_no=$request->aadhar_no;
+        $data->pan_no=$request->pan_no;
+        $data->bank_name=$request->bank_name;
+        $data->acc_no=$request->acc_no;
+        $data->ifsc=$request->ifsc;
         $data->updated_by=auth()->user()->id;
         $data->save();
         return redirect()->back()->with('update','update');

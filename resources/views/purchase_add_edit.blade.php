@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'Update':'Create'}} Supplier</h2>
+                    <h2>{{isset($data)?'Update':'Create'}} Purchase</h2>
                 </div>
 
                 <div class="row">
@@ -62,12 +62,19 @@
                                     <input type="text" class="form-control" name="amount" id="amount" required
                                         value="{{isset($data)?$data->amount:''}}">
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="">Remark</label>
+                                    <textarea name="remark" id="remark" class="form-control" cols="30"
+                                        rows="3">{{isset($data)?$data->remark:''}}</textarea>
+
+
+                                </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
                                     <input type="submit" class="btn btn-info" id="submit" name="submit"
-                                        value="{{isset($data)?'Update':'Create'}}">
+                                        value="{{isset($data)?'Update':'Purchase'}}">
                                 </div>
                             </div>
                         </form>
@@ -105,6 +112,8 @@ $(document).ready(function() {
                 var rate = obj.rate;
                 $("#rate").val('');
                 $("#rate").val(rate);
+                $("#amount").val('');
+                $("#quantity").val('');
                 // $("#tr_" + id).remove();
                 // toastr.success('Member Delete Successfully.');
 
@@ -121,8 +130,8 @@ $(document).ready(function() {
             $("#quantity").val(val1);
         } else {
             // alert('hii')
-            
-            var amount= Number(rate) * Number(value) ;
+
+            var amount = Number(rate) * Number(value);
             $("#amount").val('');
             $("#amount").val(amount);
 
@@ -135,6 +144,11 @@ $(document).ready(function() {
             // Filter non-digits from input value.
             val2 = value.replace(/\D/g, '');
             $("#rate").val(val2);
+        }else{
+            var value1 = $("#quantity").val();
+            var amount = Number(value) * Number(value1);
+            $("#amount").val('');
+            $("#amount").val(amount);
         }
     });
 

@@ -10,7 +10,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="{{route('saleReport')}}">
+                        <form action="{{route('supplierReport')}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">From Date</label>
@@ -26,23 +26,12 @@
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">Supplier Name</label>
-                                    <select name="supplier_id" id="supplier_id" class="form-control">
+                                    <select name="supplier_id" id="supplier_id" class="form-control" required>
                                         <option value="">-- Select Supplier Name -- </option>
                                         @foreach($suppliers as $supplier)
                                         <option value="{{$supplier->id}}"
                                             <?php if($supplier_id!='' && $supplier->id==$supplier_id){echo 'selected';} ?>>
                                             {{$supplier->sup_name. " - ".$supplier->contact_no}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">Product Name</label>
-                                    <select name="product_master_id" id="product_master_id" class="form-control">
-                                        <option value="">-- Select Product Name -- </option>
-                                        @foreach($product_master as $productmaster)
-                                        <option value="{{$productmaster->id}}"
-                                            <?php if($product_master_id!='' && $productmaster->id==$product_master_id){echo 'selected';} ?>>
-                                            {{$productmaster->pdt_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -59,52 +48,92 @@
             </div>
         </div>
         <div class="card mt-2">
-            <div class="card-body">
-                <div class="titleSec">
-                    <a type="button" href="javascript:void(0);" class="btn btn-primary"
-                        onclick="printContent('sectionDiv');">Print</a>
-                    <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
-                    <h2> Sale Report</h2>
+            <div class="card-body" id="sectionDiv">
+                <div class="container text-center mb-3">
+                    <h3 class="mb-2">Nuudyog Farmers Producer Company Ltd.</h3>
+                    <!-- <h4 class="mb-2">Company Registered under the Companies Act, 2013</h4>
+                    <h4 class="mb-2">Farmer producer Company under NABARD, Govt. of India</h4>
+                    <h5 class="mb-2">Regd. No. - U01110WB2020PTC238766</h5> -->
+                    <h4 class="mb-2">Office Address : Plot-2025, Henriya Attaramchak, Heria, Khejuri , Purba Medinipur,
+                        West Bengal, India 721430</h4>
+                    <!-- <h5 class="mb-2">Mail ID - nuudyogfpc@gmail.com</h5>
+                    <h5 class="mb-2">Contact Us : 9734358832</h5> -->
+                    <h5 class="mb-2">Supplier Purchase & Sale Report on : {{$from_date}} - {{$to_date}}</h5>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <b>Name : {{$supplier_details[0]['sup_name']}}</b>
+                        <!-- <div>Name : </div> -->
+                    </div>
+                    <div class="col-sm-6 mb-2">
+                        <b>Contact No : {{$supplier_details[0]['contact_no']}}</b>
+                        <!-- <div>Contact No: </div> -->
+                    </div>
+                    <div class="col-sm-12 mb-2">
+                        <b>Address : {{$supplier_details[0]['sup_address']}}</b>
+                        <!-- <div>Address :</div> -->
+                    </div>
                 </div>
 
-                <div class="row" id="sectionDiv">
+                <div class="row">
                     <div class="col-sm-12">
                         <table id="" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sl No</th>
-                                    <th>Sale Date</th>
-                                    <th>Supplier Name</th>
+                                    <th>Date</th>
                                     <th>Product Name</th>
-                                    <th>Sale Type</th>
+                                    <th>Type</th>
                                     <th>Rate</th>
                                     <th>Quantity</th>
-                                    <th>Amount</th>
+                                    <!-- sale Purchase -->
+                                    <th>Total Amount</th>
+                                    <th>Deposit</th>
+                                    <th>Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1;?>
+                                <?php $i=1; $cal_amt=0;?>
                                 @foreach($datas as $data)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$data->sale_date}}</td>
-                                    <td>{{$data->sup_name}}</td>
-                                    <td>{{$data->pdt_name}}</td>
                                     <td>
-                                        @if($data->sale_type=='C')
-                                        {{"Credit"}}
-                                        @else
-                                        {{'Cash'}}
-                                        @endif
+                                        <?php if(isset($data->sale_date)){echo $data->sale_date;}?>
+                                        <?php if(isset($data->received_date)){echo $data->received_date;}?>
                                     </td>
-                                    <td>{{$data->rate}}</td>
-                                    <td>{{$data->quantity}}</td>
-                                    <td>{{$data->amount}}</td>
+                                    <td><?php if(isset($data->pdt_name)){echo $data->pdt_name;}else{echo "-";}?></td>
+                                    <td>
+                                        <?php if(isset($data->sale_type)){echo "Purchase";}?>
+                                        <?php if(isset($data->received_type)){echo "Payment";}?>
+                                    </td>
+                                    <td>
+                                        <?php if(isset($data->rate)){echo $data->rate;}else{echo "-";}?>
+                                    </td>
+                                    <td>
+                                        <?php if(isset($data->quantity)){echo $data->quantity;}else{echo "-";}?>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                            if (isset($data->sale_type)) {
+                                                $cal_amt=$cal_amt+$data->amount;
+                                                echo $data->amount;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                            if (isset($data->received_type)) {
+                                                $cal_amt=$cal_amt-$data->amount;
+                                                echo $data->amount;
+                                            }
+                                        ?>
+                                    </td>
+                                    <td>{{$cal_amt}}</td>
 
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Sale Date</th>
@@ -115,12 +144,22 @@
                                     <th>Quantity</th>
                                     <th>Amount</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <a type="button" href="javascript:void(0);" class="btn btn-primary"
+                            onclick="printContent('sectionDiv');">Print</a>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 @endsection

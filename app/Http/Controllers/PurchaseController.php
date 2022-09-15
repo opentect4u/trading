@@ -60,6 +60,7 @@ class PurchaseController extends Controller
             'rate'=>$request->rate,
             'quantity'=>$request->quantity,
             'amount'=>$request->amount,
+            'remark'=>$request->remark,
             'created_by'=>auth()->user()->id,
         ));
         return redirect()->route('purchaseManage')->with('addSuccess','addSuccess');

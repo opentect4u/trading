@@ -40,7 +40,7 @@
             <div class="card-body">
                 <div class="titleSec">
                     <a type="button" href="{{route('receiveAdd')}}" class="btn btn-primary">Create</a>
-                    <h2>Payment</h2>
+                    <h2>Receive Payemnt</h2>
                 </div>
 
                 <div class="row">
