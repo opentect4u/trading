@@ -20,6 +20,8 @@ class ProductRateController extends Controller
             ->leftJoin('md_product_master','md_product_master.id','=','md_product_rate.product_master_id')
             ->select('md_product_rate.*','md_product_master.pdt_name as pdt_name')
             ->where('md_product_rate.society_id',auth()->user()->society_id)
+            ->orderBy('md_product_rate.effective_date','DESC')
+            ->groupBy('md_product_rate.product_master_id')
             ->get();
         // $datas=MdProductRate::where('society_id',auth()->user()->society_id)->get();
         return view('master.product_rate_manage',['datas'=>$datas]);

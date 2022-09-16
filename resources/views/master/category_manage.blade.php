@@ -15,7 +15,7 @@
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Sl No</th>
+                                    <th>Category Id</th>
                                     <th>Name</th>
                                     <th>Action</th>
                                 </tr>
@@ -31,13 +31,13 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Name</th>
                                     <th>Action</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
                     </div>
                 </div>

@@ -75,6 +75,11 @@
                                     <input type="text" class="form-control" name="pan_no" id="pan_no"
                                         value="{{isset($data)?$data->pan_no:''}}">
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="">VoterId No.</label>
+                                    <input type="text" class="form-control" name="voter_id" id="voter_id"
+                                        value="{{isset($data)?$data->voter_id:''}}">
+                                </div>
 
                                 <div class="col-sm-6">
                                     <label for="">Bank Name</label>
@@ -95,7 +100,7 @@
 
 
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="">Remarks</label>
                                     <textarea class="form-control" name="remark" id="remark" cols="30"
                                         rows="2">{{isset($data)?$data->remark:''}}</textarea>

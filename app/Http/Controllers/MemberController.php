@@ -71,6 +71,7 @@ class MemberController extends Controller
 
             'aadhar_no'=>$request->aadhar_no,
             'pan_no'=>$request->pan_no,
+            'voter_id'=>$request->pan_no,
             'bank_name'=>$request->bank_name,
             'acc_no'=>$request->acc_no,
             'ifsc'=>$request->ifsc,
@@ -126,6 +127,7 @@ class MemberController extends Controller
         ->update([
             'aadhar_no' => $request->aadhar_no,
             'pan_no' => $request->pan_no,
+            'voter_id' => $request->voter_id,
             'bank_name' => $request->bank_name,
             'acc_no' => $request->acc_no,
             'ifsc' => $request->ifsc,

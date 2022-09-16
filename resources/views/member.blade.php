@@ -13,14 +13,26 @@
                     <div class="col-sm-12">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input class="form-check" type="radio" id="member_type_1" name="member_type" value="A"
+                                <!-- <input class="form-check" type="radio" id="member_type_1" name="member_type" value="A"
                                     <?php if($member_type=='A'){echo "checked";}?>>
                                 <label for="html">Open</label>
                                 <input class="form-check" type="radio" id="member_type_2" name="member_type" value="C" <?php if($member_type=='C'){echo "checked";}?>>
                                 <label for="css">Close</label>
                                 <input class="form-check" type="radio" id="member_type_3" name="member_type" value="N" <?php if($member_type=='N'){echo "checked";}?>>
-                                <label for="css">Nominal</label>
+                                <label for="css">Nominal</label> -->
 
+
+                                <div class="btn-group" >
+                                    <label class="btn btn-default">
+                                        <input type="radio" id="member_type_1" name="member_type" value="A" <?php if($member_type=='A'){echo "checked";}?>/> Open
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" id="member_type_2" name="member_type" value="C" <?php if($member_type=='C'){echo "checked";}?>/> Close
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" id="member_type_3" name="member_type" value="N" <?php if($member_type=='N'){echo "checked";}?>/> Nominal
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>

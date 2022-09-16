@@ -16,7 +16,7 @@
                             @csrf
                             <input type="text" name="society_id" id="society_id" hidden
                                 value="{{isset($data)?\Crypt::encryptString($data->society_id):''}}">
-                            
+
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">Customer ID</label>
@@ -63,10 +63,47 @@
                                         value="{{isset($data)?$data->deposit_amount:''}}" readonly>
                                 </div>
 
+                                <div class="col-sm-6">
+                                    <label for="">Aadhar No.</label>
+                                    <input type="text" class="form-control" name="aadhar_no" id="aadhar_no"
+                                        value="{{isset($data)?$data->aadhar_no:''}}"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" readonly>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">PAN No.</label>
+                                    <input type="text" class="form-control" name="pan_no" id="pan_no"
+                                        value="{{isset($data)?$data->pan_no:''}}" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">VoterId No.</label>
+                                    <input type="text" class="form-control" name="voter_id" id="voter_id"
+                                        value="{{isset($data)?$data->voter_id:''}}" readonly>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Bank Name</label>
+                                    <input type="text" class="form-control" name="bank_name" id="bank_name"
+                                        value="{{isset($data)?$data->bank_name:''}}" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">ACC No.</label>
+                                    <input type="text" class="form-control" name="acc_no" id="acc_no"
+                                        value="{{isset($data)?$data->acc_no:''}}"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" readonly>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">IFSC</label>
+                                    <input type="text" class="form-control" name="ifsc" id="ifsc"
+                                        value="{{isset($data)?$data->ifsc:''}}" readonly>
+                                </div>
+
+
+
                                 <div class="col-sm-12">
-                                    <label for="">Remark</label>
-                                    <textarea class="form-control" name="remark" id="remark" cols="30" readonly
-                                        rows="2">{{isset($data)?$data->remark:''}}</textarea>
+                                    <label for="">Remarks</label>
+                                    <textarea class="form-control" name="remark" id="remark" cols="30" rows="2"
+                                        readonly>{{isset($data)?$data->remark:''}}</textarea>
                                 </div>
 
                             </div>

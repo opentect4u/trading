@@ -25,6 +25,7 @@ class TdMember extends Model
         'deposit_amount',
         'aadhar_no',
         'pan_no',
+        'voter_id',
         'bank_name',
         'acc_no',
         'ifsc',
