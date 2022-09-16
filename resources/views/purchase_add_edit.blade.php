@@ -43,15 +43,15 @@
                                     <select name="product_category_id" id="product_category_id" class="form-control"
                                         required>
                                         <option value=""> -- Select Product Category -- </option>
+                                        @foreach($ProductCategory as $category)
+                                        <option value="{{$category->id}}">{{$category->cat_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Product Name</label>
                                     <select name="product_master_id" id="product_master_id" class="form-control">
                                         <option value=""> -- Select Product Name -- </option>
-                                        @foreach($products as $product)
-                                        <option value="{{$product->id}}">{{$product->pdt_name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -69,7 +69,7 @@
                                     <input type="text" class="form-control" name="amount" id="amount" required
                                         value="{{isset($data)?$data->amount:''}}">
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="">Remarks</label>
                                     <textarea name="remark" id="remark" class="form-control" cols="30"
                                         rows="3">{{isset($data)?$data->remark:''}}</textarea>
@@ -129,29 +129,29 @@ $(document).ready(function() {
             }
         });
     });
+    
+    // $("#product_master_id").on('change', function() {
+    //     var product_master_id = $("#product_master_id").val();
+    //     $.ajax({
+    //         url: "{{route('productRateAjax')}}",
+    //         method: "POST",
+    //         data: {
+    //             product_master_id: product_master_id,
+    //         },
+    //         success: function(data) {
+    //             // alert(data)
+    //             var obj = JSON.parse(data);
+    //             var rate = obj.rate;
+    //             $("#rate").val('');
+    //             $("#rate").val(rate);
+    //             $("#amount").val('');
+    //             $("#quantity").val('');
+    //             // $("#tr_" + id).remove();
+    //             // toastr.success('Member Delete Successfully.');
 
-    $("#product_master_id").on('change', function() {
-        var product_master_id = $("#product_master_id").val();
-        $.ajax({
-            url: "{{route('productRateAjax')}}",
-            method: "POST",
-            data: {
-                product_master_id: product_master_id,
-            },
-            success: function(data) {
-                // alert(data)
-                var obj = JSON.parse(data);
-                var rate = obj.rate;
-                $("#rate").val('');
-                $("#rate").val(rate);
-                $("#amount").val('');
-                $("#quantity").val('');
-                // $("#tr_" + id).remove();
-                // toastr.success('Member Delete Successfully.');
-
-            }
-        });
-    });
+    //         }
+    //     });
+    // });
 
     $('#quantity').keyup(function(e) {
         var value = $("#quantity").val();

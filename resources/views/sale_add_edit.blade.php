@@ -72,7 +72,7 @@
                                     <input type="text" class="form-control" name="amount" id="amount" required
                                         value="{{isset($data)?$data->amount:''}}">
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="">Remarks</label>
                                     <textarea name="remark" id="remark" class="form-control" cols="30"
                                         rows="3">{{isset($data)?$data->remark:''}}</textarea>

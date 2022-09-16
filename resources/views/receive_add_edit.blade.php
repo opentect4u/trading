@@ -60,8 +60,8 @@
                                         value="{{isset($data)?$data->cheque_date:''}}">
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <label for="">Remark</label>
+                                <div class="col-sm-12">
+                                    <label for="">Remarks</label>
                                     <textarea name="remark" id="remark" class="form-control" cols="30"
                                         rows="3">{{isset($data)?$data->remark:''}}</textarea>
                                 </div>
@@ -148,6 +148,10 @@ $(document).ready(function() {
             val2 = value.replace(/\D/g, '');
             $("#amount").val(val2);
         }
+    });
+
+    $("#received_date").datepicker({
+        dateFormat: 'dd-mm-yy',
     });
 });
 </script>

@@ -57,6 +57,7 @@ class PurchaseController extends Controller
             'purchase_date'=> date('Y-m-d',strtotime($request->purchase_date)),
             'purchase_type'=>$request->purchase_type,
             'supplier_id'=>$request->supplier_id,
+            'product_category_id'=>$request->product_category_id,
             'product_master_id'=>$request->product_master_id,
             'rate'=>$request->rate,
             'quantity'=>$request->quantity,
