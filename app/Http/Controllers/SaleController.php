@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 use Helper;
-use App\Models\{TdSale,MdSupplier,MdProductMaster,MdProductRate};
+use App\Models\{TdSale,MdSupplier,MdProductMaster,MdProductRate,TdMember,MdProductCategory};
 
 class SaleController extends Controller
 {
@@ -50,8 +50,10 @@ class SaleController extends Controller
         // return Helper::stockProduct($product_master_id,$start_date);
 
         $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
-        $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
-        return view('sale_add_edit',['products'=>$products,'suppliers'=>$suppliers]);
+        $ProductCategory=MdProductCategory::where('society_id',auth()->user()->society_id)->get();
+        // $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        $suppliers=TdMember::where('delete_flag','N')->where('society_id',auth()->user()->society_id)->get();
+        return view('sale_add_edit',['products'=>$products,'suppliers'=>$suppliers,'ProductCategory'=>$ProductCategory]);
     }
 
     public function Create(Request $request)
@@ -91,5 +93,12 @@ class SaleController extends Controller
         $json_data['stock']=$stock;
         $json_data['product_master_id']=$product_master_id;
         echo json_encode($json_data);
+    }
+
+    public function ProductNameAjax(Request $request)
+    {
+        $product_category_id=$request->product_category_id;
+        $products=MdProductMaster::where('product_category_id',$product_category_id)->where('society_id',auth()->user()->society_id)->get();
+        return view('product_name_ajax',['products'=>$products]);
     }
 }

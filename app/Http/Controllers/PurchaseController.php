@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use DB;
-use App\Models\{TdPurchase,MdSupplier,MdProductMaster,MdProductRate};
+use App\Models\{TdPurchase,MdSupplier,MdProductMaster,MdProductRate,MdProductCategory};
 
 class PurchaseController extends Controller
 {
@@ -44,8 +44,9 @@ class PurchaseController extends Controller
     public function Show()
     {
         $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
+        $ProductCategory=MdProductCategory::where('society_id',auth()->user()->society_id)->get();
         $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
-        return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers]);
+        return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers,'ProductCategory'=>$ProductCategory]);
     }
 
     public function Create(Request $request)

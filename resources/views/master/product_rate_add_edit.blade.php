@@ -40,7 +40,7 @@
                                         value="{{isset($data)?$data->company_rate:''}}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Buy Rate</label>
+                                    <label for="">Purchase Rate</label>
                                     <input type="text" class="form-control" name="buy_rate" id="buy_rate" required
                                         value="{{isset($data)?$data->buy_rate:''}}">
                                 </div>

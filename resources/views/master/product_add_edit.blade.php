@@ -16,7 +16,7 @@
                             <input type="text" name="id" id="id" hidden
                                 value="{{isset($data)?\Crypt::encryptString($data->id):''}}">
                             <div class="form-group row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="">Category</label>
                                     <select class="form-control" id="product_category_id" name="product_category_id" required>
                                         <option value=""> -- Select Category -- </option>
@@ -25,7 +25,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="">Name</label>
                                     <input type="text" class="form-control" name="pdt_name" id="pdt_name" required
                                         value="{{isset($data)?$data->pdt_name:''}}">

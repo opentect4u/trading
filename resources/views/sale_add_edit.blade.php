@@ -30,21 +30,30 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Supplier Name</label>
+                                    <label for="">Member Name</label>
                                     <select name="supplier_id" id="supplier_id" class="form-control" required>
-                                        <option value=""> -- Select Supplier Name -- </option>
+                                        <option value=""> -- Select Member Name -- </option>
                                         @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}">{{$supplier->sup_name}}</option>
+                                        <option value="{{$supplier->customer_id}}">{{$supplier->mem_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Product Category</label>
+                                    <select name="product_category_id" id="product_category_id" class="form-control"
+                                        required>
+                                        <option value=""> -- Select Product Category -- </option>
+                                        @foreach($ProductCategory as $category)
+                                        <option value="{{$category->id}}">{{$category->cat_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Product Name</label>
-                                    <select name="product_master_id" id="product_master_id" class="form-control" required>
+                                    <select name="product_master_id" id="product_master_id" class="form-control"
+                                        required>
                                         <option value=""> -- Select Product Name -- </option>
-                                        @foreach($products as $product)
-                                        <option value="{{$product->id}}">{{$product->pdt_name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -64,7 +73,7 @@
                                         value="{{isset($data)?$data->amount:''}}">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Remark</label>
+                                    <label for="">Remarks</label>
                                     <textarea name="remark" id="remark" class="form-control" cols="30"
                                         rows="3">{{isset($data)?$data->remark:''}}</textarea>
 
@@ -105,6 +114,30 @@ toastr.error('Product sale Failed.');
 
 <script>
 $(document).ready(function() {
+    // product_category_id
+    $("#product_category_id").on('change', function() {
+        var product_category_id = $("#product_category_id").val();
+        $.ajax({
+            url: "{{route('productNameAjax')}}",
+            method: "POST",
+            data: {
+                product_category_id: product_category_id,
+            },
+            success: function(data) {
+                // alert(data)
+                $("#product_master_id").empty();
+                $("#product_master_id").html(data);
+
+                // var obj = JSON.parse(data);
+                // var rate = obj.rate;
+                // $("#rate").val('');
+                // $("#rate").val(rate);
+                // $("#tr_" + id).remove();
+                // toastr.success('Member Delete Successfully.');
+
+            }
+        });
+    });
     $("#product_master_id").on('change', function() {
         var product_master_id = $("#product_master_id").val();
         $.ajax({
@@ -185,6 +218,10 @@ $(document).ready(function() {
             val2 = value.replace(/\D/g, '');
             $("#amount").val(val2);
         }
+    });
+
+    $("#sale_date").datepicker({
+        dateFormat: 'dd-mm-yy',
     });
 });
 </script>

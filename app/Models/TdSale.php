@@ -14,6 +14,7 @@ class TdSale extends Model
         'sale_date',
         'sale_type',
         'supplier_id',
+        'product_category_id',
         'product_master_id',
         'rate',
         'quantity',

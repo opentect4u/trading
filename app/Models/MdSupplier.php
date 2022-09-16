@@ -20,6 +20,7 @@ class MdSupplier extends Model
         'bank_name',
         'acc_no',
         'ifsc',
+        'remarks',
         'created_by',
         'updated_by',
     ];

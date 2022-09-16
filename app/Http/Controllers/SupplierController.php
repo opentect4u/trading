@@ -38,6 +38,7 @@ class SupplierController extends Controller
             'bank_name'=>$request->bank_name,
             'acc_no'=>$request->acc_no,
             'ifsc'=>$request->ifsc,
+            'remarks'=>$request->remarks,
             'created_by'=>auth()->user()->id,
         ));
         return redirect()->route('supplierManage')->with('addSuccess','addSuccess');
@@ -65,6 +66,7 @@ class SupplierController extends Controller
         $data->bank_name=$request->bank_name;
         $data->acc_no=$request->acc_no;
         $data->ifsc=$request->ifsc;
+        $data->remarks=$request->remarks;
         $data->updated_by=auth()->user()->id;
         $data->save();
         return redirect()->back()->with('update','update');

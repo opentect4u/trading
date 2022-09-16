@@ -61,6 +61,7 @@ Route::get('dashboard',[App\Http\Controllers\HomeController::class,'Index'])->na
 Route::get('members',[App\Http\Controllers\MemberController::class,'Index'])->name('memberManage');
 Route::get('memberadd',[App\Http\Controllers\MemberController::class,'Show'])->name('memberAdd');
 Route::post('memberadd',[App\Http\Controllers\MemberController::class,'Create'])->name('memberAdd');
+Route::get('memberview/{society_id}/{customer_id}',[App\Http\Controllers\MemberController::class,'View'])->name('memberView');
 Route::get('memberedit/{society_id}/{customer_id}',[App\Http\Controllers\MemberController::class,'Edit'])->name('memberEdit');
 Route::post('memberupdate',[App\Http\Controllers\MemberController::class,'Update'])->name('memberUpdate');
 Route::get('memberclose/{society_id}/{customer_id}',[App\Http\Controllers\MemberController::class,'ShowClose'])->name('memberClose');
@@ -113,6 +114,7 @@ Route::post('saleadd',[App\Http\Controllers\SaleController::class,'Create'])->na
 Route::get('saleedit/{id}',[App\Http\Controllers\SaleController::class,'Edit'])->name('saleEdit');
 Route::post('saleedit',[App\Http\Controllers\SaleController::class,'Update'])->name('saleUpdate');
 Route::post('productStockAjax',[App\Http\Controllers\SaleController::class,'SaleStockProductAjax'])->name('productStockAjax');
+Route::post('productNameAjax',[App\Http\Controllers\SaleController::class,'ProductNameAjax'])->name('productNameAjax');
 
 Route::get('receive',[App\Http\Controllers\ReceivedController::class,'Index'])->name('receiveManage');
 Route::get('receiveadd',[App\Http\Controllers\ReceivedController::class,'Show'])->name('receiveAdd');

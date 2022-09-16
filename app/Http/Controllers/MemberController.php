@@ -13,15 +13,27 @@ class MemberController extends Controller
         $this->middleware('auth');
     }
 
-    public function Index()
+    public function Index(Request $request)
     {
         // return "hii";
-        $datas=TdMember::where('society_id',auth()->user()->society_id)
-            ->where('delete_flag','N')
-            // ->orderBy('customer_id','desc')
-            ->get();
+        $member_type=$request->member_type;
+        if ($member_type!='') {
+            $datas=TdMember::where('society_id',auth()->user()->society_id)
+                ->where('delete_flag','N')
+                ->where('open_close_flag',$member_type)
+                // ->orderBy('customer_id','desc')
+                ->get();
+        }else{
+            $datas=TdMember::where('society_id',auth()->user()->society_id)
+                ->where('delete_flag','N')
+                ->where('open_close_flag','A')
+                // ->orderBy('customer_id','desc')
+                ->get();
+
+            $member_type='A';
+        }
         // return $datas;
-        return view('member',['datas'=>$datas]);
+        return view('member',['datas'=>$datas ,'member_type'=>$member_type]);
     }
 
     public function Show(Type $var = null)
@@ -72,6 +84,17 @@ class MemberController extends Controller
         return redirect()->route('memberManage');
     }
 
+    public function View($society_id,$customer_id)
+    {
+        $society_id=Crypt::decryptString($society_id);
+        $customer_id=Crypt::decryptString($customer_id);
+        // return $customer_id;
+        // $data=TdMember::find($society_id);
+        $data=TdMember::where('society_id',$society_id)->where('customer_id',$customer_id)->get();
+        // return $data[0];
+        return view('member_view',['data'=>$data[0]]);
+    }
+
     public function Edit($society_id,$customer_id)
     {
         $society_id=Crypt::decryptString($society_id);
@@ -93,13 +116,24 @@ class MemberController extends Controller
         return view('member_close',['data'=>$data[0]]);
     }
 
-    // public function Update(Request $request)
-    // {
-    //     $id=Crypt::decryptString($request->id);
-    //     return $id;
-    //     $data=TdMember::find($id);
-    //     $data->society_id=
-    // }
+    public function Update(Request $request)
+    {
+        // return $request;
+        // $id=Crypt::decryptString($request->id);
+        // return $id;
+        $data=TdMember::where('society_id', auth()->user()->society_id)
+        ->where('customer_id', $request->customer_id)
+        ->update([
+            'aadhar_no' => $request->aadhar_no,
+            'pan_no' => $request->pan_no,
+            'bank_name' => $request->bank_name,
+            'acc_no' => $request->acc_no,
+            'ifsc' => $request->ifsc,
+            'updated_by'=>auth()->user()->id,
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]); 
+        return redirect()->back()->with('update','update');
+    }
 
     public function Close(Request $request)
     {

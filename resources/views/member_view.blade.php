@@ -20,24 +20,24 @@
                                 <div class="col-sm-6">
                                     <label for="">Customer ID</label>
                                     <input type="text" class="form-control" name="customer_id" id="customer_id" required
-                                        value="{{isset($data)?$data->customer_id:''}}" readonly>
+                                        value="{{isset($data)?$data->customer_id:''}}">
                                 </div>
                                 @endif
                                 <div class="col-sm-6">
                                     <label for="">Name</label>
                                     <input type="text" class="form-control" name="mem_name" id="mem_name" required
-                                        value="{{isset($data)?$data->mem_name:''}}" <?php if(isset($data)){echo "readonly";}?>>
+                                        value="{{isset($data)?$data->mem_name:''}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Address</label>
                                     <textarea class="form-control" name="mem_address" id="mem_address" cols="30"
-                                        rows="2" required <?php if(isset($data)){echo "readonly";}?>>{{isset($data)?$data->mem_address:''}}</textarea>
+                                        rows="2" required>{{isset($data)?$data->mem_address:''}}</textarea>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Contact No</label>
                                     <input type="text" class="form-control" name="contact_no" id="contact_no" required
                                         value="{{isset($data)?$data->contact_no:''}}"
-                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" <?php if(isset($data)){echo "readonly";}?>>
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Email</label>
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Member Type</label>
-                                    <select class="form-control" id="member_type" name="member_type" required <?php if(isset($data)){echo "disabled";}?>>
+                                    <select class="form-control" id="member_type" name="member_type" required>
                                         <option value=""> -- Select Member Type --</option>
                                         <option value="M"
                                             <?php if(isset($data) && $data->member_type=='M'){echo "selected";}?>>Member
@@ -60,7 +60,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Deposit Amount</label>
                                     <input type="text" class="form-control" name="deposit_amount" id="deposit_amount"
-                                        value="{{isset($data)?$data->deposit_amount:''}}" <?php if(isset($data)){echo "readonly";}?>>
+                                        value="{{isset($data)?$data->deposit_amount:''}}">
                                 </div>
 
                                 <div class="col-sm-6">
@@ -122,14 +122,14 @@
                                 </div>
                             </div>
                             @endif
-                            
+                            @if(!isset($data))
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
                                     <input type="submit" class="btn btn-info" id="submit" name="submit"
                                         value="{{isset($data)?'Update':'Create'}}">
                                 </div>
                             </div>
-                            
+                            @endif
                         </form>
 
                     </div>
@@ -142,15 +142,12 @@
 
 
 @section('script')
-@if(Session::has('update'))
-<script>
-toastr.success('Member Update Successfully.');
-</script>
-@endif
 
-@if(isset($data))
 <script>
-var updateval = '{{isset($data)?$data->member_type:'
+$(document).ready(function() {
+
+    // alert('hohofjhbuh')
+    var updateval = '{{isset($data)?$data->member_type:'
     '}}';
     if (updateval == 'M') {
         $("#deposit_amount").attr('required', 'required');
@@ -158,17 +155,9 @@ var updateval = '{{isset($data)?$data->member_type:'
     } else {
         $("#deposit_amount").removeAttr('required');
     }
-</script>
-@endif
 
-<script>
-$(document).ready(function() {
-
-    // alert('hohofjhbuh')
-    
     $("#member_type").on('change', function() {
         var val = $("#member_type").val();
-        // alert(val)
         if (val == 'M') {
             $("#deposit_amount").attr('required', 'required');
             // deposit_amount

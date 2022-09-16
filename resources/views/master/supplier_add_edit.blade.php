@@ -67,6 +67,11 @@
                                     <input type="text" class="form-control" name="ifsc" id="ifsc"
                                         value="{{isset($data)?$data->ifsc:''}}">
                                 </div>
+
+                                <div class="col-sm-12">
+                                    <label for="">Remarks</label>
+                                    <textarea class="form-control" name="remarks" id="remarks" cols="30" rows="3">{{isset($data)?$data->remarks:''}}</textarea>
+                                </div>
                             </div>
 
                             <div class="form-group row">

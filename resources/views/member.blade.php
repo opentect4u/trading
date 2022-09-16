@@ -11,6 +11,22 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input class="form-check" type="radio" id="member_type_1" name="member_type" value="A"
+                                    <?php if($member_type=='A'){echo "checked";}?>>
+                                <label for="html">Open</label>
+                                <input class="form-check" type="radio" id="member_type_2" name="member_type" value="C" <?php if($member_type=='C'){echo "checked";}?>>
+                                <label for="css">Close</label>
+                                <input class="form-check" type="radio" id="member_type_3" name="member_type" value="N" <?php if($member_type=='N'){echo "checked";}?>>
+                                <label for="css">Nominal</label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
@@ -22,6 +38,7 @@
                                     <th>Member Type</th>
                                     <!-- <th>Deposit Amount</th> -->
                                     <th>View</th>
+                                    <th>Edit</th>
                                     <th>Close</th>
                                     <th>Delete</th>
                                 </tr>
@@ -58,16 +75,25 @@
                                         @endif
                                     </td> -->
                                     <td>
-                                        <a href="{{route('memberEdit',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
+                                        <a href="{{route('memberView',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
                                             title="View"><i class="fa fa-eye" aria-hidden="true"
+                                                style="font-size:18px;"></i></a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('memberEdit',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
+                                            title="View"><i class="fa fa-edit" aria-hidden="true"
                                                 style="font-size:18px;"></i></a>
                                     </td>
 
                                     <td>
                                         @if($data->member_type=='M')
+                                        @if($data->open_close_flag=='C')
+                                        -
+                                        @else
                                         <a href="{{route('memberClose',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
                                             title="Close Member"><i class="fa fa-times-circle-o" aria-hidden="true"
                                                 style="font-size:18px;color:red;"></i></a>
+                                        @endif
                                         @else
                                         -
                                         @endif
@@ -92,6 +118,7 @@
                                     <th>Member Type</th>
                                     <!-- <th>Deposit Amount</th> -->
                                     <th>View</th>
+                                    <th>Edit</th>
                                     <th>Close</th>
                                     <th>Delete</th>
                                 </tr>
@@ -114,6 +141,12 @@ toastr.success('Member Close Successfully.');
 </script>
 @endif
 <script>
+$('input[type=radio][name=member_type]').change(function() {
+    // alert(this.value);
+    var url = ("{{route('memberManage')}}") + "?member_type=" + this.value;
+    window.location.assign(url);
+});
+
 function butDelete(society_id, customer_id) {
     // alert(id)
     $.confirm({

@@ -47,6 +47,7 @@
                 </div>
             </div>
         </div>
+        @if(count($datas)>0)
         <div class="card mt-2">
             <div class="card-body" id="sectionDiv">
                 <div class="container text-center mb-3">
@@ -159,7 +160,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
     </div>
 </div>
 @endsection
