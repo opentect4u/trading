@@ -74,8 +74,6 @@
                                         <small style="color:green;">{{"( Open )"}}</small>
                                         @elseif($data->open_close_flag=='C')
                                         <small style="color:red;">{{"( Close )"}}</small>
-                                        @elseif($data->open_close_flag=='N')
-                                        <small style="color:#f19813;">{{"( Not a Member )"}}</small>
                                         @endif
                                     </td>
 

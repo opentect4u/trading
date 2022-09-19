@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TdMember;
+use App\Models\{TdMember,MdBlock};
 use Illuminate\Support\Facades\Crypt;
 
 class MemberController extends Controller
@@ -38,7 +38,8 @@ class MemberController extends Controller
 
     public function Show(Type $var = null)
     {
-        return view('member_add_edit');
+        $blocks=MdBlock::get();
+        return view('member_add_edit',['blocks'=>$blocks]);
     }
 
     public function Create(Request $request)
@@ -58,24 +59,39 @@ class MemberController extends Controller
         }else {
             $open_close_flag='N';
         }
+        if($request->deposit_amount!=''){
+            $mem_share=$request->deposit_amount/10;
+        }else{
+            $mem_share=0;
+        }
         TdMember::create(array(
             'society_id' =>auth()->user()->society_id,
             'customer_id'=>$customer_id,
             'mem_date'=>date('Y-m-d'),
             'mem_name'=>$request->mem_name,
-            'mem_address'=>$request->mem_address,
             'contact_no'=>$request->contact_no,
             'mem_email'=>$request->mem_email,
-            'member_type'=>$request->member_type,
-            'deposit_amount'=>$request->deposit_amount,
-
+            'mem_vill'=>$request->mem_vill,
+            'mem_block'=>$request->mem_block,
+            'mem_gender'=>$request->mem_gender,
+            'mem_cast'=>$request->mem_cast,
+            'mem_qualification'=>$request->mem_qualification,
             'aadhar_no'=>$request->aadhar_no,
             'pan_no'=>$request->pan_no,
-            'voter_id'=>$request->pan_no,
+            'voter_id'=>$request->voter_id,
+            'ration_card'=>$request->ration_card,
+            'nrega_card'=>$request->nrega_card,
+            // 'whether_member'=>$request->mem_name,
+            'member_type'=>$request->member_type,
+            'mem_share'=>$mem_share,
+            'deposit_amount'=>$request->deposit_amount,
+            'classification_of_mem'=>$request->classification_of_mem,
+            'landholding'=>$request->landholding,
+
+           
             'bank_name'=>$request->bank_name,
             'acc_no'=>$request->acc_no,
             'ifsc'=>$request->ifsc,
-
             'remark'=>$request->remark,
             'open_close_flag'=>$open_close_flag,
             'delete_flag'=>'N',
@@ -93,7 +109,8 @@ class MemberController extends Controller
         // $data=TdMember::find($society_id);
         $data=TdMember::where('society_id',$society_id)->where('customer_id',$customer_id)->get();
         // return $data[0];
-        return view('member_view',['data'=>$data[0]]);
+        $blocks=MdBlock::get();
+        return view('member_view',['data'=>$data[0],'blocks'=>$blocks]);
     }
 
     public function Edit($society_id,$customer_id)
@@ -104,7 +121,8 @@ class MemberController extends Controller
         // $data=TdMember::find($society_id);
         $data=TdMember::where('society_id',$society_id)->where('customer_id',$customer_id)->get();
         // return $data[0];
-        return view('member_add_edit',['data'=>$data[0]]);
+        $blocks=MdBlock::get();
+        return view('member_add_edit',['data'=>$data[0],'blocks'=>$blocks]);
     }
 
     public function ShowClose($society_id,$customer_id)
@@ -125,9 +143,17 @@ class MemberController extends Controller
         $data=TdMember::where('society_id', auth()->user()->society_id)
         ->where('customer_id', $request->customer_id)
         ->update([
+            'mem_name'=>$request->mem_name,
+            'mem_vill'=>$request->mem_vill,
+            'mem_qualification'=>$request->mem_qualification,
+            'mem_email'=>$request->mem_email,
             'aadhar_no' => $request->aadhar_no,
             'pan_no' => $request->pan_no,
             'voter_id' => $request->voter_id,
+            'ration_card' => $request->ration_card,
+            'nrega_card' => $request->nrega_card,
+            'classification_of_mem' => $request->classification_of_mem,
+            'landholding' => $request->landholding,
             'bank_name' => $request->bank_name,
             'acc_no' => $request->acc_no,
             'ifsc' => $request->ifsc,
