@@ -57,4 +57,17 @@ Route::group(['prefix'=>'admin','as'=>'admin.'],function () {
 
     
     Route::get('dashboard', [App\Http\Controllers\Admin\HomeController::class, 'Index'])->name('dashboard');
+
+    Route::get('society', [App\Http\Controllers\Admin\SocietyController::class, 'Index'])->name('SocietyManage');
+    Route::get('societyadd', [App\Http\Controllers\Admin\SocietyController::class, 'Show'])->name('societyAdd');
+    Route::post('societyadd', [App\Http\Controllers\Admin\SocietyController::class, 'Create'])->name('societyCreate');
+    Route::get('societyedit/{id}', [App\Http\Controllers\Admin\SocietyController::class, 'Edit'])->name('societyEdit');
+    Route::post('societyedit', [App\Http\Controllers\Admin\SocietyController::class, 'Update'])->name('societyUpdate');
+
+    Route::get('user', [App\Http\Controllers\Admin\UserController::class, 'Index'])->name('userManage');
+    Route::get('useradd', [App\Http\Controllers\Admin\UserController::class, 'Show'])->name('userAdd');
+    Route::post('useradd', [App\Http\Controllers\Admin\UserController::class, 'Create'])->name('userCreate');
+    Route::get('useredit/{id}', [App\Http\Controllers\Admin\UserController::class, 'Edit'])->name('userEdit');
+    Route::post('useredit', [App\Http\Controllers\Admin\UserController::class, 'Update'])->name('userUpdate');
+
 });

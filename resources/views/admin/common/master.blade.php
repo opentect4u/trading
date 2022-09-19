@@ -41,9 +41,9 @@
 </head>
 
 <body>
-    @include('common.header')
+    @include('admin.common.header')
     <div class="page-body-wrapper">
-        @include('common.sidebar')
+        @include('admin.common.sidebar')
 
         @yield('content')
 
