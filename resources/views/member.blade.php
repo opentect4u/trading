@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="titleSec">
                     <a type="button" href="{{route('memberAdd')}}" class="btn btn-primary">Create</a>
-                    <h2>Members</h2>
+                    <h2>Customers</h2>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -24,7 +24,7 @@
 
                                 <div class="btn-group" >
                                     <label class="btn btn-default">
-                                        <input type="radio" id="member_type_1" name="member_type" value="A" <?php if($member_type=='A'){echo "checked";}?>/> Open
+                                        <input type="radio" id="member_type_1" name="member_type" value="A" <?php if($member_type=='A'){echo "checked";}?>/> Active
                                     </label>
                                     <label class="btn btn-default">
                                         <input type="radio" id="member_type_2" name="member_type" value="C" <?php if($member_type=='C'){echo "checked";}?>/> Close
@@ -47,9 +47,9 @@
                                     <!-- <th>Member Date</th> -->
                                     <th>Name</th>
                                     <th>Contact No</th>
-                                    <th>Member Type</th>
+                                    <th>Customer Type</th>
                                     <!-- <th>Deposit Amount</th> -->
-                                    <th>View</th>
+                                    <!-- <th>View</th> -->
                                     <th>Edit</th>
                                     <th>Close</th>
                                     <th>Delete</th>
@@ -69,12 +69,6 @@
                                         @else
                                         {{"Nominal"}}
                                         @endif
-
-                                        @if($data->open_close_flag=='A')
-                                        <small style="color:green;">{{"( Open )"}}</small>
-                                        @elseif($data->open_close_flag=='C')
-                                        <small style="color:red;">{{"( Close )"}}</small>
-                                        @endif
                                     </td>
 
                                     <!-- <td>
@@ -84,11 +78,11 @@
                                         0
                                         @endif
                                     </td> -->
-                                    <td>
+                                    <!-- <td>
                                         <a href="{{route('memberView',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
                                             title="View"><i class="fa fa-eye" aria-hidden="true"
                                                 style="font-size:18px;"></i></a>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <a href="{{route('memberEdit',['society_id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
                                             title="View"><i class="fa fa-edit" aria-hidden="true"
@@ -125,9 +119,9 @@
                                     <!-- <th>Member Date</th> -->
                                     <th>Name</th>
                                     <th>Contact No</th>
-                                    <th>Member Type</th>
+                                    <th>Customer Type</th>
                                     <!-- <th>Deposit Amount</th> -->
-                                    <th>View</th>
+                                    <!-- <th>View</th> -->
                                     <th>Edit</th>
                                     <th>Close</th>
                                     <th>Delete</th>
@@ -147,7 +141,12 @@
 
 @if(Session::has('close_member'))
 <script>
-toastr.success('Member Close Successfully.');
+toastr.success('Customer Close Successfully.');
+</script>
+@endif
+@if(Session::has('success'))
+<script>
+toastr.success('Customer added Successfully.');
 </script>
 @endif
 <script>

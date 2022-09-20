@@ -5,7 +5,7 @@
             <div class="link"><a href="{{route('dashboard')}}"><i class="fa fa-tachometer"></i>Dashboard</a></div>
         </li>
         <li class="{{Route::currentRouteName()=='memberManage'?'open':''}}">
-            <div class="link"><a href="{{route('memberManage')}}"><i class="fa fa-users"></i>Members </a></div>
+            <div class="link"><a href="{{route('memberManage')}}"><i class="fa fa-users"></i>Customers </a></div>
         </li>
         <li
             class="{{Route::currentRouteName()=='supplierManage'||Route::currentRouteName()=='categoryManage' ||Route::currentRouteName()=='productManage'?'open':''}}">
@@ -79,7 +79,7 @@
             <ul class="submenu" style="{{Route::currentRouteName()=='memberReport'||Route::currentRouteName()=='stockReport' 
                     ||Route::currentRouteName()=='purchaseReport' ||Route::currentRouteName()=='saleReport' 
                     ||Route::currentRouteName()=='receiveReport' ||Route::currentRouteName()=='supplierReport' ||Route::currentRouteName()=='paymentReport'?'display: block;':''}}">
-                <li><a href="{{route('memberReport')}}"><i class="fa fa-industry"></i>Members</a></li>
+                <li><a href="{{route('memberReport')}}"><i class="fa fa-industry"></i>Customer</a></li>
                 <li><a href="{{route('stockReport')}}"><i class="fa fa-list-alt"></i>Stock </a></li>
                 <li><a href="{{route('purchaseReport')}}"><i class="fa fa-list-alt"></i>Purchase</a></li>
                 <li><a href="{{route('saleReport')}}"><i class="fa fa-list-alt"></i>Sale</a></li>

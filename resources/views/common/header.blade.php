@@ -13,7 +13,7 @@
 
             </li> -->
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Details</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{auth()->user()->name}}</a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="#" class="dropdown-item"><i class="fa fa-cog"></i> Settings</a>
                     <form method="POST" action="{{ route('logout') }}">

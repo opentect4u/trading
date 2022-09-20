@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'Close':'Create'}} Member</h2>
+                    <h2>{{isset($data)?'Close':'Create'}} Customer</h2>
                 </div>
 
                 <div class="row">

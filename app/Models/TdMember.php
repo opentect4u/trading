@@ -18,7 +18,7 @@ class TdMember extends Model
         'customer_id',
         'mem_date',
         'mem_name',
-        
+        'mem_address',
         'contact_no',
         'mem_email',
         'mem_vill',

@@ -67,12 +67,13 @@ class MemberController extends Controller
         TdMember::create(array(
             'society_id' =>auth()->user()->society_id,
             'customer_id'=>$customer_id,
-            'mem_date'=>date('Y-m-d'),
+            'mem_date'=>date('Y-m-d',strtotime($request->mem_date)),
             'mem_name'=>$request->mem_name,
             'contact_no'=>$request->contact_no,
             'mem_email'=>$request->mem_email,
             'mem_vill'=>$request->mem_vill,
             'mem_block'=>$request->mem_block,
+            'mem_address'=>$request->mem_address,
             'mem_gender'=>$request->mem_gender,
             'mem_cast'=>$request->mem_cast,
             'mem_qualification'=>$request->mem_qualification,
@@ -98,7 +99,7 @@ class MemberController extends Controller
             'created_by'=>auth()->user()->id,
             // 'updated_by',
         ));
-        return redirect()->route('memberManage');
+        return redirect()->route('memberManage')->with('success','success');
     }
 
     public function View($society_id,$customer_id)
@@ -147,6 +148,7 @@ class MemberController extends Controller
             'mem_vill'=>$request->mem_vill,
             'mem_qualification'=>$request->mem_qualification,
             'mem_email'=>$request->mem_email,
+            'mem_address'=>$request->mem_address,
             'aadhar_no' => $request->aadhar_no,
             'pan_no' => $request->pan_no,
             'voter_id' => $request->voter_id,

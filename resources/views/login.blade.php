@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Dashboard</title>
+    <title>Nuudyog Farmers Producer Company Ltd.</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

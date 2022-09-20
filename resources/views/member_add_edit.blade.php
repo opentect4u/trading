@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'View':'Create'}} Member</h2>
+                    <h2>{{isset($data)?'View':'Create'}} Customer</h2>
                 </div>
 
                 <div class="row">
@@ -22,71 +22,79 @@
                                     <input type="text" class="form-control" name="customer_id" id="customer_id" required
                                         value="{{isset($data)?$data->customer_id:''}}" readonly>
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="">Customer Type *</label>
+                                    <select class="form-control" id="member_type" name="member_type" required
+                                        <?php if(isset($data)){echo "disabled";}?>>
+                                        <option value=""> -- Select Customer Type --</option>
+                                        <option value="M"
+                                            <?php if(isset($data) && $data->member_type=='M'){echo "selected";}?>>Member
+                                        </option>
+                                        <option value="N"
+                                            <?php if(isset($data) && $data->member_type=='N'){echo "selected";}?>>
+                                            Nominal</option>
+                                    </select>
+                                </div>
                                 @endif
                                 <div class="col-sm-6">
-                                    <label for="">Name</label>
+                                    <label for="">Name *</label>
                                     <input type="text" class="form-control" name="mem_name" id="mem_name" required
                                         value="{{isset($data)?$data->mem_name:''}}"
                                         <?php if(isset($data)){echo "readonly";}?>>
                                 </div>
-                                <!-- <div class="col-sm-6">
-                                    <label for="">Address</label>
-                                    <textarea class="form-control" name="mem_address" id="mem_address" cols="30"
-                                        rows="2" required <?php if(isset($data)){echo "readonly";}?>>{{isset($data)?$data->mem_address:''}}</textarea>
-                                </div> -->
                                 <div class="col-sm-6">
-                                    <label for="">Village</label>
-                                    <input type="text" class="form-control" name="mem_vill" id="mem_vill" required
-                                        value="{{isset($data)?$data->mem_vill:''}}"
-                                        <?php if(isset($data)){echo "readonly";}?>>
+                                    <label for="">Date *</label>
+                                    <input type="text" class="form-control" name="mem_date" id="mem_date" required
+                                        value="{{isset($data)?$data->mem_date:date('d-m-Y')}}"
+                                        <?php if(isset($data)){echo "disabled";}?>>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Block</label>
-                                    <select name="mem_block" id="mem_block" class="form-control" required <?php if(isset($data)){echo "disabled";}?>>
-                                        <option value="">-- Select Block -- </option>
-                                        @foreach($blocks as $block)
-                                        <option value="{{$block->sl_no}}"
-                                            <?php if(isset($data) && $data->mem_block==$block->sl_no){echo "selected";}?>>
-                                            {{$block->block_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">Gender</label>
+                                    <label for="">Gender *</label>
                                     <select name="mem_gender" id="mem_gender" class="form-control" required>
                                         <option value="">-- Select Gender -- </option>
-                                        <option value="M" <?php if(isset($data) && $data->mem_gender=='M'){echo "selected";}?>>Male</option>
-                                        <option value="F" <?php if(isset($data) && $data->mem_gender=='F'){echo "selected";}?>>Female</option>
-                                        <option value="O" <?php if(isset($data) && $data->mem_gender=='O'){echo "selected";}?>>Other</option>
+                                        <option value="M"
+                                            <?php if(isset($data) && $data->mem_gender=='M'){echo "selected";}?>>Male
+                                        </option>
+                                        <option value="F"
+                                            <?php if(isset($data) && $data->mem_gender=='F'){echo "selected";}?>>Female
+                                        </option>
+                                        <option value="O"
+                                            <?php if(isset($data) && $data->mem_gender=='O'){echo "selected";}?>>Other
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Category</label>
+                                    <label for="">Category *</label>
                                     <select name="mem_cast" id="mem_cast" class="form-control" required>
-                                        <option value="">-- Select Block -- </option>
-                                        <option value="General" <?php if(isset($data) && $data->mem_cast=='General'){echo "selected";}?>>General</option>
-                                        <option value="OBC" <?php if(isset($data) && $data->mem_cast=='OBC'){echo "selected";}?>>OBC</option>
-                                        <option value="SC" <?php if(isset($data) && $data->mem_cast=='SC'){echo "selected";}?>>SC</option>
-                                        <option value="ST" <?php if(isset($data) && $data->mem_cast=='ST'){echo "selected";}?>>ST</option>
-                                        <option value="Minority" <?php if(isset($data) && $data->mem_cast=='Minority'){echo "selected";}?>>Minority</option>
+                                        <option value="">-- Select Category -- </option>
+                                        <option value="General"
+                                            <?php if(isset($data) && $data->mem_cast=='General'){echo "selected";}?>>
+                                            General</option>
+                                        <option value="OBC"
+                                            <?php if(isset($data) && $data->mem_cast=='OBC'){echo "selected";}?>>OBC
+                                        </option>
+                                        <option value="SC"
+                                            <?php if(isset($data) && $data->mem_cast=='SC'){echo "selected";}?>>SC
+                                        </option>
+                                        <option value="ST"
+                                            <?php if(isset($data) && $data->mem_cast=='ST'){echo "selected";}?>>ST
+                                        </option>
+                                        <option value="Minority"
+                                            <?php if(isset($data) && $data->mem_cast=='Minority'){echo "selected";}?>>
+                                            Minority</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Educational Qualification</label>
-                                    <!-- <select name="mem_qualification" id="mem_qualification" class="form-control">
-                                        <option value="">-- Select Block -- </option>
-                                        <option value="General">General</option>
-                                        <option value="OBC">OBC</option>
-                                        <option value="SC">SC</option>
-                                        <option value="ST">ST</option>
-                                        <option value="Minority">Minority</option>
-                                    </select> -->
                                     <input type="text" class="form-control" name="mem_qualification"
-                                        id="mem_qualification" value="{{isset($data)?$data->mem_qualification:''}}"
-                                        >
+                                        id="mem_qualification" value="{{isset($data)?$data->mem_qualification:''}}">
                                 </div>
+                            </div>
+
+                            <div class="form-group row">
+
                                 <div class="col-sm-6">
-                                    <label for="">Contact No</label>
+                                    <label for="">Contact No *</label>
                                     <input type="text" class="form-control" name="contact_no" id="contact_no" required
                                         value="{{isset($data)?$data->contact_no:''}}"
                                         onkeypress="return event.charCode >= 48 && event.charCode <= 57"
@@ -97,11 +105,40 @@
                                     <input type="email" class="form-control" name="mem_email" id="mem_email"
                                         value="{{isset($data)?$data->mem_email:''}}">
                                 </div>
+                                <div class="col-sm-12">
+                                    <label for="">Address *</label>
+                                    <textarea class="form-control" name="mem_address" id="mem_address" cols="30"
+                                        rows="2" required>{{isset($data)?$data->mem_address:''}}</textarea>
+                                </div>
                                 <div class="col-sm-6">
-                                    <label for="">Member Type</label>
+                                    <label for="">Block *</label>
+                                    <select name="mem_block" id="mem_block" class="form-control" required
+                                        <?php if(isset($data)){echo "disabled";}?>>
+                                        <option value="">-- Select Block -- </option>
+                                        @foreach($blocks as $block)
+                                        <option value="{{$block->sl_no}}"
+                                            <?php if(isset($data) && $data->mem_block==$block->sl_no){echo "selected";}?>>
+                                            {{$block->block_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">Village *</label>
+                                    <input type="text" class="form-control" name="mem_vill" id="mem_vill" required
+                                        value="{{isset($data)?$data->mem_vill:''}}"
+                                        <?php if(isset($data)){echo "readonly";}?>>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+
+                                @if(!isset($data))
+                                <div class="col-sm-6">
+                                    <label for="">Customer Type *</label>
                                     <select class="form-control" id="member_type" name="member_type" required
                                         <?php if(isset($data)){echo "disabled";}?>>
-                                        <option value=""> -- Select Member Type --</option>
+                                        <option value=""> -- Select Customer Type --</option>
                                         <option value="M"
                                             <?php if(isset($data) && $data->member_type=='M'){echo "selected";}?>>Member
                                         </option>
@@ -110,13 +147,15 @@
                                             Nominal</option>
                                     </select>
                                 </div>
-
+                                @endif
                                 <div class="col-sm-6">
                                     <label for="">Deposit Amount</label>
                                     <input type="text" class="form-control" name="deposit_amount" id="deposit_amount"
                                         value="{{isset($data)?$data->deposit_amount:''}}"
                                         <?php if(isset($data)){echo "readonly";}?>>
                                 </div>
+                            </div>
+                            <div class="form-group row">
 
                                 <div class="col-sm-6">
                                     <label for="">Aadhar No.</label>
@@ -147,15 +186,25 @@
                                     <input type="text" class="form-control" name="nrega_card" id="nrega_card"
                                         value="{{isset($data)?$data->nrega_card:''}}">
                                 </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">Classification of Farmer</label>
                                     <select name="classification_of_mem" id="classification_of_mem"
                                         class="form-control">
                                         <option value="">-- Select Classification of Farmer -- </option>
-                                        <option value="T" <?php if(isset($data) && $data->classification_of_mem=='T'){echo "selected";}?>>Tenant</option>
-                                        <option value="S" <?php if(isset($data) && $data->classification_of_mem=='S'){echo "selected";}?>>SMALL FARMER</option>
-                                        <option value="M" <?php if(isset($data) && $data->classification_of_mem=='M'){echo "selected";}?>>MARGINAL</option>
-                                        <option value="O" <?php if(isset($data) && $data->classification_of_mem=='O'){echo "selected";}?>>Others</option>
+                                        <option value="T"
+                                            <?php if(isset($data) && $data->classification_of_mem=='T'){echo "selected";}?>>
+                                            Tenant</option>
+                                        <option value="S"
+                                            <?php if(isset($data) && $data->classification_of_mem=='S'){echo "selected";}?>>
+                                            SMALL FARMER</option>
+                                        <option value="M"
+                                            <?php if(isset($data) && $data->classification_of_mem=='M'){echo "selected";}?>>
+                                            MARGINAL</option>
+                                        <option value="O"
+                                            <?php if(isset($data) && $data->classification_of_mem=='O'){echo "selected";}?>>
+                                            Others</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -231,7 +280,7 @@
 @section('script')
 @if(Session::has('update'))
 <script>
-toastr.success('Member Update Successfully.');
+toastr.success('Customer Update Successfully.');
 </script>
 @endif
 
@@ -258,11 +307,44 @@ $(document).ready(function() {
         // alert(val)
         if (val == 'M') {
             $("#deposit_amount").attr('required', 'required');
+            $("#deposit_amount").val(1000);
             // deposit_amount
         } else {
             $("#deposit_amount").removeAttr('required');
+            $("#deposit_amount").val('');
         }
     });
+
+    $("#mem_date").datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
+    // deposit_amount
+    $("#deposit_amount").on('change', function() {
+        var val = $("#deposit_amount").val();
+
+        var number = val / 10;
+        // alert(number)
+        if (Number.isInteger(number)) {
+            // alert(number)
+        } else {
+            alert('Please enter valid stock amount')
+            $("#deposit_amount").val('');
+            // $("#deposit_amount").val(amount);
+        }
+
+    });
+
+    $('#deposit_amount').keyup(function(e) {
+        var value = $("#deposit_amount").val();
+        var rate = $("#rate").val();
+        if (/\D/g.test(value)) {
+            // Filter non-digits from input value.
+            val1 = value.replace(/\D/g, '');
+            $("#deposit_amount").val(val1);
+        }
+    });
+
 });
 </script>
 @endsection

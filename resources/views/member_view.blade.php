@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'View':'Create'}} Member</h2>
+                    <h2>{{isset($data)?'View':'Create'}} Customer</h2>
                 </div>
 
                 <div class="row">
