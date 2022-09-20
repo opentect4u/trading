@@ -73,6 +73,7 @@ class SaleController extends Controller
             'sale_date'=> date('Y-m-d',strtotime($request->sale_date)),
             'sale_type'=>$request->sale_type,
             'supplier_id'=>$request->supplier_id,
+            'product_category_id'=>$request->product_category_id,
             'product_master_id'=>$request->product_master_id,
             'rate'=>$request->rate,
             'quantity'=>$request->quantity,
@@ -81,6 +82,39 @@ class SaleController extends Controller
             'created_by'=>auth()->user()->id,
         ));
         return redirect()->route('saleManage')->with('addSuccess','addSuccess');
+    }
+
+    public function Edit($id)
+    {
+        $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
+        $ProductCategory=MdProductCategory::where('society_id',auth()->user()->society_id)->get();
+        // $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        $suppliers=TdMember::where('delete_flag','N')->where('society_id',auth()->user()->society_id)->get();
+        $id=Crypt::decryptString($id);
+        // return $id;
+        $data=TdSale::find($id);
+        // return $data;
+        return view('sale_add_edit',['products'=>$products,'suppliers'=>$suppliers,
+            'data'=>$data,'ProductCategory'=>$ProductCategory
+        ]);
+    }
+
+    public function Update(Request $request)
+    {
+        // return $request;
+        $id=Crypt::decryptString($request->id);
+        $data=TdSale::find($id);
+        $data->sale_date=date('Y-m-d',strtotime($request->sale_date));
+        $data->sale_type=$request->sale_type;
+        $data->supplier_id=$request->supplier_id;
+        $data->product_category_id=$request->product_category_id;
+        $data->product_master_id=$request->product_master_id;
+        $data->rate=$request->rate;
+        $data->quantity=$request->quantity;
+        $data->amount=$request->amount;
+        $data->updated_by=auth()->user()->id;
+        $data->save();
+        return redirect()->back()->with('update','update');
     }
 
     public function SaleStockProductAjax(Request $request)
@@ -100,7 +134,8 @@ class SaleController extends Controller
     public function ProductNameAjax(Request $request)
     {
         $product_category_id=$request->product_category_id;
+        $product_master_id=$request->product_master_id;
         $products=MdProductMaster::where('product_category_id',$product_category_id)->where('society_id',auth()->user()->society_id)->get();
-        return view('product_name_ajax',['products'=>$products]);
+        return view('product_name_ajax',['products'=>$products,'product_master_id'=>$product_master_id]);
     }
 }

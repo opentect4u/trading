@@ -71,25 +71,33 @@ class PurchaseController extends Controller
     public function Edit($id)
     {
         $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
+        $ProductCategory=MdProductCategory::where('society_id',auth()->user()->society_id)->get();
         $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
         $id=Crypt::decryptString($id);
         // return $id;
         $data=TdPurchase::find($id);
-        return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers,'data'=>$data]);
+        return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers,
+            'data'=>$data,'ProductCategory'=>$ProductCategory
+        ]);
     }
 
-    public function Update(Request $request)
-    {
-        // return $request;
-        $id=Crypt::decryptString($request->id);
-        $data=TdPurchase::find($id);
-        $data->effective_date=date('Y-m-d',strtotime($request->effective_date));
-        $data->product_master_id=$request->product_master_id;
-        $data->rate=$request->rate;
-        $data->updated_by=auth()->user()->id;
-        $data->save();
-        return redirect()->back()->with('update','update');
-    }
+    // public function Update(Request $request)
+    // {
+    //     // return $request;
+    //     $id=Crypt::decryptString($request->id);
+    //     $data=TdPurchase::find($id);
+    //     $data->purchase_date=date('Y-m-d',strtotime($request->purchase_date));
+    //     $data->purchase_type=$request->purchase_type;
+    //     $data->supplier_id=$request->supplier_id;
+    //     $data->product_category_id=$request->product_category_id;
+    //     $data->product_master_id=$request->product_master_id;
+    //     $data->rate=$request->rate;
+    //     $data->quantity=$request->quantity;
+    //     $data->amount=$request->amount;
+    //     $data->updated_by=auth()->user()->id;
+    //     $data->save();
+    //     return redirect()->back()->with('update','update');
+    // }
 
     public function RateAjax(Request $request)
     {
@@ -103,6 +111,24 @@ class PurchaseController extends Controller
         $json_data=[];
         $json_data['rate']=isset($rate->rate)?$rate->rate:0;
         $json_data['product_master_id']=isset($rate->product_master_id)?$rate->product_master_id:'';
+        echo json_encode($json_data);
+    }
+
+    public function DeleteAjax(Request $request)
+    {
+        $id=$request->customer_id;
+        $table_name=$request->table_name;
+        // $product_master_id=1;
+        // $rate=MdProductRate::where('society_id',auth()->user()->society_id)
+        //     ->where('product_master_id',$product_master_id)
+        //     ->orderBy('effective_date','desc')
+        //     ->first();
+
+        $data=DB::table($table_name)->where('id',$id)->delete();
+        // return $rate;
+        $json_data=[];
+        $json_data['id']=$id;
+        $json_data['table_name']=$table_name;
         echo json_encode($json_data);
     }
 }

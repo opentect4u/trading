@@ -22,7 +22,7 @@
                                     <input type="text" class="form-control" name="sup_name" id="sup_name" required
                                         value="{{isset($data)?$data->sup_name:''}}">
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="">Address</label>
                                     <textarea class="form-control" name="sup_address" id="sup_address" cols="30"
                                         rows="2" required>{{isset($data)?$data->sup_address:''}}</textarea>

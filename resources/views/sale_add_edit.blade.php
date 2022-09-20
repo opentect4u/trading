@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'Update':'Create'}} Sale</h2>
+                    <h2>{{isset($data)?'View':'Create'}} Sale</h2>
                 </div>
 
                 <div class="row">
@@ -25,8 +25,12 @@
                                     <label for="">Sale Type</label>
                                     <select name="sale_type" id="sale_type" class="form-control" required>
                                         <option value=""> -- Select Sale Type -- </option>
-                                        <option value="C">Credit</option>
-                                        <option value="S">Cash</option>
+                                        <option value="C"
+                                            <?php if(isset($data) && $data->sale_type=='C'){echo "selected";}?>>Credit
+                                        </option>
+                                        <option value="S"
+                                            <?php if(isset($data) && $data->sale_type=='S'){echo "selected";}?>>Cash
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -34,7 +38,9 @@
                                     <select name="supplier_id" id="supplier_id" class="form-control" required>
                                         <option value=""> -- Select Customer Name -- </option>
                                         @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->customer_id}}">{{$supplier->mem_name}}</option>
+                                        <option value="{{$supplier->customer_id}}"
+                                            <?php if(isset($data) && $data->supplier_id==$supplier->customer_id){echo "selected";}?>>
+                                            {{$supplier->mem_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -45,7 +51,9 @@
                                         required>
                                         <option value=""> -- Select Product Category -- </option>
                                         @foreach($ProductCategory as $category)
-                                        <option value="{{$category->id}}">{{$category->cat_name}}</option>
+                                        <option value="{{$category->id}}"
+                                            <?php if(isset($data) && $data->product_category_id==$category->id){echo "selected";}?>>
+                                            {{$category->cat_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -80,6 +88,7 @@
 
                                 </div>
                             </div>
+                            @if(!isset($data))
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
@@ -87,6 +96,7 @@
                                         value="{{isset($data)?'Update':'Sale'}}">
                                 </div>
                             </div>
+                            @endif
                         </form>
 
                     </div>
@@ -111,7 +121,54 @@ toastr.success('Product sale successfully.');
 toastr.error('Product sale Failed.');
 </script>
 @endif
+@if(isset($data))
+<script>
+var product_category_id = '<?php echo $data->product_category_id;?>';
+var product_master_id = '<?php echo $data->product_master_id;?>';
+$.ajax({
+    url: "{{route('productNameAjax')}}",
+    method: "POST",
+    data: {
+        product_category_id: product_category_id,
+        product_master_id: product_master_id,
+    },
+    success: function(data) {
+        // alert(data)
+        $("#product_master_id").empty();
+        $("#product_master_id").html(data);
 
+        // var obj = JSON.parse(data);
+        // var rate = obj.rate;
+        // $("#rate").val('');
+        // $("#rate").val(rate);
+        // $("#tr_" + id).remove();
+        // toastr.success('Member Delete Successfully.');
+
+    }
+});
+// productStock(product_master_id);
+$.ajax({
+        url: "{{route('productStockAjax')}}",
+        method: "POST",
+        data: {
+            product_master_id: product_master_id,
+        },
+        success: function(data) {
+            // alert(data)
+            var obj = JSON.parse(data);
+            var stock = obj.stock;
+
+            $("#total_stock").val('');
+            $("#total_stock").val(stock);
+            $("#totalStockTag").empty();
+            $("#totalStockTag").append(stock);
+            // $("#tr_" + id).remove();
+            // toastr.success('Member Delete Successfully.');
+
+        }
+    });
+</script>
+@endif
 <script>
 $(document).ready(function() {
     // product_category_id
@@ -122,6 +179,7 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 product_category_id: product_category_id,
+                product_master_id: '',
             },
             success: function(data) {
                 // alert(data)
@@ -157,26 +215,7 @@ $(document).ready(function() {
 
             }
         });
-        $.ajax({
-            url: "{{route('productStockAjax')}}",
-            method: "POST",
-            data: {
-                product_master_id: product_master_id,
-            },
-            success: function(data) {
-                // alert(data)
-                var obj = JSON.parse(data);
-                var stock = obj.stock;
-
-                $("#total_stock").val('');
-                $("#total_stock").val(stock);
-                $("#totalStockTag").empty();
-                $("#totalStockTag").append(stock);
-                // $("#tr_" + id).remove();
-                // toastr.success('Member Delete Successfully.');
-
-            }
-        });
+        productStock(product_master_id);
     });
 
     $('#quantity').keyup(function(e) {
@@ -224,5 +263,28 @@ $(document).ready(function() {
         dateFormat: 'dd-mm-yy',
     });
 });
+
+function productStock(product_master_id) {
+    $.ajax({
+        url: "{{route('productStockAjax')}}",
+        method: "POST",
+        data: {
+            product_master_id: product_master_id,
+        },
+        success: function(data) {
+            // alert(data)
+            var obj = JSON.parse(data);
+            var stock = obj.stock;
+
+            $("#total_stock").val('');
+            $("#total_stock").val(stock);
+            $("#totalStockTag").empty();
+            $("#totalStockTag").append(stock);
+            // $("#tr_" + id).remove();
+            // toastr.success('Member Delete Successfully.');
+
+        }
+    });
+}
 </script>
 @endsection

@@ -99,7 +99,7 @@
 
 @if(Session::has('addSuccess'))
 <script>
-toastr.success('Product purchase successfully.');
+toastr.success('Payment successfully.');
 </script>
 @endif
 <script>

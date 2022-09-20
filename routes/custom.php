@@ -99,6 +99,7 @@ Route::post('purchaseadd',[App\Http\Controllers\PurchaseController::class,'Creat
 Route::get('purchaseedit/{id}',[App\Http\Controllers\PurchaseController::class,'Edit'])->name('purchaseEdit');
 Route::post('purchaseedit',[App\Http\Controllers\PurchaseController::class,'Update'])->name('purchaseUpdate');
 Route::post('productRateAjax',[App\Http\Controllers\PurchaseController::class,'RateAjax'])->name('productRateAjax');
+Route::post('transDeleteAjax',[App\Http\Controllers\PurchaseController::class,'DeleteAjax'])->name('transDeleteAjax');
 
 
 Route::get('payment',[App\Http\Controllers\PaymentController::class,'Index'])->name('paymentManage');

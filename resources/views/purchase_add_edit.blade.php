@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'Update':'Create'}} Purchase</h2>
+                    <h2>{{isset($data)?'View':'Create'}} Purchase</h2>
                 </div>
 
                 <div class="row">
@@ -19,14 +19,19 @@
                                 <div class="col-sm-6">
                                     <label for="">Purchase Date</label>
                                     <input type="text" class="form-control" name="purchase_date" id="purchase_date"
-                                        required value="{{isset($data)?$data->purchase_date:date('d-m-Y')}}">
+                                        required
+                                        value="{{isset($data)?date('d-m-Y',strtotime($data->purchase_date)):date('d-m-Y')}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Purchase Type</label>
                                     <select name="purchase_type" id="purchase_type" class="form-control">
                                         <option value=""> -- Select Purchase Type -- </option>
-                                        <option value="C">Credit</option>
-                                        <option value="S">Cash</option>
+                                        <option value="C"
+                                            <?php if(isset($data) && $data->purchase_type=='C'){echo "selected";}?>>
+                                            Credit</option>
+                                        <option value="S"
+                                            <?php if(isset($data) && $data->purchase_type=='S'){echo "selected";}?>>Cash
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -34,7 +39,9 @@
                                     <select name="supplier_id" id="supplier_id" class="form-control">
                                         <option value=""> -- Select Supplier Name -- </option>
                                         @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}">{{$supplier->sup_name}}</option>
+                                        <option value="{{$supplier->id}}"
+                                            <?php if(isset($data) && $data->supplier_id==$supplier->id){echo "selected";}?>>
+                                            {{$supplier->sup_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -44,7 +51,9 @@
                                         required>
                                         <option value=""> -- Select Product Category -- </option>
                                         @foreach($ProductCategory as $category)
-                                        <option value="{{$category->id}}">{{$category->cat_name}}</option>
+                                        <option value="{{$category->id}}"
+                                            <?php if(isset($data) && $data->product_category_id==$category->id){echo "selected";}?>>
+                                            {{$category->cat_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -78,12 +87,14 @@
                                 </div>
                             </div>
 
+                            @if(!isset($data))
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
                                     <input type="submit" class="btn btn-info" id="submit" name="submit"
                                         value="{{isset($data)?'Update':'Purchase'}}">
                                 </div>
                             </div>
+                            @endif
                         </form>
 
                     </div>
@@ -99,10 +110,36 @@
 
 @if(Session::has('update'))
 <script>
-toastr.success('Supplier update successfully.');
+toastr.success('Purchase deatils update successfully.');
 </script>
 @endif
+@if(isset($data))
+<script>
+var product_category_id = '<?php echo $data->product_category_id;?>';
+var product_master_id = '<?php echo $data->product_master_id;?>';
+$.ajax({
+    url: "{{route('productNameAjax')}}",
+    method: "POST",
+    data: {
+        product_category_id: product_category_id,
+        product_master_id: product_master_id,
+    },
+    success: function(data) {
+        // alert(data)
+        $("#product_master_id").empty();
+        $("#product_master_id").html(data);
 
+        // var obj = JSON.parse(data);
+        // var rate = obj.rate;
+        // $("#rate").val('');
+        // $("#rate").val(rate);
+        // $("#tr_" + id).remove();
+        // toastr.success('Member Delete Successfully.');
+
+    }
+});
+</script>
+@endif
 <script>
 $(document).ready(function() {
 
@@ -113,6 +150,7 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 product_category_id: product_category_id,
+                product_master_id: '',
             },
             success: function(data) {
                 // alert(data)
@@ -129,7 +167,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     // $("#product_master_id").on('change', function() {
     //     var product_master_id = $("#product_master_id").val();
     //     $.ajax({
@@ -176,7 +214,7 @@ $(document).ready(function() {
             // Filter non-digits from input value.
             val2 = value.replace(/\D/g, '');
             $("#rate").val(val2);
-        }else{
+        } else {
             var value1 = $("#quantity").val();
             var amount = Number(value) * Number(value1);
             $("#amount").val('');

@@ -25,9 +25,9 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Supplier Name</label>
+                                    <label for="">Customer Name</label>
                                     <select name="supplier_id" id="supplier_id" class="form-control" required>
-                                        <option value="">-- Select Supplier Name -- </option>
+                                        <option value="">-- Select Customer Name -- </option>
                                         @foreach($suppliers as $supplier)
                                         <option value="{{$supplier->customer_id}}"
                                             <?php if($supplier_id!='' && $supplier->customer_id==$supplier_id){echo 'selected';} ?>>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 mb-2">
-                        <b>Name : {{$supplier_details[0]['sup_name']}}</b>
+                        <b>Name : {{$supplier_details[0]['mem_name']}}</b>
                         <!-- <div>Name : </div> -->
                     </div>
                     <div class="col-sm-6 mb-2">
@@ -71,7 +71,7 @@
                         <!-- <div>Contact No: </div> -->
                     </div>
                     <div class="col-sm-12 mb-2">
-                        <b>Address : {{$supplier_details[0]['sup_address']}}</b>
+                        <b>Address : {{$supplier_details[0]['mem_address'].$supplier_details[0]['mem_vill']}}</b>
                         <!-- <div>Address :</div> -->
                     </div>
                 </div>

@@ -14,20 +14,19 @@
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">From Date</label>
-                                    <input type="text" class="form-control" name="from_date" id="from_date"
-                                        required value="<?php if($from_date!=''){echo $from_date;}else{ echo date('d-m-Y');} ?>">
+                                    <input type="text" class="form-control" name="from_date" id="from_date" required
+                                        value="<?php if($from_date!=''){echo $from_date;}else{ echo date('d-m-Y');} ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">To Date</label>
-                                    <input type="text" class="form-control" name="to_date" id="to_date"
-                                        required value="<?php if($to_date!=''){echo $to_date;}else{ echo date('d-m-Y');} ?>">
+                                    <input type="text" class="form-control" name="to_date" id="to_date" required
+                                        value="<?php if($to_date!=''){echo $to_date;}else{ echo date('d-m-Y');} ?>">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
-                                    <input type="submit" class="btn btn-info" id="submit"
-                                        value="Search">
+                                    <input type="submit" class="btn btn-info" id="submit" value="Search">
                                 </div>
                             </div>
                         </form>
@@ -56,13 +55,14 @@
                                     <th>Rate</th>
                                     <th>Quantity</th>
                                     <th>Amount</th>
-                                    <!-- <th>Action</th> -->
+                                    <th>View</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1;?>
                                 @foreach($datas as $data)
-                                <tr>
+                                <tr id="tr_{{$data->id}}">
                                     <td>{{$i++}}</td>
                                     <td>{{$data->sale_date}}</td>
                                     <td>
@@ -77,8 +77,12 @@
                                     <td>{{$data->rate}}</td>
                                     <td>{{$data->quantity}}</td>
                                     <td>{{$data->amount}}</td>
-                                    <!-- <td><a href="{{route('purchaseEdit',['id'=>\Crypt::encryptString($data->id)])}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"
-                                                style="font-size:18px;"></i></a></td> -->
+                                    <td><a href="{{route('saleEdit',['id'=>\Crypt::encryptString($data->id)])}}"
+                                            title="View"><i class="fa fa-eye" aria-hidden="true"
+                                                style="font-size:18px;"></i></a></td>
+                                    <td><a href="javascript:void(0);"
+                                            title="Delete" onclick="butDelete({{$data->id}})"><i class="fa fa-trash-o" aria-hidden="true"
+                                                style="font-size:18px;color:red;"></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -92,7 +96,8 @@
                                     <th>Rate</th>
                                     <th>Quantity</th>
                                     <th>Amount</th>
-                                    <!-- <th>Action</th> -->
+                                    <th>View</th>
+                                    <th>Delete</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -120,5 +125,47 @@ $(function() {
         dateFormat: 'dd-mm-yy',
     });
 });
+
+
+
+function butDelete(customer_id) {
+    // alert(customer_id)
+    $.confirm({
+        title: '',
+        content: 'Are you sure to continue?',
+        buttons: {
+            cancel: function() {
+                // $.alert('Canceled!');
+            },
+            confirm: {
+                text: 'Confirm',
+                btnClass: 'btn-blue',
+                keys: ['enter', 'shift'],
+                action: function() {
+
+                    $.ajax({
+                        url: "{{route('transDeleteAjax')}}",
+                        method: "POST",
+                        data: {
+                            customer_id: customer_id,
+                            table_name: "td_sale",
+                        },
+                        success: function(data) {
+                            // alert(data)
+                            var obj = JSON.parse(data);
+                            var id = obj.id;
+                            $("#tr_" + id).remove();
+                            toastr.success('Delete Successfully.');
+
+                        }
+                    });
+
+                }
+            }
+        }
+    });
+
+
+}
 </script>
 @endsection

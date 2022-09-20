@@ -85,7 +85,7 @@
                 <li><a href="{{route('saleReport')}}"><i class="fa fa-list-alt"></i>Sale</a></li>
                 <li><a href="{{route('paymentReport')}}"><i class="fa fa-list-alt"></i>Payment</a></li>
                 <li><a href="{{route('receiveReport')}}"><i class="fa fa-list-alt"></i>Receive</a></li>
-                <li><a href="{{route('supplierReport')}}"><i class="fa fa-list-alt"></i>Member Purchase Sale</a></li>
+                <li><a href="{{route('supplierReport')}}"><i class="fa fa-list-alt"></i>Customer Purchase Sale</a></li>
             </ul>
         </li>
 
