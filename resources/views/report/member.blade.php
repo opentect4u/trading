@@ -29,7 +29,7 @@
                                     <select name="type" id="type" class="form-control" required>
                                         <option value="">-- Select Type --</option>
                                         <!-- <option value="ALL" <?php if($type=='ALL'){echo "selected";}?>>All</option> -->
-                                        <option value="A" <?php if($type=='A'){echo "selected";}?>>Open</option>
+                                        <option value="A" <?php if($type=='A'){echo "selected";}?>>Active</option>
                                         <option value="C" <?php if($type=='C'){echo "selected";}?>>Close</option>
                                     </select>
                                 </div>
