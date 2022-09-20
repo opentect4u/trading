@@ -37,7 +37,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{route('usersEdit',['id'=>\Crypt::encryptString($data->society_id),'customer_id'=>\Crypt::encryptString($data->customer_id)])}}"
+                                        <a href="{{route('usersEdit',['id'=>\Crypt::encryptString($data->id)])}}"
                                             title="View"><i class="fa fa-edit" aria-hidden="true"
                                                 style="font-size:18px;"></i></a>
                                     </td>

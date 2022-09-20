@@ -62,4 +62,18 @@ class UserController extends Controller
         return view('user_add_edit',['data'=>$data]);
     }
 
+    public function Update(Request $request)
+    {
+        // return $request;
+        if ($request->password!=$request->password_confirmation) {
+            return redirect()->back()->with('password_error','password_error');
+        }
+        $id=Crypt::decryptString($request->id);
+        $data=User::find($id);
+        $data->name=$request->name;
+        $data->password=Hash::make($request->password);
+        $data->save();
+        return redirect()->back()->with('update','update');
+    }
+
 }

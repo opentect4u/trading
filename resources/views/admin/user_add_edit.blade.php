@@ -11,22 +11,59 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <form method="POST" action="{{isset($data)?route('admin.societyUpdate'):route('admin.societyCreate')}}">
+                        <form method="POST"
+                            action="{{isset($data)?route('admin.userUpdate'):route('admin.userCreate')}}">
                             @csrf
                             <input type="text" name="id" id="id" hidden
                                 value="{{isset($data)?\Crypt::encryptString($data->id):''}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Name</label>
-                                    <input type="text" class="form-control" name="soc_name" id="soc_name" required
-                                        value="{{isset($data)?$data->soc_name:''}}">
+                                    <label for="">Society *</label>
+                                    <select name="society_id" id="society_id" class="form-control" required <?php 
+                                            if(isset($data)){echo "disabled";}
+                                        ?>>
+                                        <option value="">-- Select Society --</option>
+                                        @foreach($societies as $society)
+                                        <option value="{{$society->id}}" <?php 
+                                                if(isset($data) && $data->society_id==$society->id){echo "selected";} 
+                                                // if(isset($data)){echo "disabled";}
+                                            ?>>
+                                            {{$society->soc_name}}</option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
-                                <div class="col-sm-12">
-                                    <label for="">Address </label>
-                                    <textarea name="soc_address" class="form-control" id="soc_address" cols="30" rows="3">{{isset($data)?$data->soc_address:''}}</textarea>
-                                </div>
-                               
                             </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="">Name *</label>
+                                    <input type="text" class="form-control" name="name" id="name" required
+                                        value="{{isset($data)?$data->name:''}}">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Email *</label>
+                                    <input type="email" class="form-control" name="email" id="email" required
+                                        value="{{isset($data)?$data->email:''}}"
+                                        <?php if(isset($data)){echo "readonly";}?>>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-sm-6">
+                                    <label for="">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password" value=""
+                                        required>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Confirm Password</label>
+                                    <input type="password" class="form-control" name="password_confirmation"
+                                        id="password_confirmation" value="" required>
+                                </div>
+                            </div>
+
 
                             <div class="form-group row">
                                 <div class="col-sm-12 btnSubmitSec">
@@ -47,9 +84,21 @@
 
 @section('script')
 
+@if(Session::has('email_error'))
+<script>
+toastr.error('Email already exists');
+</script>
+@endif
+
+@if(Session::has('password_error'))
+<script>
+toastr.error('Password and confrim password does not match!');
+</script>
+@endif
+
 @if(Session::has('update'))
 <script>
-toastr.success('Society update successfully.');
+toastr.success('User details updated successfully.');
 </script>
 @endif
 

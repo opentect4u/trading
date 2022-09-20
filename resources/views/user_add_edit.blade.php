@@ -9,7 +9,7 @@
                     <h2>{{isset($data)?'View':'Create'}} Customer</h2>
                 </div>
 
-                
+
 
                 <div class="row">
 
@@ -51,12 +51,12 @@
 
                                 <div class="col-sm-6">
                                     <label for="">Password</label>
-                                    <input type="text" class="form-control" name="password" id="password" value="">
+                                    <input type="password" class="form-control" name="password" id="password" value="">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label for="">Confirm Password</label>
-                                    <input type="text" class="form-control" name="password_confirmation"
+                                    <input type="password" class="form-control" name="password_confirmation"
                                         id="password_confirmation" value="">
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
     </div>
 </div>
 @endsection
-                
+
 
 @section('script')
 
@@ -102,7 +102,7 @@ toastr.error('Password and confrim password does not match!');
 
 @if(Session::has('update'))
 <script>
-toastr.success('Customer Update Successfully.');
+toastr.success('User details Updated Successfully.');
 </script>
 @endif
 
