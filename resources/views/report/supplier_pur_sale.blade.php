@@ -29,9 +29,9 @@
                                     <select name="supplier_id" id="supplier_id" class="form-control" required>
                                         <option value="">-- Select Supplier Name -- </option>
                                         @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}"
-                                            <?php if($supplier_id!='' && $supplier->id==$supplier_id){echo 'selected';} ?>>
-                                            {{$supplier->sup_name. " - ".$supplier->contact_no}}</option>
+                                        <option value="{{$supplier->customer_id}}"
+                                            <?php if($supplier_id!='' && $supplier->customer_id==$supplier_id){echo 'selected';} ?>>
+                                            {{$supplier->mem_name. " - ".$supplier->contact_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>

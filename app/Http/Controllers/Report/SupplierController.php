@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 use Helper;
-use App\Models\{TdPurchase,TdSale,TdReceive,TdPayment,MdProductMaster,MdSupplier};
+use App\Models\{TdPurchase,TdSale,TdReceive,TdPayment,MdProductMaster,MdSupplier,TdMember};
 
 class SupplierController extends Controller
 {
@@ -95,7 +95,9 @@ class SupplierController extends Controller
             ->where('id',$supplier_id)
             ->get();
         // return $supplier_details;
-        $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        // $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        $suppliers=TdMember::where('delete_flag','N')->where('society_id',auth()->user()->society_id)->get();
+
         return view('report.supplier_pur_sale',['datas'=>$datas,'from_date'=>$from_date,'to_date'=>$to_date,
             'supplier_id'=>$supplier_id,'suppliers'=>$suppliers,
             'supplier_details'=>$supplier_details

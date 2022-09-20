@@ -61,8 +61,8 @@
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
-                    <a type="button" href="javascript:void(0);" class="btn btn-primary"
-                        onclick="printContent('sectionDiv');">Print</a>
+                    <!-- <a type="button" href="javascript:void(0);" class="btn btn-primary"
+                        onclick="printContent('sectionDiv');">Print</a> -->
                     <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
                     <h2> Sale Report</h2>
                 </div>
@@ -104,7 +104,7 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Sale Date</th>
@@ -115,8 +115,14 @@
                                     <th>Quantity</th>
                                     <th>Amount</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <a type="button" href="javascript:void(0);" class="btn btn-primary"
+                            onclick="printContent('sectionDiv');">Print</a>
                     </div>
                 </div>
             </div>

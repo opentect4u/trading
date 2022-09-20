@@ -81,6 +81,8 @@ class StockController extends Controller
         }
 
         // return $datas;
-        return view('report.stock',['datas'=>$datas,'from_date'=>$from_date,'to_date'=>$to_date]);
+        return view('report.stock',['datas'=>$datas,'from_date'=>$from_date,
+            'to_date'=>$to_date,'finalcial_start_date'=>$start_date
+        ]);
     }
 }

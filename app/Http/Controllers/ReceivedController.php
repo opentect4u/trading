@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use DB;
-use App\Models\{TdPurchase,MdSupplier,MdProductMaster,MdProductRate,TdPayment,TdReceive};
+use App\Models\{TdPurchase,MdSupplier,MdProductMaster,MdProductRate,TdPayment,TdReceive,TdMember};
 
 class ReceivedController extends Controller
 {
@@ -20,19 +20,23 @@ class ReceivedController extends Controller
         $to_date=$request->to_date;
         if ($from_date!='' && $to_date!='') {
             $datas=DB::table('td_receive')
-                ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_receive.supplier_id')
+                // ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
                 // ->leftJoin('md_product_master','md_product_master.id','=','td_receive.product_master_id')
-                ->select('td_receive.*','md_supplier.sup_name as sup_name')
+                ->select('td_receive.*','td_member.mem_name as sup_name')
                 ->where('td_receive.society_id',auth()->user()->society_id)
+                ->where('td_member.society_id',auth()->user()->society_id)
                 ->whereDate('td_receive.received_date','>=',date('Y-m-d',strtotime($from_date)))
                 ->whereDate('td_receive.received_date','<=',date('Y-m-d',strtotime($to_date)))
                 ->get();
         }else {
             $datas=DB::table('td_receive')
-                ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_receive.supplier_id')
+                // ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
                 // ->leftJoin('md_product_master','md_product_master.id','=','td_receive.product_master_id')
-                ->select('td_receive.*','md_supplier.sup_name as sup_name')
+                ->select('td_receive.*','td_member.mem_name as sup_name')
                 ->where('td_receive.society_id',auth()->user()->society_id)
+                ->where('td_member.society_id',auth()->user()->society_id)
                 ->whereDate('td_receive.received_date',date('Y-m-d'))
                 ->get();
         }
@@ -44,7 +48,8 @@ class ReceivedController extends Controller
     public function Show()
     {
         $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
-        $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        // $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        $suppliers=TdMember::where('delete_flag','N')->where('society_id',auth()->user()->society_id)->get();
         return view('receive_add_edit',['products'=>$products,'suppliers'=>$suppliers]);
     }
 

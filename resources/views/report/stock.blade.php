@@ -12,13 +12,14 @@
                     <div class="col-sm-12">
                         <form action="{{route('stockReport')}}">
                             <div class="form-group row">
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
                                     <label for="">From Date</label>
                                     <input type="text" class="form-control" name="from_date" id="from_date" required
                                         value="<?php if($from_date!=''){echo $from_date;}else{ echo date('d-m-Y');} ?>">
-                                </div>
+                                </div> -->
+                                <input type="text" name="from_date" id="from_date" value="{{$finalcial_start_date}}" hidden> 
                                 <div class="col-sm-6">
-                                    <label for="">To Date</label>
+                                    <label for="">Date</label>
                                     <input type="text" class="form-control" name="to_date" id="to_date" required
                                         value="<?php if($to_date!=''){echo $to_date;}else{ echo date('d-m-Y');} ?>">
                                 </div>
@@ -38,8 +39,8 @@
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
-                    <a type="button" href="javascript:void(0);" class="btn btn-primary"
-                        onclick="printContent('sectionDiv');">Print</a>
+                    <!-- <a type="button" href="javascript:void(0);" class="btn btn-primary"
+                        onclick="printContent('sectionDiv');">Print</a> -->
                     <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
                     <h2> Stock Report</h2>
                 </div>
@@ -73,7 +74,7 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Product Category</th>
@@ -83,8 +84,14 @@
                                     <th>Sale Stock</th>
                                     <th> Stock in Hand</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <a type="button" href="javascript:void(0);" class="btn btn-primary"
+                            onclick="printContent('sectionDiv');">Print</a>
                     </div>
                 </div>
             </div>

@@ -92,7 +92,7 @@
                                     <td>{{$total_amount}}</td>
                                 </tr>
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Received Date</th>
@@ -100,7 +100,7 @@
                                     <th>Received Type</th>
                                     <th>Amount</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
                     </div>
                 </div>
