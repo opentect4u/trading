@@ -51,7 +51,7 @@
                                     <th>Sl No</th>
                                     <th>Date</th>
                                     <th>Type</th>
-                                    <th>Member Name</th>
+                                    <th>Customer Name</th>
                                     <th>Amount</th>
                                     <!-- <th>Action</th> -->
                                 </tr>
@@ -81,7 +81,7 @@
                                     <th>Sl No</th>
                                     <th>Date</th>
                                     <th>Type</th>
-                                    <th>Member Name</th>
+                                    <th>Customer Name</th>
                                     <th>Amount</th>
                                     <!-- <th>Action</th> -->
                                 </tr>

@@ -30,9 +30,9 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Member Name</label>
+                                    <label for="">Customer Name</label>
                                     <select name="supplier_id" id="supplier_id" class="form-control" required>
-                                        <option value=""> -- Select Member Name -- </option>
+                                        <option value=""> -- Select Customer Name -- </option>
                                         @foreach($suppliers as $supplier)
                                         <option value="{{$supplier->customer_id}}">{{$supplier->mem_name}}</option>
                                         @endforeach

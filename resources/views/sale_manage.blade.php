@@ -51,7 +51,7 @@
                                     <th>Sl No</th>
                                     <th>Date</th>
                                     <th>Type</th>
-                                    <th>Member Name</th>
+                                    <th>Customer Name</th>
                                     <th>Product Name</th>
                                     <th>Rate</th>
                                     <th>Quantity</th>
@@ -87,7 +87,7 @@
                                     <th>Sl No</th>
                                     <th>Date</th>
                                     <th>Type</th>
-                                    <th>Member Name</th>
+                                    <th>Customer Name</th>
                                     <th>Product Name</th>
                                     <th>Rate</th>
                                     <th>Quantity</th>
