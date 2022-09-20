@@ -135,3 +135,10 @@ Route::get('receivereport',[App\Http\Controllers\Report\ReceiveController::class
 
 
 Route::get('supplierreport',[App\Http\Controllers\Report\SupplierController::class,'Index'])->name('supplierReport');
+
+
+Route::get('users',[App\Http\Controllers\UserController::class,'Index'])->name('usersManage');
+Route::get('usersadd',[App\Http\Controllers\UserController::class,'Show'])->name('usersAdd');
+Route::post('usersadd',[App\Http\Controllers\UserController::class,'Create'])->name('usersCreate');
+Route::get('usersedit/{id}',[App\Http\Controllers\UserController::class,'Edit'])->name('usersEdit');
+Route::post('usersedit',[App\Http\Controllers\UserController::class,'Update'])->name('usersUpdate');

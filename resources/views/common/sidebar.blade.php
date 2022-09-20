@@ -4,6 +4,11 @@
         <li class="{{Route::currentRouteName()=='dashboard'?'open':''}}">
             <div class="link"><a href="{{route('dashboard')}}"><i class="fa fa-tachometer"></i>Dashboard</a></div>
         </li>
+        @if(auth()->user()->user_type=='S')
+        <!-- <li class="{{Route::currentRouteName()=='usersManage'?'open':''}}">
+            <div class="link"><a href="{{route('usersManage')}}"><i class="fa fa-user"></i>Users </a></div>
+        </li> -->
+        @endif
         <li class="{{Route::currentRouteName()=='memberManage'?'open':''}}">
             <div class="link"><a href="{{route('memberManage')}}"><i class="fa fa-users"></i>Customers </a></div>
         </li>
