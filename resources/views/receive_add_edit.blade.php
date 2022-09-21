@@ -151,6 +151,8 @@ $(document).ready(function() {
     });
 
     $("#received_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
 });

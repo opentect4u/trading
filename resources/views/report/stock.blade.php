@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <!-- @if($from_date!='' && $to_date!='') -->
+        @if($from_date!='' && $to_date!='')
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        <!-- @endif -->
+        @endif
     </div>
 </div>
 @endsection

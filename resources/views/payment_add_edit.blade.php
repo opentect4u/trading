@@ -152,6 +152,8 @@ $(document).ready(function() {
     });
 
     $("#payment_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
 });

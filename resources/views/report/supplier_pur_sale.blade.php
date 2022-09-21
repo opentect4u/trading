@@ -179,9 +179,13 @@ toastr.success('Product sale successfully.');
 <script>
 $(function() {
     $("#from_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
     $("#to_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
 });

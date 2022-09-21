@@ -138,6 +138,8 @@ $(document).ready(function() {
     });
 
     $("#mem_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
 

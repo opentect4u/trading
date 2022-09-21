@@ -213,6 +213,8 @@ $(document).ready(function() {
     });
 
     $("#sale_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
 });
