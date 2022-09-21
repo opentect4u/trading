@@ -25,13 +25,13 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Supplier Name</label>
+                                    <label for="">Customer Name</label>
                                     <select name="supplier_id" id="supplier_id" class="form-control">
-                                        <option value="">-- Select Supplier Name -- </option>
+                                        <option value="">-- Select Customer Name -- </option>
                                         @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}"
-                                            <?php if($supplier_id!='' && $supplier->id==$supplier_id){echo 'selected';} ?>>
-                                            {{$supplier->sup_name. " - ".$supplier->contact_no}}</option>
+                                        <option value="{{$supplier->customer_id}}"
+                                            <?php if($supplier_id!='' && $supplier->customer_id==$supplier_id){echo 'selected';} ?>>
+                                            {{$supplier->mem_name. " - ".$supplier->contact_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -74,7 +74,7 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Sale Date</th>
-                                    <th>Supplier Name</th>
+                                    <th>Customer Name</th>
                                     <th>Product Name</th>
                                     <th>Sale Type</th>
                                     <th>Rate</th>
@@ -83,8 +83,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1;?>
+                                <?php $i=1; $total_rate=0;$total_quantity=0;$total_amount=0;?>
                                 @foreach($datas as $data)
+                                <?php
+                                $total_rate=$total_rate + $data->rate;
+                                $total_quantity=$total_quantity + $data->quantity;
+                                $total_amount=$total_amount + $data->amount;
+                                ?>
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$data->sale_date}}</td>
@@ -104,18 +109,14 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <!-- <tfoot>
+                            <tfoot>
                                 <tr>
-                                    <th>Sl No</th>
-                                    <th>Sale Date</th>
-                                    <th>Supplier Name</th>
-                                    <th>Product Name</th>
-                                    <th>Sale Type</th>
-                                    <th>Rate</th>
-                                    <th>Quantity</th>
-                                    <th>Amount</th>
+                                    <th colspan="5">Total</th>
+                                    <th>{{number_format((float)$total_rate, 2, '.', '')}}</th>
+                                    <th>{{number_format((float)$total_quantity, 3, '.', '')}}</th>
+                                    <th>{{number_format((float)$total_amount, 2, '.', '')}}</th>
                                 </tr>
-                            </tfoot> -->
+                            </tfoot>
                         </table>
                     </div>
                 </div>

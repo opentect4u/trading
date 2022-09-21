@@ -82,8 +82,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1;?>
+                                <?php $i=1; $total_rate=0;$total_quantity=0;$total_amount=0;?>
                                 @foreach($datas as $data)
+                                <?php
+                                $total_rate=$total_rate + $data->rate;
+                                $total_quantity=$total_quantity + $data->quantity;
+                                $total_amount=$total_amount + $data->amount;
+                                ?>
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$data->purchase_date}}</td>
@@ -103,18 +108,14 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <!-- <tfoot>
+                            <tfoot>
                                 <tr>
-                                    <th>Sl No</th>
-                                    <th>Purchase Date</th>
-                                    <th>Supplier Name</th>
-                                    <th>Product Name</th>
-                                    <th>Purchase Type</th>
-                                    <th>Rate</th>
-                                    <th>Quantity</th>
-                                    <th>Amount</th>
+                                    <th colspan="5">Total</th>
+                                    <th>{{number_format((float)$total_rate, 2, '.', '')}}</th>
+                                    <th>{{number_format((float)$total_quantity, 3, '.', '')}}</th>
+                                    <th>{{number_format((float)$total_amount, 2, '.', '')}}</th>
                                 </tr>
-                            </tfoot> -->
+                            </tfoot>
                         </table>
                     </div>
                 </div>

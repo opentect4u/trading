@@ -25,13 +25,13 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Supplier Name</label>
+                                    <label for="">Customer Name</label>
                                     <select name="supplier_id" id="supplier_id" class="form-control">
-                                        <option value="">-- Select Supplier Name -- </option>
+                                        <option value="">-- Select Customer Name -- </option>
                                         @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}"
-                                            <?php if($supplier_id!='' && $supplier->id==$supplier_id){echo 'selected';} ?>>
-                                            {{$supplier->sup_name. " - ".$supplier->contact_no}}</option>
+                                        <option value="{{$supplier->customer_id}}"
+                                            <?php if($supplier_id!='' && $supplier->customer_id==$supplier_id){echo 'selected';} ?>>
+                                            {{$supplier->mem_name. " - ".$supplier->contact_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -63,7 +63,7 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Received Date</th>
-                                    <th>Supplier Name</th>
+                                    <th>Customer Name</th>
                                     <th>Received Type</th>
                                     <th>Amount</th>
                                 </tr>
@@ -78,9 +78,9 @@
                                     <td>{{$data->sup_name}}</td>
                                     <td>
                                         @if($data->received_type=='C')
-                                        {{"Credit"}}
+                                        {{"Cash"}}
                                         @else
-                                        {{'Cash'}}
+                                        {{'Bank'}}
                                         @endif
                                     </td>
                                     <td>{{$data->amount}}</td>

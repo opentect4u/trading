@@ -95,7 +95,7 @@
                                 <tr>
                                     <th colspan="4">Total</th>
                                     <th> {{$no_of_share}}</th>
-                                    <th>{{number_format((float)$total_amount, 2, '.', '');}}</th>
+                                    <th>{{number_format((float)$total_amount, 2, '.', '')}}</th>
                                 </tr>
                             </tfoot>
                         </table>
