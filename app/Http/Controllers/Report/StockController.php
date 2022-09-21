@@ -35,46 +35,73 @@ class StockController extends Controller
             foreach ($data as $key => $value) {
                 // return $value;
                 $product_master_id=$value->id;
-                $total_stock=0;
+                // $total_opening_stock=0;
                 $opening_stockss=TdPurchase::where('purchase_type','O')
                     ->where('purchase_date',$start_date)
                     ->where('product_master_id',$product_master_id)
                     ->where('society_id',auth()->user()->society_id)
                     ->get();
-                // return $opening_stock;
-                $opening_stock=0;
+                // return $opening_stockss;
+                $finance_year_opening_stock=0;
                 foreach ($opening_stockss as $opening) {
-                    $opening_stock=$opening->quantity;
-                    $total_stock=$total_stock+$opening->quantity;
+                    $finance_year_opening_stock=$opening->quantity;
+                    // $total_opening_stock=$total_opening_stock+$opening->quantity;
                 }
-                $one_opening_stock=TdPurchase::where('product_master_id',$product_master_id)
+                // return $finance_year_opening_stock;
+
+                $all_purchase_stock=TdPurchase::where('product_master_id',$product_master_id)
                     ->where('purchase_type','!=','O')
                     ->where('society_id',auth()->user()->society_id)
-                    ->whereDate('purchase_date','>=',date('Y-m-d',strtotime($from_date)))
+                    ->whereDate('purchase_date','>=',date('Y-m-d',strtotime($start_date)))
+                    // ->whereDate('purchase_date','>=',date('Y-m-d',strtotime($from_date)))
                     ->whereDate('purchase_date','<=',date('Y-m-d',strtotime($to_date)))
+                    ->orderBy('purchase_date','ASC')
                     ->get();
-                // return $one_opening_stock;
-                $total_purchase=0;
-                foreach ($one_opening_stock as $one_opening) {
-                    $total_purchase=$total_purchase+$one_opening->quantity;
-                    $total_stock=$total_stock+$one_opening->quantity;
-                }
+                // return $all_purchase_stock;
 
-                $saless=TdSale::where('product_master_id',$product_master_id)
-                    ->where('society_id',auth()->user()->society_id)
-                    ->whereDate('sale_date','>=',date('Y-m-d',strtotime($from_date)))
-                    ->whereDate('sale_date','<=',date('Y-m-d',strtotime($to_date)))
-                    ->get();
-                
-                $total_sale=0;
-                foreach ($saless as $sale) {
-                    $total_sale=$total_sale+$sale->quantity;
+                $during_period_purchase=0;
+                $before_period_purchase=0;
+                foreach ($all_purchase_stock as $one_opening) {
+                    if ($one_opening->purchase_date >= date('Y-m-d',strtotime($from_date))) {
+                        $during_period_purchase=$during_period_purchase+$one_opening->quantity;
+                    }else{
+                        $before_period_purchase=$before_period_purchase+$one_opening->quantity;
+                    }
                 }
+                // return $during_period_purchase;
+                // return $before_period_purchase;
+
+                $all_saless=TdSale::where('product_master_id',$product_master_id)
+                    ->where('society_id',auth()->user()->society_id)
+                    ->whereDate('sale_date','>=',date('Y-m-d',strtotime($start_date)))
+                    // ->whereDate('sale_date','>=',date('Y-m-d',strtotime($from_date)))
+                    ->whereDate('sale_date','<=',date('Y-m-d',strtotime($to_date)))
+                    ->orderBy('sale_date','ASC')
+                    ->get();
+
+                // return $all_saless;
+                
+                $during_period_sale=0;
+                $before_period_sale=0;
+                foreach ($all_saless as $sale) {
+                    if ($sale->sale_date >= date('Y-m-d',strtotime($from_date))) {
+                        $during_period_sale=$during_period_sale+$sale->quantity;
+                    }else{
+                        $before_period_sale=$before_period_sale+$sale->quantity;
+                    }
+                }
+                // return $during_period_sale;
+                // return $before_period_sale;
+                
+                $opening_stock= ($finance_year_opening_stock + $before_period_purchase) - $before_period_sale ;
+                $total_purchase=$during_period_purchase + $finance_year_opening_stock + $before_period_purchase;
+                $total_sale=$before_period_sale + $during_period_sale;
+                // return $opening_stock;
+                $value->finance_year_opening_stock=$finance_year_opening_stock;
                 $value->opening_stock=$opening_stock;
-                $value->total_stock=$total_stock;
-                $value->total_purchase=$total_purchase;
-                $value->total_sale=$total_sale;
-                $value->stock_in_hand= $total_stock - $total_sale;
+                $value->during_period_purchase=$during_period_purchase;
+                $value->during_period_sale=$during_period_sale;
+                $value->stock_in_hand= $total_purchase - $total_sale;
                 array_push($datas,$value);
 
             }

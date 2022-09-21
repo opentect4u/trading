@@ -12,12 +12,12 @@
                     <div class="col-sm-12">
                         <form action="{{route('stockReport')}}">
                             <div class="form-group row">
-                                <!-- <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <label for="">From Date</label>
                                     <input type="text" class="form-control" name="from_date" id="from_date" required
                                         value="<?php if($from_date!=''){echo $from_date;}else{ echo date('d-m-Y');} ?>">
-                                </div> -->
-                                <input type="text" name="from_date" id="from_date" value="{{$finalcial_start_date}}" hidden> 
+                                </div>
+                                <!-- <input type="text" name="from_date" id="from_date" value="{{$finalcial_start_date}}" hidden>  -->
                                 <div class="col-sm-6">
                                     <label for="">Date</label>
                                     <input type="text" class="form-control" name="to_date" id="to_date" required
@@ -36,12 +36,12 @@
                 </div>
             </div>
         </div>
+        <!-- @if($from_date!='' && $to_date!='') -->
         <div class="card mt-2">
             <div class="card-body">
                 <div class="titleSec">
-                    <!-- <a type="button" href="javascript:void(0);" class="btn btn-primary"
-                        onclick="printContent('sectionDiv');">Print</a> -->
-                    <!-- <a type="button" href="{{route('saleAdd')}}" class="btn btn-primary">Create</a> -->
+
+
                     <h2> Stock Report</h2>
                 </div>
 
@@ -53,10 +53,10 @@
                                     <th>Sl No</th>
                                     <th>Product Category</th>
                                     <th>Product Name</th>
-                                    <th>Opening Stock</th>
-                                    <th>Purchase Stock</th>
-                                    <th>Sale Stock</th>
-                                    <th> Stock in Hand</th>
+                                    <th>Opening</th>
+                                    <th>Purchase during the period</th>
+                                    <th>Sale during the period</th>
+                                    <th>Closing</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,8 +67,8 @@
                                     <td>{{$data->cat_name}}</td>
                                     <td>{{$data->pdt_name}}</td>
                                     <td>{{$data->opening_stock}}</td>
-                                    <td>{{$data->total_purchase}}</td>
-                                    <td>{{$data->total_sale}}</td>
+                                    <td>{{$data->during_period_purchase}}</td>
+                                    <td>{{$data->during_period_sale}}</td>
                                     <td>{{$data->stock_in_hand}}</td>
 
                                 </tr>
@@ -96,6 +96,7 @@
                 </div>
             </div>
         </div>
+        <!-- @endif -->
     </div>
 </div>
 @endsection
@@ -111,9 +112,13 @@ toastr.success('Product sale successfully.');
 <script>
 $(function() {
     $("#from_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
     $("#to_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
 });
