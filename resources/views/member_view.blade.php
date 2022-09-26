@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'View':'Create'}} Customer</h2>
+                    <h2>{{isset($data)?'View':'Create'}} Member</h2>
                 </div>
 
                 <div class="row">
@@ -18,7 +18,7 @@
                             <div class="form-group row">
                                 @if(isset($data))
                                 <div class="col-sm-6">
-                                    <label for="">Customer ID</label>
+                                    <label for="">Member ID</label>
                                     <input type="text" class="form-control" name="customer_id" id="customer_id" required
                                         value="{{isset($data)?$data->customer_id:''}}">
                                 </div>

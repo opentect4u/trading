@@ -22,6 +22,7 @@ class TdMember extends Model
         'contact_no',
         'mem_email',
         'mem_vill',
+        'district_id',
         'mem_block',
         'mem_gender',
         'mem_cast',

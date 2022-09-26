@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{TdMember,MdBlock};
+use App\Models\{TdMember,MdBlock,MdDistrict,MdVillage};
 use Illuminate\Support\Facades\Crypt;
 
 class MemberController extends Controller
@@ -39,7 +39,8 @@ class MemberController extends Controller
     public function Show(Type $var = null)
     {
         $blocks=MdBlock::get();
-        return view('member_add_edit',['blocks'=>$blocks]);
+        $districts=MdDistrict::get();
+        return view('member_add_edit',['blocks'=>$blocks,'districts'=>$districts]);
     }
 
     public function Create(Request $request)
@@ -72,6 +73,7 @@ class MemberController extends Controller
             'contact_no'=>$request->contact_no,
             'mem_email'=>$request->mem_email,
             'mem_vill'=>$request->mem_vill,
+            'district_id'=>$request->district_id,
             'mem_block'=>$request->mem_block,
             'mem_address'=>$request->mem_address,
             'mem_gender'=>$request->mem_gender,
@@ -111,7 +113,8 @@ class MemberController extends Controller
         $data=TdMember::where('society_id',$society_id)->where('customer_id',$customer_id)->get();
         // return $data[0];
         $blocks=MdBlock::get();
-        return view('member_view',['data'=>$data[0],'blocks'=>$blocks]);
+        $districts=MdDistrict::get();
+        return view('member_view',['data'=>$data[0],'blocks'=>$blocks,'districts'=>$districts]);
     }
 
     public function Edit($society_id,$customer_id)
@@ -123,7 +126,8 @@ class MemberController extends Controller
         $data=TdMember::where('society_id',$society_id)->where('customer_id',$customer_id)->get();
         // return $data[0];
         $blocks=MdBlock::get();
-        return view('member_add_edit',['data'=>$data[0],'blocks'=>$blocks]);
+        $districts=MdDistrict::get();
+        return view('member_add_edit',['data'=>$data[0],'blocks'=>$blocks,'districts'=>$districts]);
     }
 
     public function ShowClose($society_id,$customer_id)
@@ -133,7 +137,8 @@ class MemberController extends Controller
         // return $customer_id;
         // $data=TdMember::find($society_id);
         $data=TdMember::where('society_id',$society_id)->where('customer_id',$customer_id)->get();
-        return view('member_close',['data'=>$data[0]]);
+        $districts=MdDistrict::get();
+        return view('member_close',['data'=>$data[0],'districts'=>$districts]);
     }
 
     public function Update(Request $request)
@@ -145,6 +150,7 @@ class MemberController extends Controller
         ->where('customer_id', $request->customer_id)
         ->update([
             'mem_name'=>$request->mem_name,
+            'district_id'=>$request->district_id,
             'mem_vill'=>$request->mem_vill,
             'mem_qualification'=>$request->mem_qualification,
             'mem_email'=>$request->mem_email,
@@ -201,5 +207,22 @@ class MemberController extends Controller
         $jsondata['customer_id']=$customer_id;
         $jsondata['success']='Success';
         echo json_encode($jsondata);
+    }
+
+    public function BlockNameAJax(Request $request)
+    {
+        $district_id=$request->district_id;
+        $block_id=$request->block_id;
+        $blocks=MdBlock::where('district_id',$district_id)->get();
+        return view('block_name_ajax',['blocks'=>$blocks,'block_id'=>$block_id]);
+    }
+
+    public function VillageNameAJax(Request $request)
+    {
+        $district_id=$request->district_id;
+        $block_id=$request->block_id;
+        $vill_id=$request->vill_id;
+        $villages=MdVillage::where('district_id',$district_id)->where('block_id',$block_id)->orderBy('vill_name','ASC')->get();
+        return view('village_name_ajax',['villages'=>$villages,'vill_id'=>$vill_id]);
     }
 }

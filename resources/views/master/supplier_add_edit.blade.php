@@ -18,17 +18,17 @@
                                 value="{{isset($data)?\Crypt::encryptString($data->id):''}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Name</label>
+                                    <label for="">Name  *</label>
                                     <input type="text" class="form-control" name="sup_name" id="sup_name" required
                                         value="{{isset($data)?$data->sup_name:''}}">
                                 </div>
                                 <div class="col-sm-12">
-                                    <label for="">Address</label>
+                                    <label for="">Address  *</label>
                                     <textarea class="form-control" name="sup_address" id="sup_address" cols="30"
                                         rows="2" required>{{isset($data)?$data->sup_address:''}}</textarea>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Contact No</label>
+                                    <label for="">Contact No  *</label>
                                     <input type="text" class="form-control" name="contact_no" id="contact_no" required
                                         value="{{isset($data)?$data->contact_no:''}}"
                                         onkeypress="return event.charCode >= 48 && event.charCode <= 57">

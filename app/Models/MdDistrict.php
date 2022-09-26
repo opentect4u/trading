@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MdBlock extends Model
+class MdDistrict extends Model
 {
     use HasFactory;
-    protected $table="md_block";
+    protected $table="md_district";
     protected $primaryKey = 'sl_no';
     protected $fillable = [
-        'district_id',
-        'block_name',
+        'dist_name',
         'created_by',
         'updated_by',
     ];

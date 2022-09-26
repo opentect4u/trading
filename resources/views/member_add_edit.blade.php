@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="titleSec">
-                    <h2>{{isset($data)?'View':'Create'}} Customer</h2>
+                    <h2>{{isset($data)?'Edit':'Create'}} Member</h2>
                 </div>
 
                 <div class="row">
@@ -18,15 +18,15 @@
                             <div class="form-group row">
                                 @if(isset($data))
                                 <div class="col-sm-6">
-                                    <label for="">Customer ID</label>
+                                    <label for="">Member ID</label>
                                     <input type="text" class="form-control" name="customer_id" id="customer_id" required
                                         value="{{isset($data)?$data->customer_id:''}}" readonly>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="">Customer Type *</label>
+                                <!-- <div class="col-sm-6">
+                                    <label for="">Member Type *</label>
                                     <select class="form-control" id="member_type" name="member_type" required
                                         <?php if(isset($data)){echo "disabled";}?>>
-                                        <option value=""> -- Select Customer Type --</option>
+                                        <option value=""> -- Select Member Type --</option>
                                         <option value="M"
                                             <?php if(isset($data) && $data->member_type=='M'){echo "selected";}?>>Member
                                         </option>
@@ -34,13 +34,12 @@
                                             <?php if(isset($data) && $data->member_type=='N'){echo "selected";}?>>
                                             Nominal</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 @endif
                                 <div class="col-sm-6">
                                     <label for="">Name *</label>
                                     <input type="text" class="form-control" name="mem_name" id="mem_name" required
-                                        value="{{isset($data)?$data->mem_name:''}}"
-                                        <?php if(isset($data)){echo "readonly";}?>>
+                                        value="{{isset($data)?$data->mem_name:''}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Date *</label>
@@ -86,8 +85,30 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Educational Qualification</label>
-                                    <input type="text" class="form-control" name="mem_qualification"
-                                        id="mem_qualification" value="{{isset($data)?$data->mem_qualification:''}}">
+                                    <!-- <input type="text" class="form-control" name="mem_qualification"
+                                        id="mem_qualification" value="{{isset($data)?$data->mem_qualification:''}}"> -->
+                                    <select name="mem_qualification" id="mem_qualification" class="form-control"
+                                        required>
+                                        <option value="">-- Select Qualification -- </option>
+                                        <option value="Matric / High School"
+                                            <?php if(isset($data) && $data->mem_qualification=='Matric / High School'){echo "selected";}?>>
+                                            Matric / High School</option>
+                                        <option value="Intermediate / Higher Secondary / 12th Standard"
+                                            <?php if(isset($data) && $data->mem_qualification=='Intermediate / Higher Secondary / 12th Standard'){echo "selected";}?>>
+                                            Intermediate / Higher Secondary / 12th Standard </option>
+                                        <option value="Diploma"
+                                            <?php if(isset($data) && $data->mem_qualification=='Diploma'){echo "selected";}?>>
+                                            Diploma</option>
+                                        <option value="Bachelor's degree"
+                                            <?php if(isset($data) && $data->mem_qualification=="Bachelor's degree"){echo "selected";}?>>
+                                            Bachelor's degree </option>
+                                        <option value="Master's degree"
+                                            <?php if(isset($data) && $data->mem_qualification=="Master's degree"){echo "selected";}?>>
+                                            Master's degree </option>
+                                        <option value="Others"
+                                            <?php if(isset($data) && $data->mem_qualification=='Others'){echo "selected";}?>>
+                                            Others </option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -108,25 +129,35 @@
                                 <div class="col-sm-12">
                                     <label for="">Address *</label>
                                     <textarea class="form-control" name="mem_address" id="mem_address" cols="30"
-                                        rows="2" required>{{isset($data)?$data->mem_address:''}}</textarea>
+                                        rows="2">{{isset($data)?$data->mem_address:''}}</textarea>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="">Block *</label>
-                                    <select name="mem_block" id="mem_block" class="form-control" required
-                                        <?php if(isset($data)){echo "disabled";}?>>
-                                        <option value="">-- Select Block -- </option>
-                                        @foreach($blocks as $block)
-                                        <option value="{{$block->sl_no}}"
-                                            <?php if(isset($data) && $data->mem_block==$block->sl_no){echo "selected";}?>>
-                                            {{$block->block_name}}</option>
+                                    <label for="">District *</label>
+                                    <select name="district_id" id="district_id" class="form-control" required>
+                                        <option value="">-- Select District -- </option>
+                                        @foreach($districts as $district)
+                                        <option value="{{$district->sl_no}}"
+                                            <?php if(isset($data) && $data->district_id==$district->sl_no){echo "selected";}?>>
+                                            {{$district->dist_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
+                                    <label for="">Block *</label>
+                                    <select name="mem_block" id="mem_block" class="form-control" required>
+                                        <option value="">-- Select Block -- </option>
+
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
                                     <label for="">Village *</label>
-                                    <input type="text" class="form-control" name="mem_vill" id="mem_vill" required
-                                        value="{{isset($data)?$data->mem_vill:''}}"
-                                        <?php if(isset($data)){echo "readonly";}?>>
+                                    <!-- <input type="text" class="form-control" name="mem_vill" id="mem_vill" required
+                                        value="{{isset($data)?$data->mem_vill:''}}"> -->
+
+                                    <select name="mem_vill" id="mem_vill" class="form-control" required>
+                                        <option value="">-- Select Village -- </option>
+
+                                    </select>
                                 </div>
                             </div>
 
@@ -134,11 +165,12 @@
                             <div class="form-group row">
 
                                 @if(!isset($data))
-                                <div class="col-sm-6">
-                                    <label for="">Customer Type *</label>
+                                <input type="text" id="member_type" name="member_type" value="M" hidden>
+                                <!-- <div class="col-sm-6">
+                                    <label for="">Member Type *</label>
                                     <select class="form-control" id="member_type" name="member_type" required
                                         <?php if(isset($data)){echo "disabled";}?>>
-                                        <option value=""> -- Select Customer Type --</option>
+                                        <option value=""> -- Select Member Type --</option>
                                         <option value="M"
                                             <?php if(isset($data) && $data->member_type=='M'){echo "selected";}?>>Member
                                         </option>
@@ -146,13 +178,13 @@
                                             <?php if(isset($data) && $data->member_type=='N'){echo "selected";}?>>
                                             Nominal</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 @endif
                                 <div class="col-sm-6">
                                     <label for="">Deposit Amount</label>
+                                    <?php  $amount=DB::table('md_param')->where('sl_no',3)->value('param_value');?>
                                     <input type="text" class="form-control" name="deposit_amount" id="deposit_amount"
-                                        value="{{isset($data)?$data->deposit_amount:''}}"
-                                        <?php if(isset($data)){echo "readonly";}?>>
+                                        value="{{isset($data)?$data->deposit_amount:$amount}}" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -280,22 +312,11 @@
 @section('script')
 @if(Session::has('update'))
 <script>
-toastr.success('Customer Update Successfully.');
+toastr.success('Member Update Successfully.');
 </script>
 @endif
 
-@if(isset($data))
-<script>
-var updateval = '{{isset($data)?$data->member_type:'
-'}}';
-if (updateval == 'M') {
-    $("#deposit_amount").attr('required', 'required');
-    // deposit_amount
-} else {
-    $("#deposit_amount").removeAttr('required');
-}
-</script>
-@endif
+
 
 <script>
 $(document).ready(function() {
@@ -345,6 +366,79 @@ $(document).ready(function() {
         }
     });
 
+
+    $("#district_id").on('change', function() {
+        var district_id = $("#district_id").val();
+        var block_id = '';
+        BlockNameAJax(district_id, block_id);
+    });
+
+    
+    $("#mem_block").on('change', function() {
+        var district_id = $("#district_id").val();
+        var block_id = $("#mem_block").val();
+        var vill_id = '';
+        VillageNameAJax(district_id, block_id,vill_id);
+    });
+
 });
+
+function BlockNameAJax(district_id, block_id) {
+    $.ajax({
+        url: "{{route('BlockNameAJax')}}",
+        method: "POST",
+        data: {
+            district_id: district_id,
+            block_id: block_id,
+        },
+        success: function(data) {
+            // alert(data)
+            $("#mem_block").empty();
+            $("#mem_block").html(data);
+
+        }
+    });
+}
+
+function VillageNameAJax(district_id, block_id,vill_id) {
+    $.ajax({
+        url: "{{route('VillageNameAJax')}}",
+        method: "POST",
+        data: {
+            district_id: district_id,
+            block_id: block_id,
+            vill_id: vill_id,
+        },
+        success: function(data) {
+            // alert(data)
+            $("#mem_vill").empty();
+            $("#mem_vill").html(data);
+
+        }
+    });
+}
 </script>
+
+
+
+@if(isset($data))
+<script>
+var updateval = '{{isset($data)?$data->member_type:'
+'}}';
+var district_id = '{{isset($data)?$data->district_id:'
+'}}';
+var block_id = '{{isset($data)?$data->mem_block:'
+'}}';
+var vill_id = '{{isset($data)?$data->mem_vill:'
+'}}';
+BlockNameAJax(district_id, block_id);
+VillageNameAJax(district_id, block_id,vill_id);
+if (updateval == 'M') {
+    $("#deposit_amount").attr('required', 'required');
+    // deposit_amount
+} else {
+    $("#deposit_amount").removeAttr('required');
+}
+</script>
+@endif
 @endsection

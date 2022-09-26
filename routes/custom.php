@@ -67,12 +67,15 @@ Route::post('memberupdate',[App\Http\Controllers\MemberController::class,'Update
 Route::get('memberclose/{society_id}/{customer_id}',[App\Http\Controllers\MemberController::class,'ShowClose'])->name('memberClose');
 Route::post('member_close',[App\Http\Controllers\MemberController::class,'Close'])->name('memberCloseConfirm');
 Route::post('memberDeleteAjax',[App\Http\Controllers\MemberController::class,'Delete'])->name('memberDeleteAjax');
+Route::post('BlockNameAJax',[App\Http\Controllers\MemberController::class,'BlockNameAJax'])->name('BlockNameAJax');
+Route::post('VillageNameAJax',[App\Http\Controllers\MemberController::class,'VillageNameAJax'])->name('VillageNameAJax');
 
 Route::get('supplier',[App\Http\Controllers\SupplierController::class,'Index'])->name('supplierManage');
 Route::get('supplieradd',[App\Http\Controllers\SupplierController::class,'Show'])->name('supplierAdd');
 Route::post('supplieradd',[App\Http\Controllers\SupplierController::class,'Create'])->name('supplierCreate');
 Route::get('supplieredit/{id}',[App\Http\Controllers\SupplierController::class,'Edit'])->name('supplierEdit');
 Route::post('supplieredit',[App\Http\Controllers\SupplierController::class,'Update'])->name('supplierUpdate');
+Route::post('SupplierDeleteAjax',[App\Http\Controllers\SupplierController::class,'Delete'])->name('SupplierDeleteAjax');
 
 Route::get('category',[App\Http\Controllers\ProductCategoryController::class,'Index'])->name('categoryManage');
 Route::get('categoryadd',[App\Http\Controllers\ProductCategoryController::class,'Show'])->name('categoryAdd');

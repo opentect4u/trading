@@ -15,7 +15,7 @@ class SupplierController extends Controller
 
     public function Index()
     {
-        $datas=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        $datas=MdSupplier::where('society_id',auth()->user()->society_id)->where('deleted_flag','N')->get();
         return view('master.supplier_manage',['datas'=>$datas]);
     }
 
@@ -39,6 +39,7 @@ class SupplierController extends Controller
             'acc_no'=>$request->acc_no,
             'ifsc'=>$request->ifsc,
             'remarks'=>$request->remarks,
+            'deleted_flag'=>'N',
             'created_by'=>auth()->user()->id,
         ));
         return redirect()->route('supplierManage')->with('addSuccess','addSuccess');
@@ -70,5 +71,31 @@ class SupplierController extends Controller
         $data->updated_by=auth()->user()->id;
         $data->save();
         return redirect()->back()->with('update','update');
+    }
+
+    public function Delete(Request $request)
+    {
+        // $society_id=Crypt::decryptString($request->society_id);
+        // $customer_id=Crypt::decryptString($request->customer_id);
+        // $data=TdMember::where('society_id', $society_id)
+        // ->where('customer_id', $customer_id)
+        // ->update([
+        //     'delete_flag' => 'Y',
+        //     'deleted_date'=>date('Y-m-d H:i:s'),
+        //     'deleted_by'=>auth()->user()->id,
+        //     // 'updated_at'=>date('Y-m-d H:i:s'),
+        // ]);
+        $id=Crypt::decryptString($request->id);
+        $data=MdSupplier::find($id); 
+        $data->deleted_flag='Y';
+        $data->deleted_at=date('Y-m-d H:i:s');
+        $data->deleted_by=auth()->user()->id;
+        $data->save();
+
+        $jsondata=[];
+        $jsondata['id']=$id;
+        // $jsondata['customer_id']=$customer_id;
+        $jsondata['success']='Success';
+        echo json_encode($jsondata);
     }
 }

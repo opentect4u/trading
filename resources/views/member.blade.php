@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="titleSec">
                     <a type="button" href="{{route('memberAdd')}}" class="btn btn-primary">Create</a>
-                    <h2>Customers</h2>
+                    <h2>Members</h2>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -29,9 +29,9 @@
                                     <label class="btn btn-default">
                                         <input type="radio" id="member_type_2" name="member_type" value="C" <?php if($member_type=='C'){echo "checked";}?>/> Close
                                     </label>
-                                    <label class="btn btn-default">
+                                    <!-- <label class="btn btn-default">
                                         <input type="radio" id="member_type_3" name="member_type" value="N" <?php if($member_type=='N'){echo "checked";}?>/> Nominal
-                                    </label>
+                                    </label> -->
                                 </div>
                             </div>
                         </div>
@@ -43,11 +43,11 @@
                             <thead>
                                 <tr>
                                     <!-- <th>Sl No</th> -->
-                                    <th>Customer ID</th>
+                                    <th>Member ID</th>
                                     <!-- <th>Member Date</th> -->
                                     <th>Name</th>
                                     <th>Contact No</th>
-                                    <th>Customer Type</th>
+                                    <!-- <th>Member Type</th> -->
                                     <!-- <th>Deposit Amount</th> -->
                                     <!-- <th>View</th> -->
                                     <th>Edit</th>
@@ -63,13 +63,13 @@
                                     <!-- <td>{{ date('d-m-Y',strtotime($data->mem_date))}}</td> -->
                                     <td>{{$data->mem_name}}</td>
                                     <td>{{$data->contact_no}}</td>
-                                    <td>
+                                    <!-- <td>
                                         @if($data->member_type=='M')
                                         {{"Member"}}
                                         @else
                                         {{"Nominal"}}
                                         @endif
-                                    </td>
+                                    </td> -->
 
                                     <!-- <td>
                                         @if($data->deposit_amount!='')
@@ -115,11 +115,11 @@
                             <tfoot>
                                 <tr>
                                     <!-- <th>Sl No</th> -->
-                                    <th>Customer ID</th>
+                                    <th>Member ID</th>
                                     <!-- <th>Member Date</th> -->
                                     <th>Name</th>
                                     <th>Contact No</th>
-                                    <th>Customer Type</th>
+                                    <!-- <th>Member Type</th> -->
                                     <!-- <th>Deposit Amount</th> -->
                                     <!-- <th>View</th> -->
                                     <th>Edit</th>
@@ -141,12 +141,12 @@
 
 @if(Session::has('close_member'))
 <script>
-toastr.success('Customer Close Successfully.');
+toastr.success('Member Close Successfully.');
 </script>
 @endif
 @if(Session::has('success'))
 <script>
-toastr.success('Customer added Successfully.');
+toastr.success('Member added Successfully.');
 </script>
 @endif
 <script>
