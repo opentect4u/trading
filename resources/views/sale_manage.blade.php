@@ -49,8 +49,8 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Customer Name</th>
+                                    <!-- <th>Type</th> -->
+                                    <th>Member / Nominal Name</th>
                                     <th>Product Name</th>
                                     <th>Rate</th>
                                     <th>Quantity</th>
@@ -65,13 +65,13 @@
                                 <tr id="tr_{{$data->id}}">
                                     <td>{{$i++}}</td>
                                     <td>{{$data->sale_date}}</td>
-                                    <td>
+                                    <!-- <td>
                                         @if($data->sale_type =='C')
                                         Credit
                                         @else
                                         Cash
                                         @endif
-                                    </td>
+                                    </td> -->
                                     <td>{{$data->sup_name}}</td>
                                     <td>{{$data->pdt_name}}</td>
                                     <td>{{$data->rate}}</td>
@@ -90,8 +90,8 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Customer Name</th>
+                                    <!-- <th>Type</th> -->
+                                    <th>Member / Nominal Name</th>
                                     <th>Product Name</th>
                                     <th>Rate</th>
                                     <th>Quantity</th>

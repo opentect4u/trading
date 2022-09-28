@@ -24,7 +24,7 @@
                                     <input type="text" class="form-control" name="customer_id" id="customer_id" required
                                         value="{{isset($data)?$data->customer_id:''}}" readonly>
                                 </div>
-                                <!-- <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <label for="">Member Type *</label>
                                     <select class="form-control" id="member_type" name="member_type" required
                                         <?php if(isset($data)){echo "disabled";}?>>
@@ -36,7 +36,7 @@
                                             <?php if(isset($data) && $data->member_type=='N'){echo "selected";}?>>
                                             Nominal</option>
                                     </select>
-                                </div> -->
+                                </div>
                                 @endif
                                 <div class="col-sm-6">
                                     <label for="">Name *</label>
@@ -167,8 +167,7 @@
                             <div class="form-group row">
 
                                 @if(!isset($data))
-                                <input type="text" id="member_type" name="member_type" value="M" hidden>
-                                <!-- <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <label for="">Member Type *</label>
                                     <select class="form-control" id="member_type" name="member_type" required
                                         <?php if(isset($data)){echo "disabled";}?>>
@@ -180,7 +179,7 @@
                                             <?php if(isset($data) && $data->member_type=='N'){echo "selected";}?>>
                                             Nominal</option>
                                     </select>
-                                </div> -->
+                                </div>
                                 @endif
                                 <div class="col-sm-6">
                                     <label for="">Deposit Amount</label>

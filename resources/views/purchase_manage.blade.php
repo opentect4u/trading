@@ -49,10 +49,11 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Date</th>
-                                    <th>Type</th>
+                                    <!-- <th>Type</th> -->
                                     <th>Supplier Name</th>
+                                    <th>Member/Nominal Name</th>
                                     <th>Product Name</th>
-                                    <th>Rate</th>
+                                    <th>Rate per unit</th>
                                     <th>Quantity</th>
                                     <th>Amount</th>
                                     <th>View</th>
@@ -65,14 +66,15 @@
                                 <tr id="tr_{{$data->id}}">
                                     <td>{{$i++}}</td>
                                     <td>{{$data->purchase_date}}</td>
-                                    <td>
+                                    <!-- <td>
                                         @if($data->purchase_type =='C')
                                         Credit
                                         @else
                                         Cash
                                         @endif
-                                    </td>
-                                    <td>{{$data->sup_name}}</td>
+                                    </td> -->
+                                    <td>{{isset($data->sup_name)?$data->sup_name:'-'}}</td>
+                                    <td>{{isset($data->mem_name)?$data->mem_name:'-'}}</td>
                                     <td>{{$data->pdt_name}}</td>
                                     <td>{{$data->rate}}</td>
                                     <td>{{$data->quantity}}</td>
@@ -90,10 +92,11 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Date</th>
-                                    <th>Type</th>
+                                    <!-- <th>Type</th> -->
                                     <th>Supplier Name</th>
+                                    <th>Member/Nominal Name</th>
                                     <th>Product Name</th>
-                                    <th>Rate</th>
+                                    <th>Rate per unit</th>
                                     <th>Quantity</th>
                                     <th>Amount</th>
                                     <th>View</th>

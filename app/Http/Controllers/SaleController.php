@@ -71,7 +71,7 @@ class SaleController extends Controller
         TdSale::create(array(
             'society_id'=>auth()->user()->society_id,
             'sale_date'=> date('Y-m-d',strtotime($request->sale_date)),
-            'sale_type'=>$request->sale_type,
+            // 'sale_type'=>$request->sale_type,
             'supplier_id'=>$request->supplier_id,
             'product_category_id'=>$request->product_category_id,
             'product_master_id'=>$request->product_master_id,

@@ -14,6 +14,7 @@ class TdPayment extends Model
         'payment_date',
         'payment_type',
         'supplier_id',
+        'customer_id',
         'amount',
         'bank',
         'cheque_no',

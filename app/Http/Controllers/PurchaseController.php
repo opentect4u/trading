@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use DB;
-use App\Models\{TdPurchase,MdSupplier,MdProductMaster,MdProductRate,MdProductCategory};
+use App\Models\{TdPurchase,MdSupplier,MdProductMaster,MdProductRate,MdProductCategory,TdMember};
 
 class PurchaseController extends Controller
 {
@@ -18,10 +18,11 @@ class PurchaseController extends Controller
     {
         $from_date=$request->from_date;
         $to_date=$request->to_date;
+        $all_datas=[];
         if ($from_date!='' && $to_date!='') {
             $datas=DB::table('td_purchase')
-                ->leftJoin('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
-                ->leftJoin('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
+                ->join('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
+                ->join('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
                 ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name')
                 ->where('td_purchase.society_id',auth()->user()->society_id)
                 ->whereDate('td_purchase.purchase_date','>=',date('Y-m-d',strtotime($from_date)))
@@ -29,16 +30,34 @@ class PurchaseController extends Controller
                 ->get();
         }else {
             $datas=DB::table('td_purchase')
-                ->leftJoin('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
-                ->leftJoin('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
+                ->join('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
+                // ->leftJoin('td_member','td_member.customer_id','=','td_purchase.customer_id')
+                ->join('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
                 ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name')
                 ->where('td_purchase.society_id',auth()->user()->society_id)
+                // ->where('td_member.society_id',auth()->user()->society_id)
                 ->whereDate('td_purchase.purchase_date',date('Y-m-d'))
                 ->get();
+            foreach ($datas as $key => $value) {
+                array_push($all_datas,$value);
+            }
+            $datas1=DB::table('td_purchase')
+                ->leftJoin('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_purchase.customer_id')
+                ->leftJoin('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
+                ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name','td_member.mem_name as mem_name')
+                ->where('td_purchase.society_id',auth()->user()->society_id)
+                ->where('td_member.society_id',auth()->user()->society_id)
+                ->whereDate('td_purchase.purchase_date',date('Y-m-d'))
+                ->get();
+
+            foreach ($datas1 as $key => $value1) {
+                array_push($all_datas,$value1);
+            }
         }
         // return $datas;
         // $datas=TdPurchase::where('society_id',auth()->user()->society_id)->get();
-        return view('purchase_manage',['datas'=>$datas,'from_date'=>$from_date,'to_date'=>$to_date]);
+        return view('purchase_manage',['datas'=>$all_datas,'from_date'=>$from_date,'to_date'=>$to_date]);
     }
 
     public function Show()
@@ -46,7 +65,13 @@ class PurchaseController extends Controller
         $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
         $ProductCategory=MdProductCategory::where('society_id',auth()->user()->society_id)->get();
         $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
-        return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers,'ProductCategory'=>$ProductCategory]);
+        $members=TdMember::where('society_id',auth()->user()->society_id)
+                ->where('delete_flag','N')
+                ->get();
+
+        return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers,
+            'ProductCategory'=>$ProductCategory,'members'=>$members
+        ]);
     }
 
     public function Create(Request $request)
@@ -55,8 +80,9 @@ class PurchaseController extends Controller
         TdPurchase::create(array(
             'society_id'=>auth()->user()->society_id,
             'purchase_date'=> date('Y-m-d',strtotime($request->purchase_date)),
-            'purchase_type'=>$request->purchase_type,
+            // 'purchase_type'=>$request->purchase_type,
             'supplier_id'=>$request->supplier_id,
+            'customer_id'=>$request->customer_id,
             'product_category_id'=>$request->product_category_id,
             'product_master_id'=>$request->product_master_id,
             'rate'=>$request->rate,

@@ -13,7 +13,7 @@ class TdReceive extends Model
         'society_id',
         'received_date',
         'received_type',
-        'supplier_id',
+        'customer_id',
         'amount',
         'bank',
         'cheque_no',

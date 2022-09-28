@@ -14,6 +14,7 @@ class TdPurchase extends Model
         'purchase_date',
         'purchase_type',
         'supplier_id',
+        'customer_id',
         'product_category_id',
         'product_master_id',
         'rate',

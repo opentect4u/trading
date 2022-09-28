@@ -21,7 +21,7 @@
                                     <input type="text" class="form-control" name="sale_date" id="sale_date" required
                                         value="{{isset($data)?$data->sale_date:date('d-m-Y')}}" required>
                                 </div>
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
                                     <label for="">Sale Type</label>
                                     <select name="sale_type" id="sale_type" class="form-control" required>
                                         <option value=""> -- Select Sale Type -- </option>
@@ -32,15 +32,15 @@
                                             <?php if(isset($data) && $data->sale_type=='S'){echo "selected";}?>>Cash
                                         </option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="col-sm-6">
-                                    <label for="">Customer Name</label>
+                                    <label for="">Member / Nominal Name</label>
                                     <select name="supplier_id" id="supplier_id" class="form-control" required>
-                                        <option value=""> -- Select Customer Name -- </option>
+                                        <option value=""> -- Select Member / Nominal Name -- </option>
                                         @foreach($suppliers as $supplier)
                                         <option value="{{$supplier->customer_id}}"
                                             <?php if(isset($data) && $data->supplier_id==$supplier->customer_id){echo "selected";}?>>
-                                            {{$supplier->mem_name}}</option>
+                                            {{$supplier->mem_name." - ".$supplier->contact_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>

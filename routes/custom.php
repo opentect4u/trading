@@ -127,6 +127,12 @@ Route::get('receiveedit/{id}',[App\Http\Controllers\ReceivedController::class,'E
 Route::post('receiveedit',[App\Http\Controllers\ReceivedController::class,'Update'])->name('receiveUpdate');
 
 
+Route::get('paymentReceive',[App\Http\Controllers\BalanceController::class,'Index'])->name('balanceManage');
+Route::get('paymentReceiveadd',[App\Http\Controllers\BalanceController::class,'Show'])->name('balanceAdd');
+Route::post('paymentReceiveadd',[App\Http\Controllers\BalanceController::class,'Create'])->name('balanceCreate');
+Route::get('paymentReceiveedit/{id}',[App\Http\Controllers\BalanceController::class,'Edit'])->name('balanceEdit');
+Route::post('paymentReceiveedit',[App\Http\Controllers\BalanceController::class,'Update'])->name('balanceUpdate');
+
 // =============================== Report ==============================
 
 Route::get('memberreport',[App\Http\Controllers\Report\MemberController::class,'Index'])->name('memberReport');

@@ -29,9 +29,9 @@
                                     <label class="btn btn-default">
                                         <input type="radio" id="member_type_2" name="member_type" value="C" <?php if($member_type=='C'){echo "checked";}?>/> Close
                                     </label>
-                                    <!-- <label class="btn btn-default">
+                                    <label class="btn btn-default">
                                         <input type="radio" id="member_type_3" name="member_type" value="N" <?php if($member_type=='N'){echo "checked";}?>/> Nominal
-                                    </label> -->
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -44,10 +44,10 @@
                                 <tr>
                                     <!-- <th>Sl No</th> -->
                                     <th>Member ID</th>
-                                    <!-- <th>Member Date</th> -->
+                                    <th>Member Date</th>
                                     <th>Name</th>
                                     <th>Contact No</th>
-                                    <!-- <th>Member Type</th> -->
+                                    <th>Member Type</th>
                                     <!-- <th>Deposit Amount</th> -->
                                     <!-- <th>View</th> -->
                                     <th>Edit</th>
@@ -60,16 +60,16 @@
                                 @foreach($datas as $data)
                                 <tr id="tr_{{$data->customer_id}}">
                                     <td>{{$data->customer_id}}</td>
-                                    <!-- <td>{{ date('d-m-Y',strtotime($data->mem_date))}}</td> -->
+                                    <td>{{ date('d-m-Y',strtotime($data->mem_date))}}</td>
                                     <td>{{$data->mem_name}}</td>
                                     <td>{{$data->contact_no}}</td>
-                                    <!-- <td>
+                                    <td>
                                         @if($data->member_type=='M')
                                         {{"Member"}}
                                         @else
                                         {{"Nominal"}}
                                         @endif
-                                    </td> -->
+                                    </td>
 
                                     <!-- <td>
                                         @if($data->deposit_amount!='')
@@ -116,10 +116,10 @@
                                 <tr>
                                     <!-- <th>Sl No</th> -->
                                     <th>Member ID</th>
-                                    <!-- <th>Member Date</th> -->
+                                    <th>Member Date</th>
                                     <th>Name</th>
                                     <th>Contact No</th>
-                                    <!-- <th>Member Type</th> -->
+                                    <th>Member Type</th>
                                     <!-- <th>Deposit Amount</th> -->
                                     <!-- <th>View</th> -->
                                     <th>Edit</th>

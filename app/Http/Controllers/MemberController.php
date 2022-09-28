@@ -47,7 +47,8 @@ class MemberController extends Controller
     {
         // return $request;
         // return auth()->user()->society_id;
-        $count=TdMember::where('society_id',auth()->user()->society_id)->count();
+        $count=TdMember::where('member_type','M')->where('society_id',auth()->user()->society_id)->count();
+        // return $count;
         if ($count>0) {
             // return $count;
             $customer_id =($count + 1);
@@ -59,6 +60,18 @@ class MemberController extends Controller
             $open_close_flag='A';
         }else {
             $open_close_flag='N';
+
+            $count_nonmember=TdMember::where('member_type','N')->where('society_id',auth()->user()->society_id)->count();
+            // return $count_nonmember;
+            if ($count_nonmember > 0) {
+                // return $count_nonmember;
+                $customer_id =20001 + $count_nonmember;
+                // return $customer_id;
+
+            }else {
+                // return "else";
+                $customer_id =20001;
+            }
         }
         if($request->deposit_amount!=''){
             $mem_share=$request->deposit_amount/10;
