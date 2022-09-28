@@ -20,7 +20,7 @@ class SupplierController extends Controller
     {
         $from_date=$request->from_date;
         $to_date=$request->to_date;
-        $supplier_id=$request->supplier_id;
+        $customer_id=$request->customer_id;
         $datas=[];
         // $datas=collect();
 
@@ -29,7 +29,7 @@ class SupplierController extends Controller
             ->leftJoin('md_product_master','md_product_master.id','=','td_sale.product_master_id')
             ->select('td_sale.*','md_product_master.pdt_name as pdt_name')
             ->where('td_sale.society_id',auth()->user()->society_id)
-            ->where('td_sale.supplier_id',$supplier_id)
+            ->where('td_sale.supplier_id',$customer_id)
             ->whereDate('td_sale.sale_date','>=',date('Y-m-d',strtotime($from_date)))
             ->whereDate('td_sale.sale_date','<=',date('Y-m-d',strtotime($to_date)))
             ->get();
@@ -39,10 +39,10 @@ class SupplierController extends Controller
             array_push($datas,$sale);
         }
         $td_receive=DB::table('td_receive')
-            ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
+            ->leftJoin('md_supplier','md_supplier.id','=','td_receive.customer_id')
             ->select('td_receive.*','md_supplier.sup_name as sup_name')
             ->where('td_receive.society_id',auth()->user()->society_id)
-            ->where('td_receive.supplier_id',$supplier_id)
+            ->where('td_receive.customer_id',$customer_id)
             ->whereDate('td_receive.received_date','>=',date('Y-m-d',strtotime($from_date)))
             ->whereDate('td_receive.received_date','<=',date('Y-m-d',strtotime($to_date)))
             ->get();
@@ -56,7 +56,7 @@ class SupplierController extends Controller
             ->leftJoin('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
             ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name')
             ->where('td_purchase.society_id',auth()->user()->society_id)
-            ->where('td_purchase.supplier_id',$supplier_id)
+            ->where('td_purchase.customer_id',$customer_id)
             ->whereDate('td_purchase.purchase_date','>=',date('Y-m-d',strtotime($from_date)))
             ->whereDate('td_purchase.purchase_date','<=',date('Y-m-d',strtotime($to_date)))
             ->get();
@@ -69,7 +69,7 @@ class SupplierController extends Controller
             ->leftJoin('md_supplier','md_supplier.id','=','td_payment.supplier_id')
             ->select('td_payment.*','md_supplier.sup_name as sup_name')
             ->where('td_payment.society_id',auth()->user()->society_id)
-            ->where('td_payment.supplier_id',$supplier_id)
+            ->where('td_payment.customer_id',$customer_id)
             ->whereDate('td_payment.payment_date','>=',date('Y-m-d',strtotime($from_date)))
             ->whereDate('td_payment.payment_date','<=',date('Y-m-d',strtotime($to_date)))
             ->get();
@@ -92,14 +92,14 @@ class SupplierController extends Controller
         // return $datas;
         // $datas=[];
         $supplier_details=TdMember::where('society_id',auth()->user()->society_id)
-            ->where('customer_id',$supplier_id)
+            ->where('customer_id',$customer_id)
             ->get();
         // return $supplier_details;
         // $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
         $suppliers=TdMember::where('delete_flag','N')->where('society_id',auth()->user()->society_id)->get();
 
         return view('report.supplier_pur_sale',['datas'=>$datas,'from_date'=>$from_date,'to_date'=>$to_date,
-            'supplier_id'=>$supplier_id,'suppliers'=>$suppliers,
+            'customer_id'=>$customer_id,'suppliers'=>$suppliers,
             'supplier_details'=>$supplier_details
         ]);
     }

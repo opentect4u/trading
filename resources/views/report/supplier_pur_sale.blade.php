@@ -25,12 +25,12 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="">Customer Name</label>
-                                    <select name="supplier_id" id="supplier_id" class="form-control" required>
-                                        <option value="">-- Select Customer Name -- </option>
+                                    <label for="">Member/Nominal Name</label>
+                                    <select name="customer_id" id="customer_id" class="form-control" required>
+                                        <option value="">-- Select Member/Nominal Name -- </option>
                                         @foreach($suppliers as $supplier)
                                         <option value="{{$supplier->customer_id}}"
-                                            <?php if($supplier_id!='' && $supplier->customer_id==$supplier_id){echo 'selected';} ?>>
+                                            <?php if($customer_id!='' && $supplier->customer_id==$customer_id){echo 'selected';} ?>>
                                             {{$supplier->mem_name. " - ".$supplier->contact_no}}</option>
                                         @endforeach
                                     </select>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        @if(count($datas)>0)
+        @if($from_date!='' && $to_date!='' && $customer_id!='')
         <div class="card mt-2">
             <div class="card-body" id="sectionDiv">
                 <div class="container text-center mb-3">
@@ -59,7 +59,7 @@
                         West Bengal, India 721430</h4>
                     <!-- <h5 class="mb-2">Mail ID - nuudyogfpc@gmail.com</h5>
                     <h5 class="mb-2">Contact Us : 9734358832</h5> -->
-                    <h5 class="mb-2">Supplier Purchase & Sale Report on : {{$from_date}} - {{$to_date}}</h5>
+                    <h5 class="mb-2">Member / Nominal Purchase & Sale Report on : {{$from_date}} - {{$to_date}}</h5>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 mb-2">
