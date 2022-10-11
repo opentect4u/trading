@@ -141,6 +141,13 @@ Route::post('accheadadd',[App\Http\Controllers\Finance\AccHeadController::class,
 Route::get('accheadedit/{id}',[App\Http\Controllers\Finance\AccHeadController::class,'Edit'])->name('accheadEdit');
 Route::post('accheadedit',[App\Http\Controllers\Finance\AccHeadController::class,'Update'])->name('accheadUpdate');
 
+
+Route::get('voucher',[App\Http\Controllers\Finance\VoucherController::class,'Index'])->name('voucherManage');
+Route::get('voucheradd',[App\Http\Controllers\Finance\VoucherController::class,'Show'])->name('voucherAdd');
+Route::post('voucheradd',[App\Http\Controllers\Finance\VoucherController::class,'Create'])->name('voucherCreate');
+Route::get('voucheredit/{id}',[App\Http\Controllers\Finance\VoucherController::class,'Edit'])->name('voucherEdit');
+Route::post('voucheredit',[App\Http\Controllers\Finance\VoucherController::class,'Update'])->name('voucherUpdate');
+
 // =============================== Report ==============================
 
 Route::get('memberreport',[App\Http\Controllers\Report\MemberController::class,'Index'])->name('memberReport');
