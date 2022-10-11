@@ -38,6 +38,12 @@
             </ul>
         </li>
 
+        <!-- <li class="{{Route::currentRouteName()=='accheadManage' ?'open':''}}">
+            <div class="link"><i class="fa fa-exchange"></i>Finance<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu" style="{{Route::currentRouteName()=='accheadManage'?'display: block;':''}}">
+                <li><a href="{{route('accheadManage')}}"><i class="fa fa-industry"></i>Account Head</a></li>
+            </ul>
+        </li> -->
 
         <!-- open -->
         <!-- display: block; -->
@@ -56,7 +62,8 @@
                 <li><a href="{{route('saleReport')}}"><i class="fa fa-list-alt"></i>Sale</a></li>
                 <li><a href="{{route('paymentReport')}}"><i class="fa fa-list-alt"></i>Payment</a></li>
                 <li><a href="{{route('receiveReport')}}"><i class="fa fa-list-alt"></i>Receive</a></li>
-                <li><a href="{{route('supplierReport')}}"><i class="fa fa-list-alt"></i>Member/Nominal Purchase Sale</a></li>
+                <li><a href="{{route('supplierReport')}}"><i class="fa fa-list-alt"></i>Member/Nominal Purchase Sale</a>
+                </li>
             </ul>
         </li>
 

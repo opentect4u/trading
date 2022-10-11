@@ -10,7 +10,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="{{route('paymentManage')}}">
+                        <form action="{{route('balanceManage')}}">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="">From Date</label>

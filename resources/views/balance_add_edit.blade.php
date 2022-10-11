@@ -208,6 +208,7 @@ $(document).ready(function() {
         // window.location.assign(url);
 
         if (this.value =='S') {
+            
             $('#customer_id').val('');
             $('#supplier_id').val('');
             $('#customer_id').removeAttr('required') ;

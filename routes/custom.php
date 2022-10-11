@@ -133,6 +133,14 @@ Route::post('paymentReceiveadd',[App\Http\Controllers\BalanceController::class,'
 Route::get('paymentReceiveedit/{id}',[App\Http\Controllers\BalanceController::class,'Edit'])->name('balanceEdit');
 Route::post('paymentReceiveedit',[App\Http\Controllers\BalanceController::class,'Update'])->name('balanceUpdate');
 
+// =============================== Finance ==============================
+
+Route::get('acchead',[App\Http\Controllers\Finance\AccHeadController::class,'Index'])->name('accheadManage');
+Route::get('accheadadd',[App\Http\Controllers\Finance\AccHeadController::class,'Show'])->name('accheadAdd');
+Route::post('accheadadd',[App\Http\Controllers\Finance\AccHeadController::class,'Create'])->name('accheadCreate');
+Route::get('accheadedit/{id}',[App\Http\Controllers\Finance\AccHeadController::class,'Edit'])->name('accheadEdit');
+Route::post('accheadedit',[App\Http\Controllers\Finance\AccHeadController::class,'Update'])->name('accheadUpdate');
+
 // =============================== Report ==============================
 
 Route::get('memberreport',[App\Http\Controllers\Report\MemberController::class,'Index'])->name('memberReport');
@@ -145,6 +153,7 @@ Route::get('receivereport',[App\Http\Controllers\Report\ReceiveController::class
 
 Route::get('supplierreport',[App\Http\Controllers\Report\SupplierController::class,'Index'])->name('supplierReport');
 
+// =============================== Users add Routes ==============================
 
 Route::get('users',[App\Http\Controllers\UserController::class,'Index'])->name('usersManage');
 Route::get('usersadd',[App\Http\Controllers\UserController::class,'Show'])->name('usersAdd');
