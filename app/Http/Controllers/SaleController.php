@@ -77,6 +77,7 @@ class SaleController extends Controller
             'product_master_id'=>$request->product_master_id,
             'rate'=>$request->rate,
             'quantity'=>$request->quantity,
+            'discount'=>$request->discount,
             'amount'=>$request->amount,
             'remark'=>$request->remark,
             'created_by'=>auth()->user()->id,

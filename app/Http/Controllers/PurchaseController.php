@@ -116,6 +116,7 @@ class PurchaseController extends Controller
             'product_master_id'=>$request->product_master_id,
             'rate'=>$request->rate,
             'quantity'=>$request->quantity,
+            'discount'=>$request->discount,
             'amount'=>$request->amount,
             'remark'=>$request->remark,
             'created_by'=>auth()->user()->id,
@@ -128,11 +129,14 @@ class PurchaseController extends Controller
         $products=MdProductMaster::where('society_id',auth()->user()->society_id)->get();
         $ProductCategory=MdProductCategory::where('society_id',auth()->user()->society_id)->get();
         $suppliers=MdSupplier::where('society_id',auth()->user()->society_id)->get();
+        $members=TdMember::where('society_id',auth()->user()->society_id)
+        ->where('delete_flag','N')
+        ->get();
         $id=Crypt::decryptString($id);
         // return $id;
         $data=TdPurchase::find($id);
         return view('purchase_add_edit',['products'=>$products,'suppliers'=>$suppliers,
-            'data'=>$data,'ProductCategory'=>$ProductCategory
+            'data'=>$data,'ProductCategory'=>$ProductCategory,'members'=>$members
         ]);
     }
 

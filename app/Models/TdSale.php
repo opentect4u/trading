@@ -18,6 +18,7 @@ class TdSale extends Model
         'product_master_id',
         'rate',
         'quantity',
+        'discount',
         'amount',
         'remark',
         'created_by',

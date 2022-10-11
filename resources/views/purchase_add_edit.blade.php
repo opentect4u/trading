@@ -99,6 +99,11 @@
                                         value="{{isset($data)?$data->quantity:''}}">
                                 </div>
                                 <div class="col-sm-6">
+                                    <label for="">Discount (%)</label>
+                                    <input type="text" class="form-control" name="discount" id="discount"
+                                        value="{{isset($data)?$data->discount:''}}">
+                                </div>
+                                <div class="col-sm-6">
                                     <label for="">Amount</label>
                                     <input type="text" class="form-control" name="amount" id="amount" required
                                         value="{{isset($data)?$data->amount:''}}">
@@ -244,6 +249,26 @@ $(document).ready(function() {
             var amount = Number(value) * Number(value1);
             $("#amount").val('');
             $("#amount").val(amount);
+        }
+    });
+
+    $('#discount').keyup(function(e) {
+        var value = $("#rate").val();
+        var value11 = $("#discount").val();
+        if (/\D/g.test(value11)) {
+            // Filter non-digits from input value.
+            val2 = value11.replace(/\D/g, '');
+            $("#discount").val(val2);
+        } else {
+            var value1 = $("#quantity").val();
+            var amount = Number(value) * Number(value1);
+
+            var value3 = $("#discount").val();
+            var discount_amt= (Number(value3) * Number(amount) )/100;
+            var final_mat=amount - discount_amt;
+            // alert(final_mat);
+            $("#amount").val('');
+            $("#amount").val(final_mat);
         }
     });
 
