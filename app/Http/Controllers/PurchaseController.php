@@ -16,18 +16,47 @@ class PurchaseController extends Controller
 
     public function Index(Request $request)
     {
+        // return $request;
         $from_date=$request->from_date;
         $to_date=$request->to_date;
         $all_datas=[];
         if ($from_date!='' && $to_date!='') {
+            // $datas=DB::table('td_purchase')
+            //     ->join('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
+            //     ->join('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
+            //     ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name')
+            //     ->where('td_purchase.society_id',auth()->user()->society_id)
+            //     ->whereDate('td_purchase.purchase_date','>=',date('Y-m-d',strtotime($from_date)))
+            //     ->whereDate('td_purchase.purchase_date','<=',date('Y-m-d',strtotime($to_date)))
+            //     ->get();
             $datas=DB::table('td_purchase')
                 ->join('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
+                // ->leftJoin('td_member','td_member.customer_id','=','td_purchase.customer_id')
                 ->join('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
                 ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name')
                 ->where('td_purchase.society_id',auth()->user()->society_id)
+                // ->where('td_member.society_id',auth()->user()->society_id)
                 ->whereDate('td_purchase.purchase_date','>=',date('Y-m-d',strtotime($from_date)))
                 ->whereDate('td_purchase.purchase_date','<=',date('Y-m-d',strtotime($to_date)))
                 ->get();
+            foreach ($datas as $key => $value) {
+                array_push($all_datas,$value);
+            }
+            $datas1=DB::table('td_purchase')
+                ->leftJoin('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_purchase.customer_id')
+                ->leftJoin('md_product_master','md_product_master.id','=','td_purchase.product_master_id')
+                ->select('td_purchase.*','md_supplier.sup_name as sup_name','md_product_master.pdt_name as pdt_name','td_member.mem_name as mem_name')
+                ->where('td_purchase.society_id',auth()->user()->society_id)
+                ->where('td_member.society_id',auth()->user()->society_id)
+                // ->whereDate('td_purchase.purchase_date',date('Y-m-d'))
+                ->whereDate('td_purchase.purchase_date','>=',date('Y-m-d',strtotime($from_date)))
+                ->whereDate('td_purchase.purchase_date','<=',date('Y-m-d',strtotime($to_date)))
+                ->get();
+
+            foreach ($datas1 as $key => $value1) {
+                array_push($all_datas,$value1);
+            }
         }else {
             $datas=DB::table('td_purchase')
                 ->join('md_supplier','md_supplier.id','=','td_purchase.supplier_id')
