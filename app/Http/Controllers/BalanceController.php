@@ -20,14 +20,58 @@ class BalanceController extends Controller
         $to_date=$request->to_date;
         $alldata=[];
         if ($from_date!='' && $to_date!='') {
+            // $datas=DB::table('td_payment')
+            //     ->leftJoin('md_supplier','md_supplier.id','=','td_payment.supplier_id')
+            //     // ->leftJoin('md_product_master','md_product_master.id','=','td_payment.product_master_id')
+            //     ->select('td_payment.*','md_supplier.sup_name as sup_name')
+            //     ->where('td_payment.society_id',auth()->user()->society_id)
+            //     ->whereDate('td_payment.payment_date','>=',date('Y-m-d',strtotime($from_date)))
+            //     ->whereDate('td_payment.payment_date','<=',date('Y-m-d',strtotime($to_date)))
+            //     ->get();
             $datas=DB::table('td_payment')
-                ->leftJoin('md_supplier','md_supplier.id','=','td_payment.supplier_id')
+                ->join('md_supplier','md_supplier.id','=','td_payment.supplier_id')
                 // ->leftJoin('md_product_master','md_product_master.id','=','td_payment.product_master_id')
                 ->select('td_payment.*','md_supplier.sup_name as sup_name')
                 ->where('td_payment.society_id',auth()->user()->society_id)
                 ->whereDate('td_payment.payment_date','>=',date('Y-m-d',strtotime($from_date)))
                 ->whereDate('td_payment.payment_date','<=',date('Y-m-d',strtotime($to_date)))
                 ->get();
+
+            foreach ($datas as $key => $value) {
+                $value->trans_type='Payment';
+                array_push($alldata,$value);
+            }
+            $datas1=DB::table('td_payment')
+                ->leftJoin('md_supplier','md_supplier.id','=','td_payment.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_payment.customer_id')
+                ->select('td_payment.*','md_supplier.sup_name as sup_name','td_member.mem_name as mem_name')
+                ->where('td_payment.society_id',auth()->user()->society_id)
+                ->where('td_member.society_id',auth()->user()->society_id)
+                ->whereDate('td_payment.payment_date','>=',date('Y-m-d',strtotime($from_date)))
+                ->whereDate('td_payment.payment_date','<=',date('Y-m-d',strtotime($to_date)))
+                ->get();
+                
+            foreach ($datas1 as $key => $value1) {
+                $value1->trans_type='Payment';
+                array_push($alldata,$value1);
+            }
+
+            $datas2=DB::table('td_receive')
+                ->leftJoin('td_member','td_member.customer_id','=','td_receive.customer_id')
+                ->select('td_receive.*','td_member.mem_name as mem_name')
+                ->where('td_receive.society_id',auth()->user()->society_id)
+                ->where('td_member.society_id',auth()->user()->society_id)
+                // ->whereDate('td_receive.received_date',date('Y-m-d'))
+                ->whereDate('td_receive.received_date','>=',date('Y-m-d',strtotime($from_date)))
+                ->whereDate('td_receive.received_date','<=',date('Y-m-d',strtotime($to_date)))
+                ->get();
+
+            foreach ($datas2 as $key => $value2) {
+                $value2->trans_type='Receive';
+                $value2->payment_date=$value2->received_date;
+                $value2->payment_type=$value2->received_type;
+                array_push($alldata,$value2);
+            }
         }else {
             $datas=DB::table('td_payment')
                 ->join('md_supplier','md_supplier.id','=','td_payment.supplier_id')

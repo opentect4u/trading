@@ -70,7 +70,7 @@
                                         @foreach($members as $member)
                                         <option value="{{$member->customer_id}}"
                                             <?php if(isset($data) && $data->customer_id==$member->customer_id){echo "selected";}?>>
-                                            {{$member->mem_name}}</option>
+                                            {{$member->mem_name." - ".$member->contact_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -208,7 +208,10 @@ $(document).ready(function() {
         // window.location.assign(url);
 
         if (this.value =='S') {
-            
+            if (radioval=='S') {
+                $('#trans_type').val('P');
+                $('#trans_type').attr('disabled','disabled');
+            }
             $('#customer_id').val('');
             $('#supplier_id').val('');
             $('#customer_id').removeAttr('required') ;
