@@ -148,6 +148,19 @@ Route::post('voucheradd',[App\Http\Controllers\Finance\VoucherController::class,
 Route::get('voucheredit/{id}',[App\Http\Controllers\Finance\VoucherController::class,'Edit'])->name('voucherEdit');
 Route::post('voucheredit',[App\Http\Controllers\Finance\VoucherController::class,'Update'])->name('voucherUpdate');
 
+Route::get('cashvoucher',[App\Http\Controllers\Finance\CashVoucherController::class,'Index'])->name('cashvoucherManage');
+Route::get('cashvoucheradd',[App\Http\Controllers\Finance\CashVoucherController::class,'Show'])->name('cashvoucherAdd');
+Route::post('cashvoucheradd',[App\Http\Controllers\Finance\CashVoucherController::class,'Create'])->name('cashvoucherCreate');
+Route::get('cashvoucheredit/{voucher_id}/{society_id}',[App\Http\Controllers\Finance\CashVoucherController::class,'Edit'])->name('cashvoucherEdit');
+Route::post('cashvoucheredit',[App\Http\Controllers\Finance\CashVoucherController::class,'Update'])->name('cashvoucherUpdate');
+Route::post('AccHeadDetailsAjax',[App\Http\Controllers\Finance\CashVoucherController::class,'AccHeadDetailsAjax'])->name('AccHeadDetailsAjax');
+
+Route::get('bankvoucher',[App\Http\Controllers\Finance\BankVoucherController::class,'Index'])->name('bankvoucherManage');
+Route::get('bankvoucheradd',[App\Http\Controllers\Finance\BankVoucherController::class,'Show'])->name('bankvoucherAdd');
+Route::post('bankvoucheradd',[App\Http\Controllers\Finance\BankVoucherController::class,'Create'])->name('bankvoucherCreate');
+Route::get('bankvoucheredit/{voucher_id}/{society_id}',[App\Http\Controllers\Finance\BankVoucherController::class,'Edit'])->name('bankvoucherEdit');
+Route::post('bankvoucheredit',[App\Http\Controllers\Finance\BankVoucherController::class,'Update'])->name('bankvoucherUpdate');
+
 // =============================== Report ==============================
 
 Route::get('memberreport',[App\Http\Controllers\Report\MemberController::class,'Index'])->name('memberReport');

@@ -12,6 +12,7 @@ class TdVoucher extends Model
     protected $fillable = [
         'society_id',
         'voucher_date',
+        'voucher_type',
         'voucher_id',
         'voucher_mode',
         'acc_head_id',
