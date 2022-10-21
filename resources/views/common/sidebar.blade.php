@@ -38,7 +38,7 @@
             </ul>
         </li>
 
-        <li class="{{Route::currentRouteName()=='accheadManage' ?'open':''}}">
+        <!-- <li class="{{Route::currentRouteName()=='accheadManage' ?'open':''}}">
             <div class="link"><i class="fa fa-exchange"></i>Finance<i class="fa fa-chevron-down"></i></div>
             <ul class="submenu" style="{{Route::currentRouteName()=='accheadManage'?'display: block;':''}}">
                 <li><a href="{{route('accheadManage')}}"><i class="fa fa-industry"></i>Account Head</a></li>
@@ -46,7 +46,7 @@
                 <li><a href="{{route('cashvoucherManage')}}"><i class="fa fa-industry"></i>Cash Voucher</a></li>
                 <li><a href="{{route('bankvoucherManage')}}"><i class="fa fa-industry"></i>Bank Voucher</a></li>
             </ul>
-        </li>
+        </li> -->
 
         <!-- open -->
         <!-- display: block; -->

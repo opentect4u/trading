@@ -67,6 +67,29 @@
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+    <style>
+    .select2-container--default .select2-selection--single {
+        height: calc(1.5em + 0.75rem + 2px) !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 5px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 33px !important;
+    }
+    </style>
+    <script>
+    $("select").select2();
+
+    // height: calc(1.5em + 0.75rem + 2px);
+    </script>
     @yield('script')
 </body>
 
