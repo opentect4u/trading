@@ -25,18 +25,18 @@ class ReceiveController extends Controller
         $datas=[];
         if ($from_date!='' && $to_date!='' && $supplier_id!='') {
             $datas=DB::table('td_receive')
-                ->leftJoin('td_member','td_member.customer_id','=','td_receive.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_receive.customer_id')
                 // ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
                 ->select('td_receive.*','td_member.mem_name as sup_name')
                 ->where('td_receive.society_id',auth()->user()->society_id)
                 ->where('td_member.society_id',auth()->user()->society_id)
-                ->where('td_receive.supplier_id',$supplier_id)
+                ->where('td_receive.customer_id',$supplier_id)
                 ->whereDate('td_receive.received_date','>=',date('Y-m-d',strtotime($from_date)))
                 ->whereDate('td_receive.received_date','<=',date('Y-m-d',strtotime($to_date)))
                 ->get();
         }else if ($from_date!='' && $to_date!='') {
             $datas=DB::table('td_receive')
-                ->leftJoin('td_member','td_member.customer_id','=','td_receive.supplier_id')
+                ->leftJoin('td_member','td_member.customer_id','=','td_receive.customer_id')
                 // ->leftJoin('md_supplier','md_supplier.id','=','td_receive.supplier_id')
                 ->select('td_receive.*','td_member.mem_name as sup_name')
                 ->where('td_receive.society_id',auth()->user()->society_id)
