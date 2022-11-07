@@ -119,7 +119,7 @@
                                     <input type="text" class="form-control" name="contact_no" id="contact_no" required
                                         value="{{isset($data)?$data->contact_no:''}}"
                                         onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                        <?php if(isset($data)){echo "readonly";}?>>
+                                        <?php if(isset($data) && $data->member_type=='M'){echo "readonly";}?>>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="">Email</label>
