@@ -168,6 +168,7 @@ class MemberController extends Controller
             'mem_qualification'=>$request->mem_qualification,
             'mem_email'=>$request->mem_email,
             'mem_address'=>$request->mem_address,
+            'contact_no'=>$request->contact_no,
             'aadhar_no' => $request->aadhar_no,
             'pan_no' => $request->pan_no,
             'voter_id' => $request->voter_id,
