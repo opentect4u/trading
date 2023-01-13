@@ -1,7 +1,7 @@
 
 
 .loginmainDiv {
-    background: #008080;
+    background: #5448fa;
     padding: 45px 0 70px 0;
     position: relative;
     width: 100%;
@@ -10,8 +10,18 @@
 	display: flex;
 }
 
+a.forgetTxtLogin{color: #5448fa !important; font-weight: 600;}
+a.forgetTxtLogin:hover{color: #5448fa !important;}
+
+
+h3.loginTitle{font-size: 20px;
+    color: #1e1e2f;
+    margin-bottom: 25px;
+    font-weight: 400;
+    text-align: center;}
+
 .loginBox{max-width: 600px; background: #fff; margin: 0 auto; width: 100%; padding: 15px; border-radius: 10px; box-shadow:0 0 8px 0px #13c8c8;}
-.adminLogo {margin-bottom: 45px; text-align: center;}
+.adminLogo {margin-bottom: 15px; text-align: center;}
 .loginBox h3.adTitle {
     font-weight: 500 !important;
     text-align: left;
@@ -19,21 +29,21 @@
 	margin: 0;}
 
 .loginBox .fieldSec{}
-.fieldSec input[type="text"]{border: 1px solid #f3f3f3;
+.fieldSec input[type="text"]{border:1px solid #d3d3d3;
 background: #fff;
 border-radius: 2px;
-font-size: 17px;
+font-size: 16px;
 padding: 12px 15px;
 height: 52px;}
 
-.fieldSec input[type="password"]{border: 1px solid #f3f3f3;
+.fieldSec input[type="password"]{border:1px solid #d3d3d3;
 background: #fff;
 border-radius: 2px;
-font-size: 17px;
+font-size: 16px;
 padding: 12px 15px;
 height: 52px;}
 
-.fieldSec input[type="submit"]{background: #333; border: none;
+.fieldSec input[type="submit"]{background: #10121f; border: none;
 border-radius: 2px; font-size: 17px; padding: 12px 15px;}
 
 

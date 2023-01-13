@@ -38,6 +38,7 @@
     <div class="loginmainDiv">
         <div class="loginBox">
             <div class="adminLogo"><img src="{{ asset('public/images/lllogoAdmin.png') }}" alt="" /></div>
+            <h3 class="loginTitle">Farmer Producer Company Management System</h3> 
             <div>
                 @if(count($errors)>0)
                 <b>These credentials do not match our records.</b>
@@ -78,7 +79,7 @@
                     </div> -->
 
                     <div class="text-center mt-4 font-weight-light">
-                        <a href="#" class="text-primary">Forgot password?</a>
+                        <a href="#" class="text-primary forgetTxtLogin">Forgot password?</a>
                     </div>
 
 
