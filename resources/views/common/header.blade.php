@@ -1,9 +1,9 @@
 <nav class="navBar fixed-top">
-    <div class="float-left logo"><img src="{{ asset('publc/images/logo.png') }}" alt="" /></div>
+    <div class="float-left logo"><img src="{{ asset('public/images/logo.png') }}" alt="" /></div>
     <div class="float-left navRightSec">
         <ul class="topDate">
-            <!-- <li>Branch Name: Head Office</li>
-            <li>KMS Year: 2020-21</li>
+            <li class="barTitle">Farmer Producer Company Management System</li>
+            <!-- <li>KMS Year: 2020-21</li>
             <li>User: synergic</li>
             <li>Module: Paddy Procurement</li> -->
         </ul>

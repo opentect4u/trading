@@ -47,7 +47,14 @@
 
         @yield('content')
 
+
+        
     </div>
+
+    <div class="footerSection">
+    Design and Developed by <a href="https://synergicsoftek.in/" target="_blank">Synergic Softek Solutions Pvt. Ltd.</a>
+        </div>
+
     <script>
     $(document).ready(function() {
         $('#example').DataTable();

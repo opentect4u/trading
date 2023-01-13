@@ -74,7 +74,7 @@ img {
   visibility: hidden
 }
 a {
-  color: #05adff;
+  color: #5448fa;
   text-decoration: none;
   padding: 0;
   margin: 0;
@@ -100,7 +100,7 @@ img {
   width: 100%
 }
 
-.navBar{ background: #ffffff; padding:0; display: flex;}
+.navBar{ background: #5448fa; padding:0; display: flex;}
 .fixed-top {
     position: fixed;
     top: 0;
@@ -108,16 +108,20 @@ img {
     left: 0;
     z-index: 1030;
 }
-.navRightSec{width: calc(100% - 255px); height: 76px; display: flex; align-items: center; padding: 0 15px; border-bottom: #fff solid 1px;
+.navRightSec{width: calc(100% - 255px); height: 76px; display: flex; align-items: center; padding: 0 15px; 
+  /* border-bottom: #fff solid 1px; */
 	box-shadow: 4px 0px 7px 1px #d0d0d0;}
 .navRightSec button.navbar-toggler{border: none; color: #333; background: #fff; font-size: 21px; padding: 0;}
 .navRightSec .topDate{list-style-type: none; margin:0 auto 0 0;}
 .navRightSec .topDate li{display: inline-block; font-size: 14px; font-weight: 400; margin-right: 15px; line-height: 16px; color: #333;}
 
+.navRightSec .topDate li.barTitle{font-size: 26px; font-weight: 200; color: #fff;}
+
 
 .navRightSec .topDateRight{}
 .navRightSec .topDateRight li{font-size: 14px; color: #333;}
 .navRightSec .topDateRight li a{color: #333; position: relative;}
+.navRightSec .topDateRight li a.dropdown-toggle{color: #fff; font-weight:500;}
 .navRightSec .topDateRight li .dropdown-menu a{font-size: 14px;}
 
 /*
@@ -136,12 +140,14 @@ img {
 */
 
 .logo{
-	background: #282a3c; 
+	background: #5448fa; 
 /*
 	background: rgb(80,218,218);
     background: linear-gradient(90deg, rgba(80,218,218,1) 0%, rgba(33,181,181,1) 92%, rgba(3,134,134,1) 100%); 
 */
-	padding: 15px ; text-align: center; width: 255px; border-bottom:#525677 solid 1px;}
+	padding: 12px ; text-align: center; width: 255px; border-bottom:#525677 solid 1px;}
+
+  .logo img{max-width: 165px;}
 
 .page-body-wrapper {
     min-height: calc(100vh - 72px);
@@ -157,7 +163,7 @@ img {
 
 .sidebar {
     min-height: calc(100vh - 65px);
-    background: #2c2e3e;
+    background: #10121f;
 /*
 	background: rgb(80,218,218);
     background: linear-gradient(90deg, rgba(80,218,218,1) 0%, rgba(33,181,181,1) 92%, rgba(3,134,134,1) 100%); 
@@ -228,18 +234,30 @@ box-shadow: 0 0px 7px 1px #e1dfdf;
 .card .card-body .titleSec{margin: 0 0 30px 0;}
 .card .card-body .titleSec h2{color:#2c2e3e; font-weight:400; font-size: 22px; margin:0; display: inline-block;} 
 
-.card .card-body .titleSec .btn-primary{color: #fff; background-color: #0b99ce; border-color: #0b99ce; float: right; font-size: 15px; 
+.card .card-body .titleSec .btn-primary{color: #fff; background-color: #5448fa; border-color: #5448fa; float: right; font-size: 15px; 
 	border-radius: 4px; line-height: 25px; padding: 6px 25px;}
-.card .card-body .titleSec .btn-primary:hover{color: #fff; background-color: #1580a8; border-color:#1580a8; }
+.card .card-body .titleSec .btn-primary:hover{color: #fff; background-color: #5448fa; border-color:#5448fa; }
 
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #0b99ce; border-color: #0b99ce; 
+    background-color: #5448fa; border-color: #5448fa; 
 }
 
 .deletCus {margin-right: 15px; font-size: 17px;}
 .editeCus {margin-right: 0; font-size: 17px;}
+
+.btn-primary {
+  color: #fff;
+  background-color: #5448fa;
+  border-color: #5448fa;
+}
+
+.btn-primary:hover{
+  color: #fff;
+  background-color: #5448fa;
+  border-color: #5448fa;
+}
 
 .updateCustom {margin-right: 15px;
     font-size: 14px;
@@ -267,9 +285,9 @@ box-shadow: 0 0px 7px 1px #e1dfdf;
 	border-radius: 3px;}
 .rejectBtn:hover{background: #8d0b0b; color: #fff;}
 
-.btnSubmitSec input.btn-info[type="submit"]{background-color: #0b99ce; border-color: #0b99ce; color: #fff; border: none; border-radius: 2px; font-size: 15px; padding: 8px 25px; 
+.btnSubmitSec input.btn-info[type="submit"]{background-color: #5448fa; border-color: #5448fa; color: #fff; border: none; border-radius: 2px; font-size: 15px; padding: 8px 25px; 
 	margin-right: 10px;}
-.btnSubmitSec input.btn-info[type="submit"]:hover{background-color: #1580a8; border-color:#1580a8; }
+.btnSubmitSec input.btn-info[type="submit"]:hover{background-color: #5448fa; border-color:#5448fa; }
 
 .btnSubmitSec input.btn-info[type="reset"]{background: #f8f9fa; color: #000; border: none; border-radius: 2px; font-size: 15px; padding: 8px 25px; margin-right: 10px;}
 .btnSubmitSec input.btn-info[type="reset"]:hover{background: #e2e6ea;}
@@ -391,9 +409,9 @@ background: linear-gradient(90deg, rgba(11,112,112,1) 0%, rgba(33,181,181,1) 92%
 /*--------------Accordion Dropdown CSS End----------------*/
 
 
-
-
-
+.footerSection{width: 100%; display: inline-block; background: #5448fa; padding: 15px 15px; text-align: center; color: #fff; font-size: 15px;}
+.footerSection a{color: #fff; text-decoration: underline; font-weight: 600;}
+.footerSection a:hover{text-decoration: none;}
 
 
 
